@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="C++基础, 字节对齐" />
+    <meta name="keywords" content="C++基础, 字节对齐, 编程基础" />
   
   <meta name="description" content="本文转自C语言字节对齐问题详解, 做了一定的删减和修改。 1. 什么是字节对齐　　现代计算机中内存空间都是按照字节（byte）划分的，从理论上讲似乎对任何类型的变量的访问可以从任何地址开始，但实际情况是在访问特定变量的时候经常在特定的内存地址访问，这就需要各类型数据按照一定的规则在空间上排列，而不是顺序地一个接一个地排放，这就是对齐。 2. 对齐的原因和作用不同硬件平台对存储空间的处理上存在很大的">
 <meta property="og:type" content="article">
@@ -24,14 +24,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.chaoswork.cn/images/favicon.ico">
 <meta property="article:published_time" content="2019-05-12T15:20:23.000Z">
-<meta property="article:modified_time" content="2021-01-27T14:08:07.512Z">
+<meta property="article:modified_time" content="2021-01-30T16:44:33.066Z">
 <meta property="article:author" content="云海鹰影">
+<meta property="article:tag" content="编程基础">
 <meta property="article:tag" content="C++基础">
 <meta property="article:tag" content="字节对齐">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.chaoswork.cn/images/favicon.ico">
 <meta name="twitter:site" content="@null">
-  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
   <!-- 站点验证相关 -->
   
     
@@ -61,8 +62,7 @@
   
     <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
   
-<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="云海鹰影" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
   <body class="custom-background">
@@ -95,12 +95,10 @@
     
       
         <li>
-          <a  ><i class="fa fa-link"></i>外部链接</a>
+          <a  ><i class="fa fa-link"></i>秘密小窝</a>
           <ul class="sub-menu">
             
-              <li><a  target="_blank" rel="noopener" href="https://candinya.com"  >作者博客</a></li>
-            
-              <li><a  target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth"  >项目链接</a></li>
+              <li><a  target="_blank" rel="noopener" href="https://smp.chaoswork.cn"  >鹰の巢</a></li>
             
           </ul>
         </li>
@@ -137,7 +135,7 @@
                 <div class="kratos-post-meta text-center">
                     <span>
                         <i class="fa fa-calendar"></i> 2019-05-12
-                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a>
+                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>, <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a>
                         <i class="fa fa-user"></i> 作者 云海鹰影
                         <i class="fa fa-edit"></i> 
                         
@@ -151,7 +149,7 @@
             </header>
             <div class="kratos-post-content">
                 <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                    本文最后编辑于 <time datetime="1611756487512"></time> 前，其中的内容可能需要更新。
+                    本文最后编辑于 <time datetime="1612025073066"></time> 前，其中的内容可能需要更新。
                 </div>
                 
                 <hr />
@@ -166,7 +164,7 @@
 <h3 id="3-1-结构体对齐"><a href="#3-1-结构体对齐" class="headerlink" title="3.1 结构体对齐"></a>3.1 结构体对齐</h3><p>在C语言中，结构体是种复合数据类型，其构成元素既可以是基本数据类型(如int、long、float等)的变量，也可以是一些复合数据类型(如数组、结构体、联合等)的数据单元。编译器为结构体的每个成员按照其自然边界(alignment)分配空间。各成员按照它们被声明的顺序在内存中顺序存储，第一个成员的地址和整个结构的地址相同。</p>
 <p>字节对齐的问题主要就是针对结构体。</p>
 <h4 id="3-1-1-简单示例"><a href="#3-1-1-简单示例" class="headerlink" title="3.1.1 简单示例"></a>3.1.1 简单示例</h4><p>先看个简单的例子(32位，X86处理器，GCC编译器):<br>【例1】设结构体如下定义：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span>    a;</span><br><span class="line">    <span class="keyword">char</span>   b;</span><br><span class="line">    <span class="keyword">short</span>  c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>   b;</span><br><span class="line">    <span class="keyword">int</span>    a;</span><br><span class="line">    <span class="keyword">short</span>  c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c" data-lang="c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span>    a;</span><br><span class="line">    <span class="keyword">char</span>   b;</span><br><span class="line">    <span class="keyword">short</span>  c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>   b;</span><br><span class="line">    <span class="keyword">int</span>    a;</span><br><span class="line">    <span class="keyword">short</span>  c;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>已知32位机器上各数据类型的长度为：char为1字节、short为2字节、int为4字节、long为4字节、float为4字节、double为8字节。那么上面两个结构体大小如何呢？</p>
 <p>结果是：sizeof(strcut A)值为8；sizeof(struct B)的值却是12。</p>
 <p>结构体A中包含一个4字节的int数据，一个1字节char数据和一个2字节short数据；B也一样。按理说A和B大小应该都是7字节。之所以出现上述结果，就是因为编译器要对数据成员在空间上进行对齐。</p>
@@ -190,12 +188,12 @@
 </blockquote>
 <p>以此分析3.1.1节中的结构体B：<br>假定对齐值默认为4，则char的有效对齐值为1，int的有效对齐值为4，short的有效对齐值为2；则结构体的有效对齐值为4；假设结构体B内存起始地址为0x0000, 按照结构体B的变量定义顺序，可以简单地知道变量char b内存地址为0x0000，占1个字节；变量int a 内存地址为0x0004，占4个字节；变量short c内存地址为0x0008，占2个字节。至此结构体的大小为(0x0008-0x0000) + 2 = 10; 根据结构体圆整的要求（准则3），编译器会在后面补充2个字节以满足4的整数倍要求，所以sizeof(struct B)=12。</p>
 <p>再来看一个例子：<br>【例2】假设4字节对齐，以下程序的输出结果是多少？</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* OFFSET宏定义可取得指定结构体某成员在结构体内部的偏移 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OFFSET(st, field)     (size_t)&amp;(((st*)0)-&gt;field)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>  a;</span><br><span class="line">    <span class="keyword">short</span> b;</span><br><span class="line">    <span class="keyword">char</span>  c;</span><br><span class="line">    <span class="keyword">int</span>   d;</span><br><span class="line">    <span class="keyword">char</span>  e[<span class="number">3</span>];</span><br><span class="line">&#125;T_Test;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Size = %d\n  a-%d, b-%d, c-%d, d-%d\n  e[0]-%d, e[1]-%d, e[2]-%d\n&quot;</span>,</span><br><span class="line">           <span class="keyword">sizeof</span>(T_Test), OFFSET(T_Test, a), OFFSET(T_Test, b),</span><br><span class="line">           OFFSET(T_Test, c), OFFSET(T_Test, d), OFFSET(T_Test, e[<span class="number">0</span>]),</span><br><span class="line">           OFFSET(T_Test, e[<span class="number">1</span>]),OFFSET(T_Test, e[<span class="number">2</span>]));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c" data-lang="c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* OFFSET宏定义可取得指定结构体某成员在结构体内部的偏移 */</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OFFSET(st, field)     (size_t)&amp;(((st*)0)-&gt;field)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span>  a;</span><br><span class="line">    <span class="keyword">short</span> b;</span><br><span class="line">    <span class="keyword">char</span>  c;</span><br><span class="line">    <span class="keyword">int</span>   d;</span><br><span class="line">    <span class="keyword">char</span>  e[<span class="number">3</span>];</span><br><span class="line">&#125;T_Test;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Size = %d\n  a-%d, b-%d, c-%d, d-%d\n  e[0]-%d, e[1]-%d, e[2]-%d\n&quot;</span>,</span><br><span class="line">           <span class="keyword">sizeof</span>(T_Test), OFFSET(T_Test, a), OFFSET(T_Test, b),</span><br><span class="line">           OFFSET(T_Test, c), OFFSET(T_Test, d), OFFSET(T_Test, e[<span class="number">0</span>]),</span><br><span class="line">           OFFSET(T_Test, e[<span class="number">1</span>]),OFFSET(T_Test, e[<span class="number">2</span>]));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>执行后输出如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Size &#x3D; 16</span><br><span class="line">  a-0, b-2, c-4, d-8</span><br><span class="line">  e[0]-12, e[1]-13, e[2]-14</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain" data-lang="plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Size &#x3D; 16</span><br><span class="line">  a-0, b-2, c-4, d-8</span><br><span class="line">  e[0]-12, e[1]-13, e[2]-14</span><br></pre></td></tr></table></figure>
 <p>下面来具体分析：<br>首先char a占用1个字节，没问题。<br>short b本身占用2个字节，根据上面准则2，需要在b和a之间填充1个字节。<br>char c占用1个字节，没问题。<br>int d本身占用4个字节，根据准则2，需要在d和c之间填充3个字节。<br>char e[3]；本身占用3个字节，根据原则3，需要在其后补充1个字节。<br>因此，sizeof(T_Test) = 1 + 1 + 2 + 1 + 3 + 4 + 3 + 1 = 16字节。</p>
 <h4 id="3-1-3-对齐的隐患"><a href="#3-1-3-对齐的隐患" class="headerlink" title="3.1.3 对齐的隐患"></a>3.1.3 对齐的隐患</h4><h5 id="3-1-3-1-数据类型转换"><a href="#3-1-3-1-数据类型转换" class="headerlink" title="3.1.3.1 数据类型转换"></a>3.1.3.1 数据类型转换</h5><p>代码中关于对齐的隐患，很多是隐式的。例如，在强制类型转换的时候：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> *p = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)&amp;i;</span><br><span class="line">    *p = <span class="number">0x00</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> *p1 = (<span class="keyword">unsigned</span> <span class="keyword">short</span> *)(p+<span class="number">1</span>);</span><br><span class="line">    *p1 = <span class="number">0x0000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c" data-lang="c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0x12345678</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">char</span> *p = (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)&amp;i;</span><br><span class="line">    *p = <span class="number">0x00</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> *p1 = (<span class="keyword">unsigned</span> <span class="keyword">short</span> *)(p+<span class="number">1</span>);</span><br><span class="line">    *p1 = <span class="number">0x0000</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>最后两句代码，从奇数边界去访问unsigned short型变量，显然不符合对齐的规定。在X86上，类似的操作只会影响效率；但在MIPS或者SPARC上可能导致error，因为它们要求必须字节对齐。</p>
 <h5 id="3-1-3-2-排查对齐问题"><a href="#3-1-3-2-排查对齐问题" class="headerlink" title="3.1.3.2 排查对齐问题"></a>3.1.3.2 排查对齐问题</h5><p>如果出现对齐或者赋值问题可查看：</p>
 <ol>
@@ -304,10 +302,10 @@
                 <div class="footer-tag clearfix">
                     <div class="pull-left">
                     <i class="fa fa-tags"></i>
-                        <a class="tag-none-link" href="/tags/C-%E5%9F%BA%E7%A1%80/" rel="tag">C++基础</a>, <a class="tag-none-link" href="/tags/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/" rel="tag">字节对齐</a>
+                        <a class="tag-none-link" href="/tags/C-%E5%9F%BA%E7%A1%80/" rel="tag">C++基础</a>, <a class="tag-none-link" href="/tags/%E5%AD%97%E8%8A%82%E5%AF%B9%E9%BD%90/" rel="tag">字节对齐</a>, <a class="tag-none-link" href="/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="tag">编程基础</a>
                     </div>
                     <div class="pull-date">
-                    <span>最后编辑：2021-01-27</span>
+                    <span>最后编辑：2021-01-31</span>
                     </div>
                 </div>
             </footer>
@@ -328,23 +326,32 @@
         
         
             <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.css">
-<script src="//cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js"></script>
-<script src="//cdn.bootcss.com/blueimp-md5/2.9.0/js/md5.min.js"></script>
 <div id="gitalk-container"></div>
 <script type="text/javascript">
-    var gitalk = new Gitalk({
-        // Gitalk配置
-        language: "zh-CN",
-        clientID: "7dff06239ac01f6006c8",
-        clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
-        repo: "comment_data",
-        owner: "stayknight",
-        admin: ["stayknight"],
-        id: location.pathname,
-        distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
+    var load_comm = () => {
+        const init = () => {
+            const gitalk = new Gitalk({
+                // Gitalk配置
+                language: "zh-CN",
+                clientID: "7dff06239ac01f6006c8",
+                clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
+                repo: "comment_data",
+                owner: "stayknight",
+                admin: ["stayknight"],
+                id: location.pathname,
+                distractionFreeMode: false
+            });
+            gitalk.render('gitalk-container');
+        };
+        if (typeof Gitalk == 'undefined') {
+            const src = 'https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
 </script>
+
         
     </article>
 </section>
@@ -357,12 +364,12 @@
     <div class="photo-background"></div>
     <div class="photo-wrapper clearfix">
         <div class="photo-wrapper-tip text-center">
-            <img class="about-photo" src="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/0926e4ba91e6b5b7e9b9b0e5bdb12802" />
+            <img class="about-photo" src="https://cdn.jsdelivr.net/npm/chwx@1.0.0/avatars/icon41.jpg" />
         </div>
     </div>
     <div class="textwidget">
         
-            <p class="text-center">云海鹰影技术生活分享博客~</p>
+            <p class="text-center">路漫漫其修远兮，吾将上下而求索~<br/><span>(右下角搜索)</span></p>
         
     </div>
 </aside>
@@ -372,7 +379,7 @@
     
   <aside id="krw-categories" class="widget widget-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/php%E5%9F%BA%E7%A1%80/">php基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF/">博客技术</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E5%AD%A6%E4%B9%A0/">读书学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/php%E5%9F%BA%E7%A1%80/">php基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li></ul></li></ul>
   </aside>
 
 
@@ -381,7 +388,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签云</h4>
       <div class="tag-clouds">
-        <a href="/tags/ACGN/" style="font-size: 0.6em;">ACGN</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.7em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.7em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 0.7em;">linux命令</a> <a href="/tags/linux%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">linux基础</a> <a href="/tags/linux%E5%AE%89%E5%85%A8/" style="font-size: 0.6em;">linux安全</a> <a href="/tags/live2d/" style="font-size: 0.6em;">live2d</a>
+        <a href="/tags/ACGN/" style="font-size: 0.75em;">ACGN</a> <a href="/tags/ACM/" style="font-size: 0.6em;">ACM</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.65em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.65em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/SAO/" style="font-size: 0.6em;">SAO</a> <a href="/tags/adb/" style="font-size: 0.6em;">adb</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/centos/" style="font-size: 0.7em;">centos</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/gitlab/" style="font-size: 0.65em;">gitlab</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
       </div>
   </aside>
 
@@ -395,34 +402,88 @@
         
           
           
-            <a class="list-group-item" href="/20190517-1.html"><i class="fa  fa-book"></i> C++变量初始化详解(C++98和C++11)</a>
+            <a class="list-group-item" href="/20200611-1.html"><i class="fa  fa-book"></i> Linux adb devices 显示no permissions问题解决</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-18.html"><i class="fa  fa-book"></i> 2019四月新番推荐和点评</a>
+            <a class="list-group-item" href="/20200604-1.html"><i class="fa  fa-book"></i> 各类MQTT代理服务器特性对比</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-17.html"><i class="fa  fa-book"></i> php-fpm介绍，配置和优化</a>
+            <a class="list-group-item" href="/20191220-2.html"><i class="fa  fa-book"></i> 自动备份远程文件到本地</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-16.html"><i class="fa  fa-book"></i> 为你的博客博客/网页添加Live2d二次元老婆的插件/手动方法</a>
+            <a class="list-group-item" href="/20191220-1.html"><i class="fa  fa-book"></i> 数据库自动备份脚本</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-15.html"><i class="fa  fa-book"></i> linux之cron服务</a>
+            <a class="list-group-item" href="/20191211-1.html"><i class="fa  fa-book"></i> 过滤日志目录中所有日志里最近1小时的错误记录及上下5行</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           
@@ -524,16 +585,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 footer-list text-center">
-                    <ul class="kratos-social-icons">
+                    <ul class="kratos-social-icons text-center">
                         
                         
                         
                         
                         
                         
-                        
+                        <li><a target="_blank" rel="me" href="https://smp.chaoswork.cn/@stayknight"><i class="fa fa fa-share-alt-square"></i></a></li>
                         <li><a target="_blank" rel="nofollow" href="https://github.com/stayknight"><i class="fa fa-github"></i></a></li>
-                        
+                        <li><a target="_blank" rel="nofollow" href="/atom.xml"><i class="fa fa-rss"></i></a></li>
                     </ul>
                     <ul class="kratos-copyright">
                         <div>
@@ -549,8 +610,8 @@
                             <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
                         </div>
                         <div>
-                            
-                            
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
+                            <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
                         </div>
                     </ul>
                 </div>

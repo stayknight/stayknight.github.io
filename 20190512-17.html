@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="php-fpm, php基础" />
+    <meta name="keywords" content="php-fpm, php基础, 编程基础" />
   
   <meta name="description" content="上个月把博客站从php5.5.7升级到了php7.3.4，一个月的时间已经发生多次服务器卡死的情况，之前顾不上深究，直接重启了事。今天抽点时间处理了下，顺便把相关的知识点记录下来。  一、php-fpm 介绍虽然对php不熟，但是本着虽不求甚解，但不能不了解的思想，所以我还是去阅读了一些php-fpm的相关知识。php-fpm是php-fastcgi process manager的简称。所以了">
 <meta property="og:type" content="article">
@@ -24,14 +24,15 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://blog.chaoswork.cn/images/favicon.ico">
 <meta property="article:published_time" content="2019-05-12T15:41:04.000Z">
-<meta property="article:modified_time" content="2021-01-27T14:08:07.509Z">
+<meta property="article:modified_time" content="2021-01-30T16:48:41.942Z">
 <meta property="article:author" content="云海鹰影">
+<meta property="article:tag" content="编程基础">
 <meta property="article:tag" content="php基础">
 <meta property="article:tag" content="php-fpm">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://blog.chaoswork.cn/images/favicon.ico">
 <meta name="twitter:site" content="@null">
-  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
   <!-- 站点验证相关 -->
   
     
@@ -61,8 +62,7 @@
   
     <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
   
-<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="云海鹰影" type="application/atom+xml">
-</head>
+<meta name="generator" content="Hexo 5.3.0"></head>
 
 
   <body class="custom-background">
@@ -95,12 +95,10 @@
     
       
         <li>
-          <a  ><i class="fa fa-link"></i>外部链接</a>
+          <a  ><i class="fa fa-link"></i>秘密小窝</a>
           <ul class="sub-menu">
             
-              <li><a  target="_blank" rel="noopener" href="https://candinya.com"  >作者博客</a></li>
-            
-              <li><a  target="_blank" rel="noopener" href="https://github.com/Candinya/Kratos-Rebirth"  >项目链接</a></li>
+              <li><a  target="_blank" rel="noopener" href="https://smp.chaoswork.cn"  >鹰の巢</a></li>
             
           </ul>
         </li>
@@ -137,7 +135,7 @@
                 <div class="kratos-post-meta text-center">
                     <span>
                         <i class="fa fa-calendar"></i> 2019-05-12
-                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/php%E5%9F%BA%E7%A1%80/">php基础</a>
+                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>, <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/php%E5%9F%BA%E7%A1%80/">php基础</a>
                         <i class="fa fa-user"></i> 作者 云海鹰影
                         <i class="fa fa-edit"></i> 
                         
@@ -151,7 +149,7 @@
             </header>
             <div class="kratos-post-content">
                 <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                    本文最后编辑于 <time datetime="1611756487509"></time> 前，其中的内容可能需要更新。
+                    本文最后编辑于 <time datetime="1612025321942"></time> 前，其中的内容可能需要更新。
                 </div>
                 
                 <hr />
@@ -174,7 +172,7 @@
 <h2 id="二、php-fpm-配置和优化"><a href="#二、php-fpm-配置和优化" class="headerlink" title="二、php-fpm 配置和优化"></a>二、php-fpm 配置和优化</h2><p>php-fpm一直存在一些固有问题，如内存泄漏，进程僵死等；这些问题会导致占用内存一直增加，进程数不停增加，直到服务器资源耗尽死机。所以php-fpm的配置主要是围绕控制进程数和进程生命周期进行的（用这种方法来解决性能问题不得不说php团队也是对这个语言的没辙了）。</p>
 <p>php中主要有这么两个配置文件：php.ini, php-fpm.conf; 前者是php解释器的配置，后者是php-fpm的配置。php的性能优化主要是调整进程管理相关参数即php-fpm.conf。</p>
 <p>这里列举一些重要的配置，并做一些说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">error_log &#x3D; &#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;php-fpm.log  #错误日志</span><br><span class="line"></span><br><span class="line">emergency_restart_threshold &#x3D; 60</span><br><span class="line">emergency_restart_interval &#x3D; 60s</span><br><span class="line">#表示在emergency_restart_interval所设值内出现SIGSEGV或者SIGBUS错误的php-cgi进程数如果超过 emergency_restart_threshold个，php-fpm就会优雅重启。这两个选项一般保持默认值。0 表示 &#39;关闭该功能&#39;. 默认值: 0 (关闭).</span><br><span class="line"></span><br><span class="line">process_control_timeout &#x3D; 0</span><br><span class="line">#设置子进程接受主进程复用信号的超时时间. 超过时间没有接受到信号则子进程优雅退出。可用单位: s(秒), m(分), h(小时), 或者 d(天) 默认单位: s(秒). 默认值: 0.</span><br><span class="line"></span><br><span class="line">pm &#x3D; dynamic</span><br><span class="line">#php-fpm进程启动模式，pm可以设置为static和dynamic和ondemand</span><br><span class="line">#如果选择static，则进程数就数固定的，由pm.max_children指定固定的子进程数。</span><br><span class="line">#如果选择dynamic，则进程数是动态变化的,由以下参数决定：</span><br><span class="line">pm.max_children &#x3D; 50 #子进程最大数</span><br><span class="line">pm.start_servers &#x3D; 2 #启动时的进程数，默认值为: (min_spare_servers + max_spare_servers)&#x2F;2</span><br><span class="line">pm.min_spare_servers &#x3D; 1 #保证空闲进程数最小值，如果空闲进程小于此值，则创建新的子进程</span><br><span class="line">pm.max_spare_servers &#x3D; 3 #保证空闲进程数最大值，如果空闲进程大于此值，此进行清理</span><br><span class="line">pm.max_requests &#x3D; 500</span><br><span class="line">#设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 &#39;0&#39; 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.</span><br><span class="line"></span><br><span class="line">slowlog &#x3D; log&#x2F;$pool.log.slow</span><br><span class="line">#慢请求的记录日志,配合request_slowlog_timeout使用，默认关闭</span><br><span class="line">request_slowlog_timeout &#x3D; 10s</span><br><span class="line">#当一个请求该设置的超时时间后，就会将对应的PHP调用堆栈信息完整写入到慢日志中. 设置为 &#39;0&#39; 表示 &#39;Off&#39;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain" data-lang="plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">error_log &#x3D; &#x2F;usr&#x2F;local&#x2F;var&#x2F;log&#x2F;php-fpm.log  #错误日志</span><br><span class="line"></span><br><span class="line">emergency_restart_threshold &#x3D; 60</span><br><span class="line">emergency_restart_interval &#x3D; 60s</span><br><span class="line">#表示在emergency_restart_interval所设值内出现SIGSEGV或者SIGBUS错误的php-cgi进程数如果超过 emergency_restart_threshold个，php-fpm就会优雅重启。这两个选项一般保持默认值。0 表示 &#39;关闭该功能&#39;. 默认值: 0 (关闭).</span><br><span class="line"></span><br><span class="line">process_control_timeout &#x3D; 0</span><br><span class="line">#设置子进程接受主进程复用信号的超时时间. 超过时间没有接受到信号则子进程优雅退出。可用单位: s(秒), m(分), h(小时), 或者 d(天) 默认单位: s(秒). 默认值: 0.</span><br><span class="line"></span><br><span class="line">pm &#x3D; dynamic</span><br><span class="line">#php-fpm进程启动模式，pm可以设置为static和dynamic和ondemand</span><br><span class="line">#如果选择static，则进程数就数固定的，由pm.max_children指定固定的子进程数。</span><br><span class="line">#如果选择dynamic，则进程数是动态变化的,由以下参数决定：</span><br><span class="line">pm.max_children &#x3D; 50 #子进程最大数</span><br><span class="line">pm.start_servers &#x3D; 2 #启动时的进程数，默认值为: (min_spare_servers + max_spare_servers)&#x2F;2</span><br><span class="line">pm.min_spare_servers &#x3D; 1 #保证空闲进程数最小值，如果空闲进程小于此值，则创建新的子进程</span><br><span class="line">pm.max_spare_servers &#x3D; 3 #保证空闲进程数最大值，如果空闲进程大于此值，此进行清理</span><br><span class="line">pm.max_requests &#x3D; 500</span><br><span class="line">#设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 &#39;0&#39; 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.</span><br><span class="line"></span><br><span class="line">slowlog &#x3D; log&#x2F;$pool.log.slow</span><br><span class="line">#慢请求的记录日志,配合request_slowlog_timeout使用，默认关闭</span><br><span class="line">request_slowlog_timeout &#x3D; 10s</span><br><span class="line">#当一个请求该设置的超时时间后，就会将对应的PHP调用堆栈信息完整写入到慢日志中. 设置为 &#39;0&#39; 表示 &#39;Off&#39;</span><br></pre></td></tr></table></figure>
 <p><strong>额外说明：</strong></p>
 <ol>
 <li><p><code>emergency_restart</code>功能，<code>process_control_timeout</code>和 <code>slowlog</code>功能默认都是关闭的，若有频繁假死，进程过多，死机等情况，建议都打开。</p>
@@ -182,14 +180,14 @@
 <li><p>进程的数量要根据服务器的实际情况调整，不然也会耗尽资源。比如，每个php-fpm占用内存一般在30M到50M之间，对于1G内存的服务器，可能不到30个就会耗尽内存，所以可以设置：</p>
 </li>
 </ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pm &#x3D; dynamic</span><br><span class="line">pm.max_children &#x3D; 30</span><br><span class="line">pm.start_servers &#x3D; 10</span><br><span class="line">pm.min_spare_servers &#x3D; 5</span><br><span class="line">pm.max_spare_servers &#x3D; 15</span><br><span class="line">pm.max_requests &#x3D; 500  &#x2F;&#x2F;单个进程不宜过大，防止内存泄漏</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain" data-lang="plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pm &#x3D; dynamic</span><br><span class="line">pm.max_children &#x3D; 30</span><br><span class="line">pm.start_servers &#x3D; 10</span><br><span class="line">pm.min_spare_servers &#x3D; 5</span><br><span class="line">pm.max_spare_servers &#x3D; 15</span><br><span class="line">pm.max_requests &#x3D; 500  &#x2F;&#x2F;单个进程不宜过大，防止内存泄漏</span><br></pre></td></tr></table></figure>
 <hr>
 <p>其实也不确定这样是否能高枕无忧，观察一段时间再看。对于解决不了的，网上还有一种终极大法：利用linux定时器任务执行脚本(或者后台持续运行脚本)，在脚本中监测php-fpm的进程数量或系统内存占用，达到条件重启php-fpm，简单有效。</p>
 <p>一个根据memory重启的例子:</p>
 <p><code>checkmem.sh</code></p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="comment"># pcount = $(top -b -n1 | grep -c &quot;php-fpm&quot;) 这个是统计进程数的</span></span><br><span class="line">mem=$(top -b -n1 | grep <span class="string">&quot;php-fpm&quot;</span> | awk <span class="string">&#x27;&#123;sum=sum+$10&#125;;END&#123;print sum&#125;&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$mem</span> &gt; 70 ]];<span class="keyword">then</span></span><br><span class="line">    service php-fpm restart</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">sleep 30</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh" data-lang="sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="comment"># pcount = $(top -b -n1 | grep -c &quot;php-fpm&quot;) 这个是统计进程数的</span></span><br><span class="line">mem=$(top -b -n1 | grep <span class="string">&quot;php-fpm&quot;</span> | awk <span class="string">&#x27;&#123;sum=sum+$10&#125;;END&#123;print sum&#125;&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$mem</span> &gt; 70 ]];<span class="keyword">then</span></span><br><span class="line">    service php-fpm restart</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line">sleep 30</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
 <p>后台启动：</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nohup ./checkmem.sh &gt; checkmem.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># nohup 是不挂断的运行(忽略所有挂断（SIGHUP）信号)</span></span><br><span class="line"><span class="comment"># 最后一个&amp;表示后台运行</span></span><br><span class="line"><span class="comment"># 2&gt;&amp;1 表示将标准错误重定向到标准输出；这里标准输出又被重定向到checkmem.log文件中。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sh" data-lang="sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nohup ./checkmem.sh &gt; checkmem.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># nohup 是不挂断的运行(忽略所有挂断（SIGHUP）信号)</span></span><br><span class="line"><span class="comment"># 最后一个&amp;表示后台运行</span></span><br><span class="line"><span class="comment"># 2&gt;&amp;1 表示将标准错误重定向到标准输出；这里标准输出又被重定向到checkmem.log文件中。</span></span><br></pre></td></tr></table></figure>
             </div>
             
                 <div class="kratos-copyright text-center clearfix">
@@ -278,10 +276,10 @@
                 <div class="footer-tag clearfix">
                     <div class="pull-left">
                     <i class="fa fa-tags"></i>
-                        <a class="tag-none-link" href="/tags/php-fpm/" rel="tag">php-fpm</a>, <a class="tag-none-link" href="/tags/php%E5%9F%BA%E7%A1%80/" rel="tag">php基础</a>
+                        <a class="tag-none-link" href="/tags/php-fpm/" rel="tag">php-fpm</a>, <a class="tag-none-link" href="/tags/php%E5%9F%BA%E7%A1%80/" rel="tag">php基础</a>, <a class="tag-none-link" href="/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="tag">编程基础</a>
                     </div>
                     <div class="pull-date">
-                    <span>最后编辑：2021-01-27</span>
+                    <span>最后编辑：2021-01-31</span>
                     </div>
                 </div>
             </footer>
@@ -302,23 +300,32 @@
         
         
             <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.css">
-<script src="//cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js"></script>
-<script src="//cdn.bootcss.com/blueimp-md5/2.9.0/js/md5.min.js"></script>
 <div id="gitalk-container"></div>
 <script type="text/javascript">
-    var gitalk = new Gitalk({
-        // Gitalk配置
-        language: "zh-CN",
-        clientID: "7dff06239ac01f6006c8",
-        clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
-        repo: "comment_data",
-        owner: "stayknight",
-        admin: ["stayknight"],
-        id: location.pathname,
-        distractionFreeMode: false
-    });
-    gitalk.render('gitalk-container');
+    var load_comm = () => {
+        const init = () => {
+            const gitalk = new Gitalk({
+                // Gitalk配置
+                language: "zh-CN",
+                clientID: "7dff06239ac01f6006c8",
+                clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
+                repo: "comment_data",
+                owner: "stayknight",
+                admin: ["stayknight"],
+                id: location.pathname,
+                distractionFreeMode: false
+            });
+            gitalk.render('gitalk-container');
+        };
+        if (typeof Gitalk == 'undefined') {
+            const src = 'https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
 </script>
+
         
     </article>
 </section>
@@ -331,12 +338,12 @@
     <div class="photo-background"></div>
     <div class="photo-wrapper clearfix">
         <div class="photo-wrapper-tip text-center">
-            <img class="about-photo" src="https://ss0.bdstatic.com/7Ls0a8Sm1A5BphGlnYG/sys/portrait/item/0926e4ba91e6b5b7e9b9b0e5bdb12802" />
+            <img class="about-photo" src="https://cdn.jsdelivr.net/npm/chwx@1.0.0/avatars/icon41.jpg" />
         </div>
     </div>
     <div class="textwidget">
         
-            <p class="text-center">云海鹰影技术生活分享博客~</p>
+            <p class="text-center">路漫漫其修远兮，吾将上下而求索~<br/><span>(右下角搜索)</span></p>
         
     </div>
 </aside>
@@ -346,7 +353,7 @@
     
   <aside id="krw-categories" class="widget widget-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/php%E5%9F%BA%E7%A1%80/">php基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%8D%9A%E5%AE%A2%E6%8A%80%E6%9C%AF/">博客技术</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/">生活随笔</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%BB%E4%B9%A6%E5%AD%A6%E4%B9%A0/">读书学习</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">15</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/php%E5%9F%BA%E7%A1%80/">php基础</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li></ul></li></ul>
   </aside>
 
 
@@ -355,7 +362,7 @@
   <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
     <h4 class="widget-title"><i class="fa fa-tags"></i>标签云</h4>
       <div class="tag-clouds">
-        <a href="/tags/ACGN/" style="font-size: 0.6em;">ACGN</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.7em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.7em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a> <a href="/tags/https/" style="font-size: 0.6em;">https</a> <a href="/tags/linux%E5%91%BD%E4%BB%A4/" style="font-size: 0.7em;">linux命令</a> <a href="/tags/linux%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">linux基础</a> <a href="/tags/linux%E5%AE%89%E5%85%A8/" style="font-size: 0.6em;">linux安全</a> <a href="/tags/live2d/" style="font-size: 0.6em;">live2d</a>
+        <a href="/tags/ACGN/" style="font-size: 0.75em;">ACGN</a> <a href="/tags/ACM/" style="font-size: 0.6em;">ACM</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.65em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.65em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/SAO/" style="font-size: 0.6em;">SAO</a> <a href="/tags/adb/" style="font-size: 0.6em;">adb</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/centos/" style="font-size: 0.7em;">centos</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/gitlab/" style="font-size: 0.65em;">gitlab</a> <a href="/tags/hexo/" style="font-size: 0.6em;">hexo</a>
       </div>
   </aside>
 
@@ -369,34 +376,88 @@
         
           
           
-            <a class="list-group-item" href="/20190517-1.html"><i class="fa  fa-book"></i> C++变量初始化详解(C++98和C++11)</a>
+            <a class="list-group-item" href="/20200611-1.html"><i class="fa  fa-book"></i> Linux adb devices 显示no permissions问题解决</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-18.html"><i class="fa  fa-book"></i> 2019四月新番推荐和点评</a>
+            <a class="list-group-item" href="/20200604-1.html"><i class="fa  fa-book"></i> 各类MQTT代理服务器特性对比</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-17.html"><i class="fa  fa-book"></i> php-fpm介绍，配置和优化</a>
+            <a class="list-group-item" href="/20191220-2.html"><i class="fa  fa-book"></i> 自动备份远程文件到本地</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-16.html"><i class="fa  fa-book"></i> 为你的博客博客/网页添加Live2d二次元老婆的插件/手动方法</a>
+            <a class="list-group-item" href="/20191220-1.html"><i class="fa  fa-book"></i> 数据库自动备份脚本</a>
             
           
         
           
           
-            <a class="list-group-item" href="/20190512-15.html"><i class="fa  fa-book"></i> linux之cron服务</a>
+            <a class="list-group-item" href="/20191211-1.html"><i class="fa  fa-book"></i> 过滤日志目录中所有日志里最近1小时的错误记录及上下5行</a>
             
           
         
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
           
@@ -498,16 +559,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-md-offset-3 footer-list text-center">
-                    <ul class="kratos-social-icons">
+                    <ul class="kratos-social-icons text-center">
                         
                         
                         
                         
                         
                         
-                        
+                        <li><a target="_blank" rel="me" href="https://smp.chaoswork.cn/@stayknight"><i class="fa fa fa-share-alt-square"></i></a></li>
                         <li><a target="_blank" rel="nofollow" href="https://github.com/stayknight"><i class="fa fa-github"></i></a></li>
-                        
+                        <li><a target="_blank" rel="nofollow" href="/atom.xml"><i class="fa fa-rss"></i></a></li>
                     </ul>
                     <ul class="kratos-copyright">
                         <div>
@@ -523,8 +584,8 @@
                             <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
                         </div>
                         <div>
-                            
-                            
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
+                            <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
                         </div>
                     </ul>
                 </div>
