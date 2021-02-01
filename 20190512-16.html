@@ -15,24 +15,6 @@
   
     <meta name="keywords" content="live2d, wordpress, 博客" />
   
-  <meta name="description" content="今天抽空给博客添加了个live2d角色，将看到的比较好的一篇教程放到这儿。  前言好久没搞WP的教程了，想不想为你的博客加一个看板娘呢，反正我想2333，所以我便汇总了一下网上这些教程模型和机器人api。      插件版WordPress  Wikimoe大佬制作的插件（伊斯特瓦尔）  小白-白大佬制作的插件（22&amp;33娘单服装版本）    Github  小白-白大佬制作的插件（22">
-<meta property="og:type" content="article">
-<meta property="og:title" content="为你的博客博客&#x2F;网页添加Live2d二次元老婆的插件&#x2F;手动方法">
-<meta property="og:url" content="https://blog.chaoswork.cn/20190512-16.html">
-<meta property="og:site_name" content="云海鹰影">
-<meta property="og:description" content="今天抽空给博客添加了个live2d角色，将看到的比较好的一篇教程放到这儿。  前言好久没搞WP的教程了，想不想为你的博客加一个看板娘呢，反正我想2333，所以我便汇总了一下网上这些教程模型和机器人api。      插件版WordPress  Wikimoe大佬制作的插件（伊斯特瓦尔）  小白-白大佬制作的插件（22&amp;33娘单服装版本）    Github  小白-白大佬制作的插件（22">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog.chaoswork.cn/images/favicon.ico">
-<meta property="article:published_time" content="2019-05-12T15:39:18.000Z">
-<meta property="article:modified_time" content="2021-01-30T18:12:39.918Z">
-<meta property="article:author" content="云海鹰影">
-<meta property="article:tag" content="博客">
-<meta property="article:tag" content="wordpress">
-<meta property="article:tag" content="live2d">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.chaoswork.cn/images/favicon.ico">
-<meta name="twitter:site" content="@null">
-  <link rel="alternate" href="atom.xml" type="application/atom+xml">
   <!-- 站点验证相关 -->
   
     
@@ -42,6 +24,9 @@
     
     
   
+  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+
   <!-- 样式表文件 -->
   <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
   
@@ -59,6 +44,7 @@
   
   <!-- 不得不预先加载的一些JS文件 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-lazyload@1.9.7/jquery.lazyload.min.js"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
   
@@ -114,6 +100,17 @@
               <li><a  href="/resources/backend"  >后端</a></li>
             
               <li><a  href="/resources/tools"  >工具</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-gift"></i>看动漫</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://www.5dm.tv/"  >五弹幕</a></li>
             
           </ul>
         </li>
@@ -292,7 +289,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "https://blog.chaoswork.cn/20190512-16.html",
+                text: "https://www.chaoswork.cn/20190512-16.html",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -304,7 +301,7 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "https://blog.chaoswork.cn/20190512-16.html";
+            const hostUrl       = "https://www.chaoswork.cn/20190512-16.html";
             const title         = "「为你的博客博客/网页添加Live2d二次元老婆的插件/手动方法」";
             const excerpt       = `
 今天抽空给博客添加了个live2d角色，将看到的比较好的一篇教程放到这儿。
@@ -619,7 +616,7 @@
                 <div class="col-md-6 col-md-offset-3 footer-list text-center">
                     <ul class="kratos-social-icons text-center">
                         
-                        
+                        <li><a href="mailto:stayknight@163.com"><i class="fa fa-envelope"></i></a></li>
                         
                         
                         
@@ -644,6 +641,10 @@
                         <div>
                             <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
                             <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
+                            
+                                <li><a href="sitemap.xml" target="_blank">站点地图</a></li>
+                                <li><a href="baidusitemap.xml" target="_blank">百度地图</a></li>
+                            
                         </div>
                     </ul>
                 </div>
@@ -654,8 +655,11 @@
 
       </div>
     </div>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $("img.lazy").lazyload({effect: "fadeIn"});
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
 <script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script>
 
     <div>
@@ -666,7 +670,7 @@
 <script async src="/js/candy.min.js"></script>
 
 
-    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script defer src=""></script>
 
 <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <script defer src="/js/kratosr.min.js"></script>

@@ -15,24 +15,6 @@
   
     <meta name="keywords" content="博客笔记, 杂谈, 程序员" />
   
-  <meta name="description" content="从刚开始接触网络，我就开始接触博客了，比如QQ空间，也是一类博客。也曾尝试过写，做了程序猿，基于想要积累，整理和分享的欲望，更是好几次辗转各个博客平台，新浪，CSDN，cnblogs等等， 不过都没能坚持下去。我想很多同行们都有类似的体验，尝试做，但是因为各种原因，淡忘了或者坚持不下去。这里面的原因，我觉得值得深究。 作为IT技术行业，养成写BLOG的习惯的好处，我想也不需要太多说。 这里连接两篇">
-<meta property="og:type" content="article">
-<meta property="og:title" content="干程序几年了，说说博客这个事情">
-<meta property="og:url" content="https://blog.chaoswork.cn/20171117-1.html">
-<meta property="og:site_name" content="云海鹰影">
-<meta property="og:description" content="从刚开始接触网络，我就开始接触博客了，比如QQ空间，也是一类博客。也曾尝试过写，做了程序猿，基于想要积累，整理和分享的欲望，更是好几次辗转各个博客平台，新浪，CSDN，cnblogs等等， 不过都没能坚持下去。我想很多同行们都有类似的体验，尝试做，但是因为各种原因，淡忘了或者坚持不下去。这里面的原因，我觉得值得深究。 作为IT技术行业，养成写BLOG的习惯的好处，我想也不需要太多说。 这里连接两篇">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://blog.chaoswork.cn/images/favicon.ico">
-<meta property="article:published_time" content="2017-11-16T22:16:50.000Z">
-<meta property="article:modified_time" content="2021-01-30T17:28:13.130Z">
-<meta property="article:author" content="云海鹰影">
-<meta property="article:tag" content="杂谈">
-<meta property="article:tag" content="程序员">
-<meta property="article:tag" content="博客笔记">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://blog.chaoswork.cn/images/favicon.ico">
-<meta name="twitter:site" content="@null">
-  <link rel="alternate" href="atom.xml" type="application/atom+xml">
   <!-- 站点验证相关 -->
   
     
@@ -42,6 +24,9 @@
     
     
   
+  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+
   <!-- 样式表文件 -->
   <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
   
@@ -59,6 +44,7 @@
   
   <!-- 不得不预先加载的一些JS文件 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-lazyload@1.9.7/jquery.lazyload.min.js"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
   
@@ -114,6 +100,17 @@
               <li><a  href="/resources/backend"  >后端</a></li>
             
               <li><a  href="/resources/tools"  >工具</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-gift"></i>看动漫</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://www.5dm.tv/"  >五弹幕</a></li>
             
           </ul>
         </li>
@@ -226,7 +223,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "https://blog.chaoswork.cn/20171117-1.html",
+                text: "https://www.chaoswork.cn/20171117-1.html",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -238,7 +235,7 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "https://blog.chaoswork.cn/20171117-1.html";
+            const hostUrl       = "https://www.chaoswork.cn/20171117-1.html";
             const title         = "「干程序几年了，说说博客这个事情」";
             const excerpt       = `从刚开始接触网络，我就开始接触博客了，比如QQ空间，也是一类博客。也曾尝试过写，做了程序猿，基于想要积累，整理和分享的欲望，更是好几次辗转各个博客平台，新浪，CSDN，cnblogs等等， 不过都没能坚持下去。我想很多同行们都有类似的...`;
             let _URL;
@@ -540,7 +537,7 @@
                 <div class="col-md-6 col-md-offset-3 footer-list text-center">
                     <ul class="kratos-social-icons text-center">
                         
-                        
+                        <li><a href="mailto:stayknight@163.com"><i class="fa fa-envelope"></i></a></li>
                         
                         
                         
@@ -565,6 +562,10 @@
                         <div>
                             <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
                             <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
+                            
+                                <li><a href="sitemap.xml" target="_blank">站点地图</a></li>
+                                <li><a href="baidusitemap.xml" target="_blank">百度地图</a></li>
+                            
                         </div>
                     </ul>
                 </div>
@@ -575,8 +576,11 @@
 
       </div>
     </div>
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $("img.lazy").lazyload({effect: "fadeIn"});
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
 <script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script>
 
     <div>
@@ -587,7 +591,7 @@
 <script async src="/js/candy.min.js"></script>
 
 
-    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    <script defer src=""></script>
 
 <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
 <script defer src="/js/kratosr.min.js"></script>

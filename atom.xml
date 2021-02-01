@@ -3,11 +3,11 @@
   <title>云海鹰影</title>
   
   <subtitle>我独自度过的无数个晨昏，用来交换你身边一瞬</subtitle>
-  <link href="https://blog.chaoswork.cn/atom.xml" rel="self"/>
+  <link href="https://www.chaoswork.cn/atom.xml" rel="self"/>
   
-  <link href="https://blog.chaoswork.cn/"/>
+  <link href="https://www.chaoswork.cn/"/>
   <updated>2021-01-30T19:06:47.888Z</updated>
-  <id>https://blog.chaoswork.cn/</id>
+  <id>https://www.chaoswork.cn/</id>
   
   <author>
     <name>云海鹰影</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>Linux adb devices 显示no permissions问题解决</title>
-    <link href="https://blog.chaoswork.cn/20200611-1.html"/>
-    <id>https://blog.chaoswork.cn/20200611-1.html</id>
+    <link href="https://www.chaoswork.cn/20200611-1.html"/>
+    <id>https://www.chaoswork.cn/20200611-1.html</id>
     <published>2020-06-11T09:51:24.000Z</published>
     <updated>2021-01-30T19:06:47.888Z</updated>
     
@@ -34,21 +34,21 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="linux" scheme="https://blog.chaoswork.cn/tags/linux/"/>
+    <category term="linux" scheme="https://www.chaoswork.cn/tags/linux/"/>
     
-    <category term="adb" scheme="https://blog.chaoswork.cn/tags/adb/"/>
+    <category term="adb" scheme="https://www.chaoswork.cn/tags/adb/"/>
     
-    <category term="lsusb" scheme="https://blog.chaoswork.cn/tags/lsusb/"/>
+    <category term="lsusb" scheme="https://www.chaoswork.cn/tags/lsusb/"/>
     
   </entry>
   
   <entry>
     <title>各类MQTT代理服务器特性对比</title>
-    <link href="https://blog.chaoswork.cn/20200604-1.html"/>
-    <id>https://blog.chaoswork.cn/20200604-1.html</id>
+    <link href="https://www.chaoswork.cn/20200604-1.html"/>
+    <id>https://www.chaoswork.cn/20200604-1.html</id>
     <published>2020-06-04T09:51:24.000Z</published>
     <updated>2021-01-30T19:04:57.575Z</updated>
     
@@ -63,17 +63,17 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="mqtt" scheme="https://blog.chaoswork.cn/tags/mqtt/"/>
+    <category term="mqtt" scheme="https://www.chaoswork.cn/tags/mqtt/"/>
     
   </entry>
   
   <entry>
     <title>自动备份远程文件到本地</title>
-    <link href="https://blog.chaoswork.cn/20191220-2.html"/>
-    <id>https://blog.chaoswork.cn/20191220-2.html</id>
+    <link href="https://www.chaoswork.cn/20191220-2.html"/>
+    <id>https://www.chaoswork.cn/20191220-2.html</id>
     <published>2019-12-20T10:35:51.000Z</published>
     <updated>2021-01-30T19:03:05.325Z</updated>
     
@@ -91,23 +91,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="远程备份" scheme="https://blog.chaoswork.cn/tags/%E8%BF%9C%E7%A8%8B%E5%A4%87%E4%BB%BD/"/>
+    <category term="远程备份" scheme="https://www.chaoswork.cn/tags/%E8%BF%9C%E7%A8%8B%E5%A4%87%E4%BB%BD/"/>
     
   </entry>
   
   <entry>
     <title>数据库自动备份脚本</title>
-    <link href="https://blog.chaoswork.cn/20191220-1.html"/>
-    <id>https://blog.chaoswork.cn/20191220-1.html</id>
+    <link href="https://www.chaoswork.cn/20191220-1.html"/>
+    <id>https://www.chaoswork.cn/20191220-1.html</id>
     <published>2019-12-20T08:15:23.000Z</published>
     <updated>2021-01-30T19:01:27.455Z</updated>
     
@@ -122,23 +122,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="数据库" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="数据库" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="数据库" scheme="https://blog.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="数据库" scheme="https://www.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
   </entry>
   
   <entry>
     <title>过滤日志目录中所有日志里最近1小时的错误记录及上下5行</title>
-    <link href="https://blog.chaoswork.cn/20191211-1.html"/>
-    <id>https://blog.chaoswork.cn/20191211-1.html</id>
+    <link href="https://www.chaoswork.cn/20191211-1.html"/>
+    <id>https://www.chaoswork.cn/20191211-1.html</id>
     <published>2019-12-11T15:35:51.000Z</published>
     <updated>2021-01-30T18:58:40.404Z</updated>
     
@@ -153,21 +153,21 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
     
   </entry>
   
   <entry>
     <title>Mongoose中使用shortid遇到的坑</title>
-    <link href="https://blog.chaoswork.cn/20191128-1.html"/>
-    <id>https://blog.chaoswork.cn/20191128-1.html</id>
+    <link href="https://www.chaoswork.cn/20191128-1.html"/>
+    <id>https://www.chaoswork.cn/20191128-1.html</id>
     <published>2019-11-28T09:51:24.000Z</published>
     <updated>2021-01-30T18:56:49.375Z</updated>
     
@@ -183,21 +183,21 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="nodejs" scheme="https://blog.chaoswork.cn/tags/nodejs/"/>
+    <category term="nodejs" scheme="https://www.chaoswork.cn/tags/nodejs/"/>
     
-    <category term="mongoose" scheme="https://blog.chaoswork.cn/tags/mongoose/"/>
+    <category term="mongoose" scheme="https://www.chaoswork.cn/tags/mongoose/"/>
     
-    <category term="shortid" scheme="https://blog.chaoswork.cn/tags/shortid/"/>
+    <category term="shortid" scheme="https://www.chaoswork.cn/tags/shortid/"/>
     
   </entry>
   
   <entry>
     <title>完全卸载删除gitlab</title>
-    <link href="https://blog.chaoswork.cn/20191018-1.html"/>
-    <id>https://blog.chaoswork.cn/20191018-1.html</id>
+    <link href="https://www.chaoswork.cn/20191018-1.html"/>
+    <id>https://www.chaoswork.cn/20191018-1.html</id>
     <published>2019-10-18T09:51:24.000Z</published>
     <updated>2021-01-30T18:55:58.556Z</updated>
     
@@ -213,17 +213,17 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="gitlab" scheme="https://blog.chaoswork.cn/tags/gitlab/"/>
+    <category term="gitlab" scheme="https://www.chaoswork.cn/tags/gitlab/"/>
     
   </entry>
   
   <entry>
     <title>Authentication in MariaDB 10.4 (MariaDB 10.4 root账号密码问题)</title>
-    <link href="https://blog.chaoswork.cn/20191012-1.html"/>
-    <id>https://blog.chaoswork.cn/20191012-1.html</id>
+    <link href="https://www.chaoswork.cn/20191012-1.html"/>
+    <id>https://www.chaoswork.cn/20191012-1.html</id>
     <published>2019-10-12T09:51:24.000Z</published>
     <updated>2021-01-30T18:51:19.372Z</updated>
     
@@ -238,19 +238,19 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="数据库" scheme="https://blog.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="数据库" scheme="https://www.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-    <category term="mariadb" scheme="https://blog.chaoswork.cn/tags/mariadb/"/>
+    <category term="mariadb" scheme="https://www.chaoswork.cn/tags/mariadb/"/>
     
   </entry>
   
   <entry>
     <title>github算法面试资料(Java版)</title>
-    <link href="https://blog.chaoswork.cn/20190918-2.html"/>
-    <id>https://blog.chaoswork.cn/20190918-2.html</id>
+    <link href="https://www.chaoswork.cn/20190918-2.html"/>
+    <id>https://www.chaoswork.cn/20190918-2.html</id>
     <published>2019-09-18T09:51:24.000Z</published>
     <updated>2021-01-30T18:48:46.201Z</updated>
     
@@ -265,23 +265,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="数据结构与算法" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="算法" scheme="https://blog.chaoswork.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    <category term="算法" scheme="https://www.chaoswork.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
-    <category term="面试资料" scheme="https://blog.chaoswork.cn/tags/%E9%9D%A2%E8%AF%95%E8%B5%84%E6%96%99/"/>
+    <category term="面试资料" scheme="https://www.chaoswork.cn/tags/%E9%9D%A2%E8%AF%95%E8%B5%84%E6%96%99/"/>
     
   </entry>
   
   <entry>
     <title>基本算法复杂度统计</title>
-    <link href="https://blog.chaoswork.cn/20190918-1.html"/>
-    <id>https://blog.chaoswork.cn/20190918-1.html</id>
+    <link href="https://www.chaoswork.cn/20190918-1.html"/>
+    <id>https://www.chaoswork.cn/20190918-1.html</id>
     <published>2019-09-18T08:51:24.000Z</published>
     <updated>2021-01-30T18:51:56.713Z</updated>
     
@@ -295,23 +295,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="数据结构与算法" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    <category term="数据结构与算法" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="算法" scheme="https://blog.chaoswork.cn/tags/%E7%AE%97%E6%B3%95/"/>
+    <category term="算法" scheme="https://www.chaoswork.cn/tags/%E7%AE%97%E6%B3%95/"/>
     
-    <category term="算法复杂度" scheme="https://blog.chaoswork.cn/tags/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
+    <category term="算法复杂度" scheme="https://www.chaoswork.cn/tags/%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6/"/>
     
   </entry>
   
   <entry>
     <title>linux命令netstat的几个用法</title>
-    <link href="https://blog.chaoswork.cn/20190726-1.html"/>
-    <id>https://blog.chaoswork.cn/20190726-1.html</id>
+    <link href="https://www.chaoswork.cn/20190726-1.html"/>
+    <id>https://www.chaoswork.cn/20190726-1.html</id>
     <published>2019-07-26T06:44:11.000Z</published>
     <updated>2021-01-30T18:28:38.073Z</updated>
     
@@ -325,23 +325,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="linux基础" scheme="https://blog.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="netstat" scheme="https://blog.chaoswork.cn/tags/netstat/"/>
+    <category term="netstat" scheme="https://www.chaoswork.cn/tags/netstat/"/>
     
   </entry>
   
   <entry>
     <title>sequelize引起mysql错误：Too many keys specified. Max 64 keys allowed</title>
-    <link href="https://blog.chaoswork.cn/20190724-1.html"/>
-    <id>https://blog.chaoswork.cn/20190724-1.html</id>
+    <link href="https://www.chaoswork.cn/20190724-1.html"/>
+    <id>https://www.chaoswork.cn/20190724-1.html</id>
     <published>2019-07-24T14:22:08.000Z</published>
     <updated>2021-01-30T18:26:44.100Z</updated>
     
@@ -356,19 +356,19 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="mysql" scheme="https://blog.chaoswork.cn/tags/mysql/"/>
+    <category term="mysql" scheme="https://www.chaoswork.cn/tags/mysql/"/>
     
-    <category term="sequelize" scheme="https://blog.chaoswork.cn/tags/sequelize/"/>
+    <category term="sequelize" scheme="https://www.chaoswork.cn/tags/sequelize/"/>
     
   </entry>
   
   <entry>
     <title>Nginx中proxy_pass问题</title>
-    <link href="https://blog.chaoswork.cn/20190624-2.html"/>
-    <id>https://blog.chaoswork.cn/20190624-2.html</id>
+    <link href="https://www.chaoswork.cn/20190624-2.html"/>
+    <id>https://www.chaoswork.cn/20190624-2.html</id>
     <published>2019-06-24T14:22:08.000Z</published>
     <updated>2021-01-30T18:24:26.821Z</updated>
     
@@ -385,19 +385,19 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="centos" scheme="https://blog.chaoswork.cn/tags/centos/"/>
+    <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
     
-    <category term="nginx" scheme="https://blog.chaoswork.cn/tags/nginx/"/>
+    <category term="nginx" scheme="https://www.chaoswork.cn/tags/nginx/"/>
     
   </entry>
   
   <entry>
     <title>CentOS7替换国内镜像源</title>
-    <link href="https://blog.chaoswork.cn/20190624-1.html"/>
-    <id>https://blog.chaoswork.cn/20190624-1.html</id>
+    <link href="https://www.chaoswork.cn/20190624-1.html"/>
+    <id>https://www.chaoswork.cn/20190624-1.html</id>
     <published>2019-06-24T12:22:08.000Z</published>
     <updated>2021-01-30T18:23:53.926Z</updated>
     
@@ -412,19 +412,19 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="centos" scheme="https://blog.chaoswork.cn/tags/centos/"/>
+    <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
     
-    <category term="镜像源" scheme="https://blog.chaoswork.cn/tags/%E9%95%9C%E5%83%8F%E6%BA%90/"/>
+    <category term="镜像源" scheme="https://www.chaoswork.cn/tags/%E9%95%9C%E5%83%8F%E6%BA%90/"/>
     
   </entry>
   
   <entry>
     <title>ubuntu中vscode导致卡顿问题解决</title>
-    <link href="https://blog.chaoswork.cn/20190605-1.html"/>
-    <id>https://blog.chaoswork.cn/20190605-1.html</id>
+    <link href="https://www.chaoswork.cn/20190605-1.html"/>
+    <id>https://www.chaoswork.cn/20190605-1.html</id>
     <published>2019-06-05T14:22:08.000Z</published>
     <updated>2021-01-30T18:22:13.752Z</updated>
     
@@ -438,19 +438,19 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="ubuntu" scheme="https://blog.chaoswork.cn/tags/ubuntu/"/>
+    <category term="ubuntu" scheme="https://www.chaoswork.cn/tags/ubuntu/"/>
     
-    <category term="vscode" scheme="https://blog.chaoswork.cn/tags/vscode/"/>
+    <category term="vscode" scheme="https://www.chaoswork.cn/tags/vscode/"/>
     
   </entry>
   
   <entry>
     <title>C/C++内置类型，数值常量和隐式转换</title>
-    <link href="https://blog.chaoswork.cn/20190525-1.html"/>
-    <id>https://blog.chaoswork.cn/20190525-1.html</id>
+    <link href="https://www.chaoswork.cn/20190525-1.html"/>
+    <id>https://www.chaoswork.cn/20190525-1.html</id>
     <published>2019-05-25T14:22:08.000Z</published>
     <updated>2021-01-30T18:03:23.047Z</updated>
     
@@ -467,25 +467,25 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="C++基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/"/>
+    <category term="C++基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="C++基础" scheme="https://blog.chaoswork.cn/tags/C-%E5%9F%BA%E7%A1%80/"/>
+    <category term="C++基础" scheme="https://www.chaoswork.cn/tags/C-%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="内置类型" scheme="https://blog.chaoswork.cn/tags/%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/"/>
+    <category term="内置类型" scheme="https://www.chaoswork.cn/tags/%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/"/>
     
-    <category term="隐式转换" scheme="https://blog.chaoswork.cn/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
+    <category term="隐式转换" scheme="https://www.chaoswork.cn/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
     
   </entry>
   
   <entry>
     <title>centos7搭建gitlab及初期设置</title>
-    <link href="https://blog.chaoswork.cn/20190524-1.html"/>
-    <id>https://blog.chaoswork.cn/20190524-1.html</id>
+    <link href="https://www.chaoswork.cn/20190524-1.html"/>
+    <id>https://www.chaoswork.cn/20190524-1.html</id>
     <published>2019-05-24T14:22:08.000Z</published>
     <updated>2021-01-30T18:22:22.653Z</updated>
     
@@ -502,19 +502,19 @@
     
     
     
-    <category term="经验教程" scheme="https://blog.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
+    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
     
     
-    <category term="centos" scheme="https://blog.chaoswork.cn/tags/centos/"/>
+    <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
     
-    <category term="gitlab" scheme="https://blog.chaoswork.cn/tags/gitlab/"/>
+    <category term="gitlab" scheme="https://www.chaoswork.cn/tags/gitlab/"/>
     
   </entry>
   
   <entry>
     <title>mysql5.7升级到mysql8.0遇到的问题</title>
-    <link href="https://blog.chaoswork.cn/20190520-1.html"/>
-    <id>https://blog.chaoswork.cn/20190520-1.html</id>
+    <link href="https://www.chaoswork.cn/20190520-1.html"/>
+    <id>https://www.chaoswork.cn/20190520-1.html</id>
     <published>2019-05-20T14:22:08.000Z</published>
     <updated>2021-01-30T17:54:49.879Z</updated>
     
@@ -529,23 +529,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="数据库" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="数据库" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="数据库" scheme="https://blog.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="数据库" scheme="https://www.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
-    <category term="mysql" scheme="https://blog.chaoswork.cn/tags/mysql/"/>
+    <category term="mysql" scheme="https://www.chaoswork.cn/tags/mysql/"/>
     
   </entry>
   
   <entry>
     <title>C++变量初始化详解(C++98和C++11)</title>
-    <link href="https://blog.chaoswork.cn/20190517-1.html"/>
-    <id>https://blog.chaoswork.cn/20190517-1.html</id>
+    <link href="https://www.chaoswork.cn/20190517-1.html"/>
+    <id>https://www.chaoswork.cn/20190517-1.html</id>
     <published>2019-05-17T14:22:08.000Z</published>
     <updated>2021-01-30T16:50:42.426Z</updated>
     
@@ -562,23 +562,23 @@
     
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="C++基础" scheme="https://blog.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/"/>
+    <category term="C++基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/"/>
     
     
-    <category term="编程基础" scheme="https://blog.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="C++基础" scheme="https://blog.chaoswork.cn/tags/C-%E5%9F%BA%E7%A1%80/"/>
+    <category term="C++基础" scheme="https://www.chaoswork.cn/tags/C-%E5%9F%BA%E7%A1%80/"/>
     
-    <category term="变量初始化" scheme="https://blog.chaoswork.cn/tags/%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/"/>
+    <category term="变量初始化" scheme="https://www.chaoswork.cn/tags/%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/"/>
     
   </entry>
   
   <entry>
     <title>2019四月新番推荐和点评</title>
-    <link href="https://blog.chaoswork.cn/20190512-18.html"/>
-    <id>https://blog.chaoswork.cn/20190512-18.html</id>
+    <link href="https://www.chaoswork.cn/20190512-18.html"/>
+    <id>https://www.chaoswork.cn/20190512-18.html</id>
     <published>2019-05-12T15:42:26.000Z</published>
     <updated>2021-01-30T17:26:14.204Z</updated>
     
@@ -593,12 +593,12 @@
     
     
     
-    <category term="ACGN" scheme="https://blog.chaoswork.cn/categories/ACGN/"/>
+    <category term="ACGN" scheme="https://www.chaoswork.cn/categories/ACGN/"/>
     
     
-    <category term="ACGN" scheme="https://blog.chaoswork.cn/tags/ACGN/"/>
+    <category term="ACGN" scheme="https://www.chaoswork.cn/tags/ACGN/"/>
     
-    <category term="动漫推荐" scheme="https://blog.chaoswork.cn/tags/%E5%8A%A8%E6%BC%AB%E6%8E%A8%E8%8D%90/"/>
+    <category term="动漫推荐" scheme="https://www.chaoswork.cn/tags/%E5%8A%A8%E6%BC%AB%E6%8E%A8%E8%8D%90/"/>
     
   </entry>
   
