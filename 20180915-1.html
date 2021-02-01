@@ -44,7 +44,6 @@
   
   <!-- 不得不预先加载的一些JS文件 -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery-lazyload@1.9.7/jquery.lazyload.min.js"></script>
   
     <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
   
@@ -660,7 +659,9 @@
       </div>
     </div>
     <script type="text/javascript" charset="utf-8">
-    $("img.lazy").lazyload({effect: "fadeIn"});
+    $("img.headicon").one("error", function(e) {
+        $(this).attr("src", "/images/avatar.webp");
+    });
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
