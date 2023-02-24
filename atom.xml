@@ -48,6 +48,68 @@
   </entry>
   
   <entry>
+    <title>前端打包构建工具整理：功能与区别</title>
+    <link href="https://www.chaoswork.cn/20210527-1.html"/>
+    <id>https://www.chaoswork.cn/20210527-1.html</id>
+    <published>2021-05-27T07:20:18.000Z</published>
+    <updated>2023-02-24T07:57:05.991Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>据我了解，前端开发构建工具目前有两大类： bundle和no bundle, 其中,<br>bundle类工具主要代表： webpack, parcel， rollup, esbuild.<br>no bundle类主要代表： snowpack, vite.</p><p>在过去的几年，webpack之类的bundle打包工具，成为大多数web应用程序构建的必要步骤。这是因为：</p><ol><li>在HTTP 1.x时代， 浏览器客户端在同一时间，针对同一域名下的请求有一定数量限制。超过限制数目的请求会被阻塞，从而影响性能，因此合并请求非常有必要；</li><li>在以前的浏览器中， nodejs的CommonJS模块和ES模块，普遍都无法直接运行，必须转换处理，这也为bundler的存在提供了合理性。</li><li>bundle处理本身也有很多优点，比如webpack支持很多插件，可以支持各种文件处理以及混淆压缩等。</li></ol><p>但是bundler的存在，却真实的增加了前端应用开发很多的复杂性，也一定程度影响开发效率， 比如bundle体积过大，热更新速度慢等。而且到了2020后的现代，以上的问题基本上都不复存在：</p><ol><li>http2多路复用，允许同时通过单一的http2连接发起多重的请求-响应消息。随着http2的普及，合并请求变得没那么必要。</li><li>浏览器普遍开始支持ESM模块。</li></ol><p>no bundle构建工具普遍的一个特点就是配置相对简单， 启动和热更新快， 开发体验较好， 这样自然而然开始流行起来。比如vue 2.0用webpack， 到vue 3.0就抛弃webpack改用自研的vite工具了。</p><p>当然no bundle也不是真的no bundle， 毕竟bundle还是有很多优势的，在构建发布时也依然用到bundle工具, 如snowpack可以选择bundler如webpack，vite使用了rollup.</p><h2 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h2><h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>官方描述： 本质上，webpack 是一个用于现代 JavaScript 应用程序的 静态模块打包工具。当 webpack 处理应用程序时，它会在内部构建一个 依赖图(dependency graph)，此依赖图对应映射到项目所需的每个模块，并生成一个或多个 bundle。</p><h3 id="rollup"><a href="#rollup" class="headerlink" title="rollup"></a>rollup</h3><p>官方描述： Rollup 是一个 JavaScript 模块打包器，可以将小块代码编译成大块复杂的代码，例如 library 或应用程序。<br>Rollup 对代码模块使用新的标准化格式，这些标准都包含在 JavaScript 的 ES6 版本中，而不是以前的特殊解决方案，如 CommonJS 和 AMD。ES6 模块可以使你自由、无缝地使用你最喜爱的 library 中那些最有用独立函数，而你的项目不必携带其他未使用的代码。ES6 模块最终还是要由浏览器原生实现，但当前 Rollup 可以使你提前体验。</p><h3 id="esbuild"><a href="#esbuild" class="headerlink" title="esbuild"></a>esbuild</h3><p>官方描述： An extremely fast JavaScript bundler.</p><h3 id="snowpack"><a href="#snowpack" class="headerlink" title="snowpack"></a>snowpack</h3><p>官方描述： Snowpack 是为现代浏览器设计的一个超级快的前端构建工具, 它是你在开发工作流程中使用更笨重更复杂的bundle打包工具如webpack, parcel的另一个可选方案。Snowpack利用JavaScript的本地模块系统(即ESM)来避免不必要的（转换）工作, 并在你无论你工程增长多大时保持运行快速。</p><h3 id="vite"><a href="#vite" class="headerlink" title="vite"></a>vite</h3><p>官方描述： Vite 是一种新型前端构建工具，能够显著提升前端开发体验。<br>(vite vue 3.0引入， 使用了esbuild + rollup, 集合两家之长)</p><h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>webpack升级到5.x,依然是强大的主流选择，但是不再是一统天下了。<br>esbuild 和 rollup 都是小巧玲珑，主打先进和快，仅用于javascript。<br>vite 未来主要依然是用于vue 3.0的生态中。<br>snowpack 朝大而全发展，支持react, vue, svelte等。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;据我了解，前端开发构建工具目前有两大类： bundle和no bundle, 其中,&lt;br&gt;bundle类工具主要代表： webpack, </summary>
+      
+    
+    
+    
+    <category term="前端开发" scheme="https://www.chaoswork.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+    <category term="webpack" scheme="https://www.chaoswork.cn/tags/webpack/"/>
+    
+    <category term="rollup" scheme="https://www.chaoswork.cn/tags/rollup/"/>
+    
+    <category term="snowpack" scheme="https://www.chaoswork.cn/tags/snowpack/"/>
+    
+    <category term="vite" scheme="https://www.chaoswork.cn/tags/vite/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux环境下C/C++开发和可执行程序运行路径</title>
+    <link href="https://www.chaoswork.cn/20210315-1.html"/>
+    <id>https://www.chaoswork.cn/20210315-1.html</id>
+    <published>2021-03-15T06:20:21.000Z</published>
+    <updated>2023-02-24T07:57:05.991Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>开发C++程序, 路径设置一直是一个容易出错的关键点。很多人入门C++很久，对于程序开发和运行相关路径还是云里雾里。这里做一个简单的梳理。<br>因为现在C++开发一般都是CMake了，所以本文都以CMake举例。</p></blockquote><h3 id="C-开发中需要关注的路径"><a href="#C-开发中需要关注的路径" class="headerlink" title="C++开发中需要关注的路径"></a>C++开发中需要关注的路径</h3><ol><li><strong>头文件路径</strong>： 头文件路径是编译器(如: cc, cc1)需要使用的路径。</li><li><strong>依赖库文件路径</strong>：  依赖库文件路径是链接器(如: ld)需要使用的路径。</li><li><strong>运行时路径</strong>： 程序运行时通常需要加载一些动态库，仅依赖当前系统环境，与开发设置无关，所以需要在系统环境中设置运行时路径。</li></ol><h3 id="GCC链接选项-L，-rpath-link，-rpath"><a href="#GCC链接选项-L，-rpath-link，-rpath" class="headerlink" title="GCC链接选项-L，-rpath-link，-rpath"></a>GCC链接选项-L，-rpath-link，-rpath</h3><ul><li><code>-L</code>: 指定通过<code>-l</code>连接的动态库的搜索目录，所有的<code>-L</code>对所有的<code>-l</code>有效。</li><li><code>-rpath</code>: 设置运行时库搜索路径，会写入ELF可执行文件中。</li><li><code>-rpath-link</code>: 指定<strong>链接时</strong>间接依赖库搜索路径, 运行时无效。</li></ul><h3 id="LD-LIBRARY-PATH"><a href="#LD-LIBRARY-PATH" class="headerlink" title="LD_LIBRARY_PATH"></a>LD_LIBRARY_PATH</h3><p>在程序链接或运行期间，如果设置了LD_LIBRARY_PATH， 链接器/运行时链接器都会搜索该路径查找动态库。</p><h3 id="可执行程序运行时搜索库路径的几个点："><a href="#可执行程序运行时搜索库路径的几个点：" class="headerlink" title="可执行程序运行时搜索库路径的几个点："></a>可执行程序运行时搜索库路径的几个点：</h3><ul><li>默认路径： /lib， /usr/lib</li><li>环境变量： <strong>LD_LIBRARY_PATH</strong></li><li>ELF中的<strong>RPATH</strong></li><li>ELF中的<strong>RUNPATH</strong></li></ul><p>其优先级关系如下：<br>ELF中的RPATH|ELF中的RUNPATH|LD_LIBRARY_PATH环境变量|尝试加载目录的数序<br>:=:|:=:|:=:|:=:<br>未设置|未设置|未设置|/lib==&gt;/usr/lib<br>未设置|未设置|设置|${LD_LIBRARY_PATH}==&gt;/lib==&gt;/usr/lib<br>设置|未设置|未设置|${RPATH}==&gt;/lib==&gt;/usr/lib<br>设置|未设置|设置|${RPATH}==&gt;${LD_LIBRARY_PATH}==&gt;/lib==&gt;/usr/lib<br>设置或未设置|设置|设置|${LD_LIBRARY_PATH}==&gt;${RUN_PATH}==&gt;/lib==&gt;/usr/lib<br>设置或未设置|设置|未设置|${RUN_PATH}==&gt;/lib==&gt;/usr/lib</p><h3 id="pkg-config和PKG-CONFIG-PATH"><a href="#pkg-config和PKG-CONFIG-PATH" class="headerlink" title="pkg-config和PKG_CONFIG_PATH"></a>pkg-config和PKG_CONFIG_PATH</h3><p>许多程序和第三方库发布包提供一个*.pc的配置文件，里面也包含了头文件和依赖库等信息，用户通过设置PKG_CONFIG_PATH，就可以利用pkg-config工具解析并输出编译选项，将其用于gcc等编译器的编译链接过程中。如：<br>$gcc main.c <code>pkg-config --cflags --libs opencv</code> -o main</p><blockquote><p>参考： <a href="https://www.cnblogs.com/sddai/p/10266624.html">https://www.cnblogs.com/sddai/p/10266624.html</a></p></blockquote><h3 id="CMake中设置头文件，依赖库路径和运行时路径"><a href="#CMake中设置头文件，依赖库路径和运行时路径" class="headerlink" title="CMake中设置头文件，依赖库路径和运行时路径"></a>CMake中设置头文件，依赖库路径和运行时路径</h3><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">include_directories: 设置当前Project全局头文件路径</span><br><span class="line">target_include_directories： 设置单个target头文件路径</span><br><span class="line"></span><br><span class="line">link_directories: 设置当前Project全局库文件路径</span><br><span class="line">target_link_directories： 设置单个target库文件路径</span><br><span class="line"></span><br><span class="line">link_libraries： 设置当前Project全局依赖的库文件</span><br><span class="line">target_link_libraries： 设置单个target依赖的库文件</span><br><span class="line"></span><br><span class="line">// 设置运行时库路径RPATH</span><br><span class="line">set_target_properties($&#123;APP_NAME&#125; PROPERTIES INSTALL_RPATH &quot;$ORIGIN/lib:/usr/local/lib&quot;)</span><br></pre></td></tr></table></figure><h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><ol><li>设置了rpath, 但是运行时找不到so.<figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 检查elf FLAGS:</span></span><br><span class="line"><span class="variable">$readelf</span> -d myelf | grep FLAGS</span><br><span class="line">0x000000000000001e (FLAGS)              ORIGIN</span><br><span class="line">0x000000006ffffffb (FLAGS_1)            Flags: ORIGIN</span><br><span class="line"><span class="comment">#如果看到FLAGS不是上面的ORIGIN，可能需要通过`-z origin`链接选项开启。</span></span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;开发C++程序, 路径设置一直是一个容易出错的关键点。很多人入门C++很久，对于程序开发和运行相关路径还是云里雾里。这里做一个简单的梳理。&lt;br&gt;因为现在C++开发一般都是CMake了，所以本文都以CMake举例。&lt;/p&gt;
+&lt;/blockquote</summary>
+      
+    
+    
+    
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="linux基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="C++基础" scheme="https://www.chaoswork.cn/tags/C-%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
+  
+  <entry>
     <title>【转】【分享】80个网站源码</title>
     <link href="https://www.chaoswork.cn/20210201-1.html"/>
     <id>https://www.chaoswork.cn/20210201-1.html</id>
@@ -540,66 +602,6 @@
     <category term="内置类型" scheme="https://www.chaoswork.cn/tags/%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/"/>
     
     <category term="隐式转换" scheme="https://www.chaoswork.cn/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos7搭建gitlab及初期设置</title>
-    <link href="https://www.chaoswork.cn/20190524-1.html"/>
-    <id>https://www.chaoswork.cn/20190524-1.html</id>
-    <published>2019-05-24T14:22:08.000Z</published>
-    <updated>2021-03-11T10:04:17.387Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>最近因为工作的原因，需要熟悉gitlab，就在自己的服务器上先建了一套了解一下，网上看了些教程操作下来基本没啥问题，只是很多文章都说的比较零散，故这里综合一下。</p></blockquote><h2 id="一、gitlab简介"><a href="#一、gitlab简介" class="headerlink" title="一、gitlab简介"></a>一、gitlab简介</h2><p>gitlab是一个类似于github的代码仓库管理系统。由GitLabInc.开发并开源，使用MIT许可证。gitlab各方面体验和github非常相似，因为开源，个人和公司都可以用来搭建自己的私有代码仓库管理系统，非常方便。</p><p>gitlab原先全部由ruby编写，后来部分功能用go进行重写。其Web框架使用RubyonRails，数据库采用PostgreSQL，用户认证和授权基于Gitolite，邮箱服务采用postfix。</p><p>gitlab内部嵌入式集成了许多linux上常见的应用和服务。比如nginx, unicorn, logrotate, redis等。所以一键安装会很方便。当然其体量也会比较大。</p><p>下面是我在自己的服务器上（4C8G）获取的一些数据：</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">## 这里是重启的时候gitlab输出的启动服务</span><br><span class="line">sudo gitlab-ctl restart</span><br><span class="line">ok: run: alertmanager: (pid 2308) 1s</span><br><span class="line">ok: run: gitaly: (pid 2324) 0s</span><br><span class="line">ok: run: gitlab-monitor: (pid 2346) 0s</span><br><span class="line">ok: run: gitlab-workhorse: (pid 2350) 0s</span><br><span class="line">ok: run: logrotate: (pid 2379) 1s</span><br><span class="line">ok: run: nginx: (pid 2387) 0s</span><br><span class="line">ok: run: node-exporter: (pid 2396) 1s</span><br><span class="line">ok: run: postgres-exporter: (pid 2403) 0s</span><br><span class="line">ok: run: postgresql: (pid 2416) 0s</span><br><span class="line">ok: run: prometheus: (pid 2500) 1s</span><br><span class="line">ok: run: redis: (pid 2515) 0s</span><br><span class="line">ok: run: redis-exporter: (pid 2641) 1s</span><br><span class="line">ok: run: sidekiq: (pid 2689) 0s</span><br><span class="line">ok: run: unicorn: (pid 2702) 1s</span><br><span class="line"></span><br><span class="line">## 查看gitlab启动的进程数</span><br><span class="line">ps -ef | grep -c gitlab</span><br><span class="line">65</span><br><span class="line"></span><br><span class="line">## 查看gitlab相关进程占用的内存</span><br><span class="line">ps aux | grep gitlab | awk &#x27;&#123;sum += $6&#125; END&#123;print sum &quot;KB&quot;&#125;&#x27;</span><br><span class="line">3838580KB</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>从以上数据可以看到gitlab启动65个进程，占用内存接近4G。所以服务器要求还是比较高的。</p><h2 id="二、gitlab安装"><a href="#二、gitlab安装" class="headerlink" title="二、gitlab安装"></a>二、gitlab安装</h2><h3 id="2-1-配置yum源"><a href="#2-1-配置yum源" class="headerlink" title="2.1 配置yum源"></a>2.1 配置yum源</h3><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/yum.repos.d/gitlab.repo</span><br><span class="line"><span class="comment">## 输入以下内容并保存</span></span><br><span class="line">[gitlab-ce]</span><br><span class="line">name=Gitlab CE Repository</span><br><span class="line">baseurl=https://mirrors.tuna.tsinghua.edu.cn/gitlab-ce/yum/el<span class="variable">$releasever</span>/</span><br><span class="line">gpgcheck=0</span><br><span class="line">enabled=1</span><br><span class="line"><span class="comment">## gitlab ce即gitlab的社区版本</span></span><br></pre></td></tr></table></figure><p>接下来缓存相关包</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum makecache</span><br></pre></td></tr></table></figure><h3 id="2-2-安装相关依赖"><a href="#2-2-安装相关依赖" class="headerlink" title="2.2 安装相关依赖"></a>2.2 安装相关依赖</h3><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo yum -y install curl policycoreutils openssh-server openssh-clients postfix</span><br><span class="line"><span class="comment">#启动sshd和postfix服务</span></span><br><span class="line">sudo systemctl <span class="built_in">enable</span> sshd</span><br><span class="line">sudo systemctl start sshd</span><br><span class="line">sudo systemctl <span class="built_in">enable</span> postfix</span><br><span class="line">sudo systemctl start postfix</span><br></pre></td></tr></table></figure><h3 id="2-3-安装gitlab"><a href="#2-3-安装gitlab" class="headerlink" title="2.3 安装gitlab"></a>2.3 安装gitlab</h3><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gitlab-ce</span><br></pre></td></tr></table></figure><h2 id="三、gitlab配置"><a href="#三、gitlab配置" class="headerlink" title="三、gitlab配置"></a>三、gitlab配置</h2><p>GitLab 的相关参数配置都存在 <code>/etc/gitlab/gitlab.rb</code> 文件里，每次配置完成之后需要执行<code>gitlab-ctl reconfigure</code>，进行重新配置才能生效。</p><h3 id="3-1-基本配置"><a href="#3-1-基本配置" class="headerlink" title="3.1 基本配置"></a>3.1 基本配置</h3><p>主要调整下面一些参数：</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">external_url &#x27;http://gitlab.example.com:8081&#x27; #修改成自己的域名和端口(80端口可省略)</span><br><span class="line">#注意端口占用问题，因为gitlab自带nginx，如果服务器原本有一个nginx服务的话，两个端口不能一样；另外gitlab会启动unicorn服务，默认会占用8080端口</span><br><span class="line"></span><br><span class="line">unicorn[&#x27;worker_processes&#x27;] = 2 #CPU使用核数，默认是CPU核心数+1，根据性能适当调整</span><br><span class="line"></span><br><span class="line">gitlab_rails[&#x27;time_zone&#x27;] = &#x27;Asia/Shanghai&#x27; # 时间区域</span><br></pre></td></tr></table></figure><h3 id="3-2-邮箱配置"><a href="#3-2-邮箱配置" class="headerlink" title="3.2 邮箱配置"></a>3.2 邮箱配置</h3><p>gitlab可以通过SMTP服务给用户发送邮件，在<code>/etc/gitlab/gitlab.rb</code>文件中，邮箱有两处配置，一处是系统发件人配置，一处是邮箱的SMTP服务配置。</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">### 以163邮箱为例</span><br><span class="line">### 发件人设置</span><br><span class="line">gitlab_rails[&#x27;gitlab_email_enabled&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;gitlab_email_from&#x27;] = &#x27;test@163.com&#x27;</span><br><span class="line">gitlab_rails[&#x27;gitlab_email_display_name&#x27;] = &#x27;GitLab&#x27;</span><br><span class="line">gitlab_rails[&#x27;gitlab_email_reply_to&#x27;] = &#x27;test@163.com&#x27;</span><br><span class="line"></span><br><span class="line">### SMTP配置</span><br><span class="line">gitlab_rails[&#x27;smtp_enable&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;smtp_address&#x27;] = &quot;smtp.163.com&quot;</span><br><span class="line">gitlab_rails[&#x27;smtp_port&#x27;] = 25</span><br><span class="line">gitlab_rails[&#x27;smtp_user_name&#x27;] = &quot;test@163.com&quot;</span><br><span class="line">gitlab_rails[&#x27;smtp_password&#x27;] = &quot;password&quot; //这里填SMTP授权码，有的邮箱没有授权码，就填密码</span><br><span class="line">gitlab_rails[&#x27;smtp_authentication&#x27;] = &quot;login&quot;</span><br><span class="line">gitlab_rails[&#x27;smtp_enable_starttls_auto&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;smtp_tls&#x27;] = true</span><br></pre></td></tr></table></figure><p><strong>注意<code>gitlab_email_from</code>与<code>smtp_user_name</code>必须一致。</strong></p><h3 id="3-3-备份配置"><a href="#3-3-备份配置" class="headerlink" title="3.3 备份配置"></a>3.3 备份配置</h3><p>可修改备份文件存储路径，备份文件访问权限，备份加密方式，备份网络上传等。</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gitlab_rails[&#x27;manage_backup_path&#x27;] = true</span><br><span class="line">gitlab_rails[&#x27;backup_path&#x27;] = &quot;/var/opt/gitlab/backups&quot;</span><br><span class="line">gitlab_rails[&#x27;backup_archive_permissions&#x27;] = 0644</span><br></pre></td></tr></table></figure><h3 id="3-4-配置完成重启"><a href="#3-4-配置完成重启" class="headerlink" title="3.4 配置完成重启"></a>3.4 配置完成重启</h3><p>gitlab对其相关的每个服务都提供了一系列配置，可以基于此优化性能。可以参考这个文章：<a href="https://blog.csdn.net/ouyang_peng/article/details/84066417">解决gitlab内存消耗过大问题</a>。<br>另外gitlab还提供禁用内置nginx，接入外部nginx的配置方式。因为可能会遇到一些问题，我没有尝试，所以就不写了。</p><p>相关的配置完成后，必须重新运行<code>gitlab-ctl reconfigure</code>生成最终配置，并且需要重启gitlab：</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-ctl reconfigure</span><br><span class="line">sudo gitlab-ctl restart</span><br></pre></td></tr></table></figure><h3 id="四、gitlab常用命令"><a href="#四、gitlab常用命令" class="headerlink" title="四、gitlab常用命令"></a>四、gitlab常用命令</h3><figure class="highlight sh" data-lang="sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">gitlab-ctl start [service]   <span class="comment"># 启动所有/单个服务 gitlab 组件</span></span><br><span class="line">gitlab-ctl stop [service]    <span class="comment"># 停止所有/单个服务 gitlab 组件</span></span><br><span class="line">gitlab-ctl restart [service] <span class="comment"># 重启所有/单个服务 gitlab 组件</span></span><br><span class="line">gitlab-ctl status [service]  <span class="comment"># 查看所有/单个服务状态</span></span><br><span class="line">gitlab-ctl reconfigure       <span class="comment"># 重新生成配置</span></span><br><span class="line">gitlab-ctl <span class="built_in">tail</span> [service]    <span class="comment"># 查看所有/单个服务日志</span></span><br><span class="line"></span><br><span class="line">gitlab-rails console  <span class="comment"># 进入rails控制台</span></span><br><span class="line"></span><br><span class="line">gitlab-rake gitlab:backup:create  <span class="comment">#备份数据库</span></span><br><span class="line">gitlab-rake gitlab:backup:restore BACKUP=1483198680  <span class="comment">#备份恢复，后面的数字是备份的时间戳，可以通过备份文件名看到。</span></span><br></pre></td></tr></table></figure><h2 id="四、测试邮件和web服务"><a href="#四、测试邮件和web服务" class="headerlink" title="四、测试邮件和web服务"></a>四、测试邮件和web服务</h2><h3 id="4-1-测试邮件服务"><a href="#4-1-测试邮件服务" class="headerlink" title="4.1 测试邮件服务"></a>4.1 测试邮件服务</h3><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo gitlab-rails console</span><br><span class="line">irb(main):003:0&gt; Notify.test_email(<span class="string">&#x27;接收方邮件地址&#x27;</span>,<span class="string">&#x27;邮件标题&#x27;</span>,<span class="string">&#x27;邮件内容&#x27;</span>).deliver_now</span><br></pre></td></tr></table></figure><h3 id="4-2-测试web服务"><a href="#4-2-测试web服务" class="headerlink" title="4.2 测试web服务"></a>4.2 测试web服务</h3><p>从浏览器访问上面配置的<code>external_url</code>。gitlab提供了一个初始账号。</p><ul><li>初始账户: root 密码: 5iveL!fe</li></ul><p>第一次登录会要求修改密码。</p><p>这样不出问题就完成了gitlab的部署，剩下的就是去网站摸索各种功能咯，祝玩的愉快o(∩_∩)o</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;最近因为工作的原因，需要熟悉gitlab，就在自己的服务器上先建了一套了解一下，网上看了些教程操作下来基本没啥问题，只是很多文章都说的比较零散，故这里综合一下。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;一、gitlab简介&quot;&gt;&lt;a hr</summary>
-      
-    
-    
-    
-    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
-    
-    <category term="gitlab" scheme="https://www.chaoswork.cn/tags/gitlab/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mysql5.7升级到mysql8.0遇到的问题</title>
-    <link href="https://www.chaoswork.cn/20190520-1.html"/>
-    <id>https://www.chaoswork.cn/20190520-1.html</id>
-    <published>2019-05-20T14:22:08.000Z</published>
-    <updated>2021-03-11T10:04:17.387Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天把博客迁移了服务器，顺便把mysql5.7升级到了mysql8.0，，过程还算顺利，mysql上只碰到了两个问题，记录一下。</p><h2 id="一、登录问题"><a href="#一、登录问题" class="headerlink" title="一、登录问题"></a>一、登录问题</h2><p>mysql8.0建好后发觉navcat12登录不上去，提示ERROR 2059 <code>(HY000): Authentication plugin &#39;caching_sha2_password&#39; cannot be loaded</code>。查了下发觉mysql又改变了登录认证方式。新的默认的登录是采用<code>caching_sha2_password</code>方式，而将原来的登录方式放到了<code>mysql_native_password</code>方式中。</p><p>mysql5.7中我们创建用户的语句是这样的：</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user test@localhost identified by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><p>在mysql8.0中这样创建的就是采用<code>caching_sha2_password</code>方式登录认证的用户，要在8.0中恢复原来的密码登录方式，需要将语句变为：</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create user test@localhost identified with mysql_native_password by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><p>相应的，对于已经创建的用户，修改其登录方式和密码：</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter user test@localhost identified with mysql_native_password by &#x27;123456&#x27;;</span><br></pre></td></tr></table></figure><h2 id="二、datetime问题"><a href="#二、datetime问题" class="headerlink" title="二、datetime问题"></a>二、datetime问题</h2><p>将mysql5.7的结构和数据导入mysql8.0时，发生datetime默认值错误的问题。查看了下sql语句，datetime用的默认值是’0000-00-00 00:00:00’。感觉没啥问题啊，于是查了下，发觉<a href="https://dev.mysql.com/doc/refman/8.0/en/datetime.html">mysql官网</a>给了这么一段话：</p><blockquote><p>The DATE type is used for values with a date part but no time part. MySQL retrieves and displays DATE values in ‘YYYY-MM-DD’ format. The supported range is ‘1000-01-01’ to ‘9999-12-31’.</p><p>The DATETIME type is used for values that contain both date and time parts. MySQL retrieves and displays DATETIME values in ‘YYYY-MM-DD hh:mm:ss’ format. The supported range is ‘1000-01-01 00:00:00’ to ‘9999-12-31 23:59:59’.</p><p>The TIMESTAMP data type is used for values that contain both date and time parts. TIMESTAMP has a range of ‘1970-01-01 00:00:01’ UTC to ‘2038-01-19 03:14:07’ UTC.</p></blockquote><p>datetime的默认值的起始时间设了限制，改为了’1000-01-01 00:00:00’（我也是醉了）。修改后再导入就OK了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;今天把博客迁移了服务器，顺便把mysql5.7升级到了mysql8.0，，过程还算顺利，mysql上只碰到了两个问题，记录一下。&lt;/p&gt;
-&lt;h2 id=&quot;一、登录问题&quot;&gt;&lt;a href=&quot;#一、登录问题&quot; class=&quot;headerlink&quot; title=&quot;一、登录问题&quot;&gt;</summary>
-      
-    
-    
-    
-    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="数据库" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    
-    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="数据库" scheme="https://www.chaoswork.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
-    
-    <category term="mysql" scheme="https://www.chaoswork.cn/tags/mysql/"/>
     
   </entry>
   
