@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  <title>github算法面试资料(Java版) | 云海鹰影</title>
+  <meta name="author" content="云海鹰影" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="算法, 编程基础, 面试资料" />
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+      <meta name="baidu-site-verification" content="code-EjIoHOEm6V" />
+    
+    
+    
+  
+  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+  <body class="custom-background">
+    <div id="kratos-wrapper">
+      <div id="kratos-page">
+        <div id="kratos-header">
+  <div class="nav-toggle"><a class="kratos-nav-toggle js-kratos-nav-toggle"><i></i></a></div>
+  <header id="kratos-header-section">
+    <div class="container">
+      <div class="nav-header">
+        <div class="color-logo"><a href="/">云海鹰影</a></div>
+        <nav id="kratos-menu-wrap">
+  <ul id="kratos-primary-menu" class="sf-menu">
+    
+      
+        <li><a  href="/"  ><i class="fa fa-home"></i>首页</a></li>
+      
+    
+      
+        <li><a  href="/tags/"  ><i class="fa fa-file"></i>标签云</a></li>
+      
+    
+      
+        <li><a  href="/archives/"  ><i class="fa fa-file"></i>档案馆</a></li>
+      
+    
+      
+        <li><a  href="/friends/"  ><i class="fa fa-paw"></i>友链</a></li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-umbrella"></i>秘密小窝</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://smp.chaoswork.cn"  >鹰の巢</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-random"></i>资源库</a>
+          <ul class="sub-menu">
+            
+              <li><a  href="/resources/frontend"  >前端</a></li>
+            
+              <li><a  href="/resources/backend"  >后端</a></li>
+            
+              <li><a  href="/resources/tools"  >工具</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-gift"></i>看动漫</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://www.5dm.tv/"  >五弹幕</a></li>
+            
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="kratos-start kratos-hero-2">
+  <!-- <div class="kratos-overlay"></div> -->
+  <div class="kratos-cover kratos-cover-2 text-center">
+    <div class="desc desc2 animate-box">
+      <a href="/">
+        <h2>云海鹰影</h2> <br />
+        <span>我独自度过的无数个晨昏，用来交换你身边一瞬</span>
+      </a>
+    </div>
+  </div>
+</div>
+        <div id="kratos-blog-post">
+          <div class="container">
+            <div class="row">
+              
+              <div id="main">
+                <section class="col-md-8">
+    <article>
+        <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">github算法面试资料(Java版)</h1>
+                
+                <div class="kratos-post-meta text-center">
+                    <span>
+                        <i class="fa fa-calendar"></i> 2019-09-18
+                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>, <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a>
+                        <i class="fa fa-user"></i> 作者 云海鹰影
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~12.86K
+                        
+                        字
+                        
+                    </span>
+                </div>
+            </header>
+            <div class="kratos-post-content">
+                <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                    本文最后编辑于 <time datetime="1615457057391"></time> 前，其中的内容可能需要更新。
+                </div>
+                
+                <hr />
+                <h1 id="Interviews"><a href="#Interviews" class="headerlink" title="Interviews"></a>Interviews</h1><blockquote>
+<p>Maintainer - <a target="_blank" rel="noopener" href="https://github.com/kdn251">Kevin Naughton Jr.</a></p>
+</blockquote>
+<h2 id="Translations"><a href="#Translations" class="headerlink" title="Translations"></a>Translations</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kdn251/interviews/blob/master/README-zh-cn.md">简体中文</a></li>
+</ul>
+<h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a>Table of Contents</h2><ul>
+<li><a href="#youtube">YouTube</a></li>
+<li><a href="#instagram">Instagram</a></li>
+<li><a href="#articles">Articles</a></li>
+<li><a href="#online-judges">Online Judges</a></li>
+<li><a href="#live-coding-practice">Live Coding Practice</a></li>
+<li><a href="#data-structures">Data Structures</a></li>
+<li><a href="#algorithms">Algorithms</a></li>
+<li><a href="#greedy-algorithms">Greedy Algorithms</a></li>
+<li><a href="#bitmasks">Bitmasks</a></li>
+<li><a href="#runtime-analysis">Runtime Analysis</a></li>
+<li><a href="#video-lectures">Video Lectures</a></li>
+<li><a href="#interview-books">Interview Books</a></li>
+<li><a href="#computer-science-news">Computer Science News</a></li>
+<li><a href="#directory-tree">Directory Tree</a></li>
+</ul>
+<h2 id="YouTube"><a href="#YouTube" class="headerlink" title="YouTube"></a>YouTube</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCKvwPt6BifPP54yzH99ff1g">Kevin Naughton Jr.</a></li>
+</ul>
+<h2 id="Instagram"><a href="#Instagram" class="headerlink" title="Instagram"></a>Instagram</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.instagram.com/programeme/">Programeme</a></li>
+</ul>
+<h2 id="Articles"><a href="#Articles" class="headerlink" title="Articles"></a>Articles</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://medium.com/@Naughton/starting-work-b06e10f6007e">Starting Work</a></li>
+</ul>
+<h2 id="Online-Judges"><a href="#Online-Judges" class="headerlink" title="Online Judges"></a>Online Judges</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/">LeetCode</a></li>
+<li><a target="_blank" rel="noopener" href="https://vjudge.net/">Virtual Judge</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.careercup.com/">CareerCup</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.hackerrank.com/">HackerRank</a></li>
+<li><a target="_blank" rel="noopener" href="https://codefights.com/">CodeFights</a></li>
+<li><a target="_blank" rel="noopener" href="https://open.kattis.com/">Kattis</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.hackerearth.com/">HackerEarth</a></li>
+<li><a target="_blank" rel="noopener" href="https://codility.com/programmers/lessons/1-iterations/">Codility</a></li>
+<li><a target="_blank" rel="noopener" href="http://codeforces.com/">Code Forces</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.codechef.com/">Code Chef</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.spoj.com/">Sphere Online Judge - SPOJ</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.interviewbit.com/">InterviewBit</a></li>
+</ul>
+<h2 id="Live-Coding-Practice"><a href="#Live-Coding-Practice" class="headerlink" title="Live Coding Practice"></a>Live Coding Practice</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.pramp.com/ref/gt4">Pramp</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.gainlo.co/#!/">Gainlo</a></li>
+<li><a target="_blank" rel="noopener" href="https://refdash.com/">Refdash</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.interviewing.io/">Interviewing.io</a></li>
+</ul>
+<h2 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h2><h3 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h3><ul>
+<li>A <em>Linked List</em> is a linear collection of data elements, called nodes, each<br>pointing to the next node by means of a pointer. It is a data structure<br>consisting of a group of nodes which together represent a sequence.</li>
+<li><strong>Singly-linked list</strong>: linked list in which each node points to the next node and the last node points to null</li>
+<li><strong>Doubly-linked list</strong>: linked list in which each node has two pointers, p and n, such that p points to the previous node and n points to the next node; the last node’s n pointer points to null</li>
+<li><strong>Circular-linked list</strong>: linked list in which each node points to the next node and the last node points back to the first node</li>
+<li>Time Complexity:<ul>
+<li>Access: <code>O(n)</code></li>
+<li>Search: <code>O(n)</code></li>
+<li>Insert: <code>O(1)</code></li>
+<li>Remove: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><ul>
+<li>A <em>Stack</em> is a collection of elements, with two principle operations: <em>push</em>, which adds to the collection, and<br><em>pop</em>, which removes the most recently added element</li>
+<li><strong>Last in, first out data structure (LIFO)</strong>: the most recently added object is the first to be removed</li>
+<li>Time Complexity:<ul>
+<li>Access: <code>O(n)</code></li>
+<li>Search: <code>O(n)</code></li>
+<li>Insert: <code>O(1)</code></li>
+<li>Remove: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><ul>
+<li>A <em>Queue</em> is a collection of elements, supporting two principle operations: <em>enqueue</em>, which inserts an element<br>into the queue, and <em>dequeue</em>, which removes an element from the queue</li>
+<li><strong>First in, first out data structure (FIFO)</strong>: the oldest added object is the first to be removed</li>
+<li>Time Complexity:<ul>
+<li>Access: <code>O(n)</code></li>
+<li>Search: <code>O(n)</code></li>
+<li>Insert: <code>O(1)</code></li>
+<li>Remove: <code>O(1)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h3><ul>
+<li>A <em>Tree</em> is an undirected, connected, acyclic graph</li>
+</ul>
+<h3 id="Binary-Tree"><a href="#Binary-Tree" class="headerlink" title="Binary Tree"></a>Binary Tree</h3><ul>
+<li>A <em>Binary Tree</em> is a tree data structure in which each node has at most two children, which are referred to as<br>the <em>left child</em> and <em>right child</em></li>
+<li><strong>Full Tree</strong>: a tree in which every node has either 0 or 2 children</li>
+<li><strong>Perfect Binary Tree</strong>: a binary tree in which all interior nodes have two children and all leave have the same depth</li>
+<li><strong>Complete Tree</strong>: a binary tree in which every level <em>except possibly the last</em> is full and all nodes in the last<br>level are as far left as possible</li>
+</ul>
+<h3 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h3><ul>
+<li>A binary search tree, sometimes called BST, is a type of binary tree which maintains the property that the value in each<br>node must be greater than or equal to any value stored in the left sub-tree, and less than or equal to any value stored<br>in the right sub-tree</li>
+<li>Time Complexity:<ul>
+<li>Access: <code>O(log(n))</code></li>
+<li>Search: <code>O(log(n))</code></li>
+<li>Insert: <code>O(log(n))</code></li>
+<li>Remove: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<img src="/images/2019/09/BST.png?raw=true" alt="Binary Search Tree" width="400" height="500">
+
+<h3 id="Trie"><a href="#Trie" class="headerlink" title="Trie"></a>Trie</h3><ul>
+<li>A trie, sometimes called a radix or prefix tree, is a kind of search tree that is used to store a dynamic set or associative<br>array where the keys are usually Strings. No node in the tree stores the key associated with that node; instead, its position<br>in the tree defines the key with which it is associated. All the descendants of a node have a common prefix of the String associated<br>with that node, and the root is associated with the empty String.</li>
+</ul>
+<p><img src="/images/2019/09/trie.png?raw=true" alt="Trie"></p>
+<h3 id="Fenwick-Tree"><a href="#Fenwick-Tree" class="headerlink" title="Fenwick Tree"></a>Fenwick Tree</h3><ul>
+<li>A Fenwick tree, sometimes called a binary indexed tree, is a tree in concept, but in practice is implemented as an implicit data<br>structure using an array. Given an index in the array representing a vertex, the index of a vertex’s parent or child is calculated<br>through bitwise operations on the binary representation of its index. Each element of the array contains the pre-calculated sum of<br>a range of values, and by combining that sum with additional ranges encountered during an upward traversal to the root, the prefix<br>sum is calculated</li>
+<li>Time Complexity:<ul>
+<li>Range Sum: <code>O(log(n))</code></li>
+<li>Update: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/09/fenwickTree.png?raw=true" alt="Fenwick Tree"></p>
+<h3 id="Segment-Tree"><a href="#Segment-Tree" class="headerlink" title="Segment Tree"></a>Segment Tree</h3><ul>
+<li>A Segment tree, is a tree data structure for storing intervals, or segments. It allows querying which of the stored segments contain<br>a given point</li>
+<li>Time Complexity:<ul>
+<li>Range Query: <code>O(log(n))</code></li>
+<li>Update: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/09/segmentTree.png?raw=true" alt="Segment Tree"></p>
+<h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
+<li>A <em>Heap</em> is a specialized tree based structure data structure that satisfies the <em>heap</em> property: if A is a parent node of<br>B, then the key (the value) of node A is ordered with respect to the key of node B with the same ordering applying across the entire heap.<br>A heap can be classified further as either a “max heap” or a “min heap”. In a max heap, the keys of parent nodes are always greater<br>than or equal to those of the children and the highest key is in the root node. In a min heap, the keys of parent nodes are less than<br>or equal to those of the children and the lowest key is in the root node</li>
+<li>Time Complexity:<ul>
+<li>Access Max / Min: <code>O(1)</code></li>
+<li>Insert: <code>O(log(n))</code></li>
+<li>Remove Max / Min: <code>O(log(n))</code></li>
+</ul>
+</li>
+</ul>
+<img src="/images/2019/09/heap.png?raw=true" alt="Max Heap" width="400" height="500">
+
+<h3 id="Hashing"><a href="#Hashing" class="headerlink" title="Hashing"></a>Hashing</h3><ul>
+<li><em>Hashing</em> is used to map data of an arbitrary size to data of a fixed size. The values returned by a hash<br>function are called hash values, hash codes, or simply hashes. If two keys map to the same value, a collision occurs</li>
+<li><strong>Hash Map</strong>: a <em>hash map</em> is a structure that can map keys to values. A hash map uses a hash function to compute<br>an index into an array of buckets or slots, from which the desired value can be found.</li>
+<li>Collision Resolution</li>
+<li><strong>Separate Chaining</strong>: in <em>separate chaining</em>, each bucket is independent, and contains a list of entries for each index. The<br>time for hash map operations is the time to find the bucket (constant time), plus the time to iterate through the list</li>
+<li><strong>Open Addressing</strong>: in <em>open addressing</em>, when a new entry is inserted, the buckets are examined, starting with the<br>hashed-to-slot and proceeding in some sequence, until an unoccupied slot is found. The name open addressing refers to<br>the fact that the location of an item is not always determined by its hash value</li>
+</ul>
+<p><img src="/images/2019/09/hash.png" alt="Hashing"></p>
+<h3 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h3><ul>
+<li>A <em>Graph</em> is an ordered pair of G = (V, E) comprising a set V of vertices or nodes together with a set E of edges or arcs,<br>which are 2-element subsets of V (i.e. an edge is associated with two vertices, and that association takes the form of the<br>unordered pair comprising those two vertices)</li>
+<li><strong>Undirected Graph</strong>: a graph in which the adjacency relation is symmetric. So if there exists an edge from node u to node<br>v (u -&gt; v), then it is also the case that there exists an edge from node v to node u (v -&gt; u)</li>
+<li><strong>Directed Graph</strong>: a graph in which the adjacency relation is not symmetric. So if there exists an edge from node u to node v<br>(u -&gt; v), this does <em>not</em> imply that there exists an edge from node v to node u (v -&gt; u)</li>
+</ul>
+<img src="/images/2019/09/graph.png?raw=true" alt="Graph" width="400" height="500">
+
+<h2 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h2><h3 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h3><h4 id="Quicksort"><a href="#Quicksort" class="headerlink" title="Quicksort"></a>Quicksort</h4><ul>
+<li>Stable: <code>No</code></li>
+<li>Time Complexity:<ul>
+<li>Best Case: <code>O(nlog(n))</code></li>
+<li>Worst Case: <code>O(n^2)</code></li>
+<li>Average Case: <code>O(nlog(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/09/quicksort.gif?raw=true" alt="Quicksort"></p>
+<h4 id="Mergesort"><a href="#Mergesort" class="headerlink" title="Mergesort"></a>Mergesort</h4><ul>
+<li><em>Mergesort</em> is also a divide and conquer algorithm. It continuously divides an array into two halves, recurses on both the<br>left subarray and right subarray and then merges the two sorted halves</li>
+<li>Stable: <code>Yes</code></li>
+<li>Time Complexity:<ul>
+<li>Best Case: <code>O(nlog(n))</code></li>
+<li>Worst Case: <code>O(nlog(n))</code></li>
+<li>Average Case: <code>O(nlog(n))</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/09/mergesort.gif?raw=true" alt="Alt text" title="Mergesort"></p>
+<h4 id="Bucket-Sort"><a href="#Bucket-Sort" class="headerlink" title="Bucket Sort"></a>Bucket Sort</h4><ul>
+<li><em>Bucket Sort</em> is a sorting algorithm that works by distributing the elements of an array into a number of buckets. Each bucket<br>is then sorted individually, either using a different sorting algorithm, or by recursively applying the bucket sorting algorithm</li>
+<li>Time Complexity:<ul>
+<li>Best Case: <code>Ω(n + k)</code></li>
+<li>Worst Case: <code>O(n^2)</code></li>
+<li>Average Case:<code>Θ(n + k)</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/09/bucketsort.png?raw=true" alt="Bucket Sort"></p>
+<h4 id="Radix-Sort"><a href="#Radix-Sort" class="headerlink" title="Radix Sort"></a>Radix Sort</h4><ul>
+<li><em>Radix Sort</em> is a sorting algorithm that like bucket sort, distributes elements of an array into a number of buckets. However, radix<br>sort differs from bucket sort by ‘re-bucketing’ the array after the initial pass as opposed to sorting each bucket and merging</li>
+<li>Time Complexity:<ul>
+<li>Best Case: <code>Ω(nk)</code></li>
+<li>Worst Case: <code>O(nk)</code></li>
+<li>Average Case: <code>Θ(nk)</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="Graph-Algorithms"><a href="#Graph-Algorithms" class="headerlink" title="Graph Algorithms"></a>Graph Algorithms</h3><h4 id="Depth-First-Search"><a href="#Depth-First-Search" class="headerlink" title="Depth First Search"></a>Depth First Search</h4><ul>
+<li><em>Depth First Search</em> is a graph traversal algorithm which explores as far as possible along each branch before backtracking</li>
+<li>Time Complexity: <code>O(|V| + |E|)</code></li>
+</ul>
+<h4 id="Breadth-First-Search"><a href="#Breadth-First-Search" class="headerlink" title="Breadth First Search"></a>Breadth First Search</h4><ul>
+<li><em>Breadth First Search</em> is a graph traversal algorithm which explores the neighbor nodes first, before moving to the next<br>level neighbors</li>
+<li>Time Complexity: <code>O(|V| + |E|)</code></li>
+</ul>
+<p><img src="/images/2019/09/dfsbfs.gif?raw=true" alt="DFS / BFS Traversal"></p>
+<h4 id="Topological-Sort"><a href="#Topological-Sort" class="headerlink" title="Topological Sort"></a>Topological Sort</h4><ul>
+<li><em>Topological Sort</em> is the linear ordering of a directed graph’s nodes such that for every edge from node u to node v, u<br>comes before v in the ordering</li>
+<li>Time Complexity: <code>O(|V| + |E|)</code></li>
+</ul>
+<h4 id="Dijkstra’s-Algorithm"><a href="#Dijkstra’s-Algorithm" class="headerlink" title="Dijkstra’s Algorithm"></a>Dijkstra’s Algorithm</h4><ul>
+<li><em>Dijkstra’s Algorithm</em> is an algorithm for finding the shortest path between nodes in a graph</li>
+<li>Time Complexity: <code>O(|V|^2)</code></li>
+</ul>
+<p><img src="/images/2019/09/dijkstra.gif?raw=true" alt="Dijkstra&#39;s"></p>
+<h4 id="Bellman-Ford-Algorithm"><a href="#Bellman-Ford-Algorithm" class="headerlink" title="Bellman-Ford Algorithm"></a>Bellman-Ford Algorithm</h4><ul>
+<li><em>Bellman-Ford Algorithm</em> is an algorithm that computes the shortest paths from a single source node to all other nodes in a weighted graph</li>
+<li>Although it is slower than Dijkstra’s, it is more versatile, as it is capable of handling graphs in which some of the edge weights are<br>negative numbers</li>
+<li>Time Complexity:<ul>
+<li>Best Case: <code>O(|E|)</code></li>
+<li>Worst Case: <code>O(|V||E|)</code></li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/2019/09/bellman-ford.gif?raw=true" alt="Bellman-Ford"></p>
+<h4 id="Floyd-Warshall-Algorithm"><a href="#Floyd-Warshall-Algorithm" class="headerlink" title="Floyd-Warshall Algorithm"></a>Floyd-Warshall Algorithm</h4><ul>
+<li><em>Floyd-Warshall Algorithm</em> is an algorithm for finding the shortest paths in a weighted graph with positive or negative edge weights, but<br>no negative cycles</li>
+<li>A single execution of the algorithm will find the lengths (summed weights) of the shortest paths between <em>all</em> pairs of nodes</li>
+<li>Time Complexity:<ul>
+<li>Best Case: <code>O(|V|^3)</code></li>
+<li>Worst Case: <code>O(|V|^3)</code></li>
+<li>Average Case: <code>O(|V|^3)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="Prim’s-Algorithm"><a href="#Prim’s-Algorithm" class="headerlink" title="Prim’s Algorithm"></a>Prim’s Algorithm</h4><ul>
+<li><em>Prim’s Algorithm</em> is a greedy algorithm that finds a minimum spanning tree for a weighted undirected graph. In other words, Prim’s find a<br>subset of edges that forms a tree that includes every node in the graph</li>
+<li>Time Complexity: <code>O(|V|^2)</code></li>
+</ul>
+<p><img src="/images/2019/09/prim.gif?raw=true" alt="Prim&#39;s Algorithm"></p>
+<h4 id="Kruskal’s-Algorithm"><a href="#Kruskal’s-Algorithm" class="headerlink" title="Kruskal’s Algorithm"></a>Kruskal’s Algorithm</h4><ul>
+<li><em>Kruskal’s Algorithm</em> is also a greedy algorithm that finds a minimum spanning tree in a graph. However, in Kruskal’s, the graph does not<br>have to be connected</li>
+<li>Time Complexity: <code>O(|E|log|V|)</code></li>
+</ul>
+<p><img src="/images/2019/09/kruskal.gif?raw=true" alt="Kruskal&#39;s Algorithm"></p>
+<h2 id="Greedy-Algorithms"><a href="#Greedy-Algorithms" class="headerlink" title="Greedy Algorithms"></a>Greedy Algorithms</h2><ul>
+<li><em>Greedy Algorithms</em> are algorithms that make locally optimal choices at each step in the hope of eventually reaching the globally optimal solution</li>
+<li>Problems must exhibit two properties in order to implement a Greedy solution:</li>
+<li>Optimal Substructure<ul>
+<li>An optimal solution to the problem contains optimal solutions to the given problem’s subproblems</li>
+</ul>
+</li>
+<li>The Greedy Property<ul>
+<li>An optimal solution is reached by “greedily” choosing the locally optimal choice without ever reconsidering previous choices</li>
+</ul>
+</li>
+<li>Example - Coin Change<ul>
+<li>Given a target amount V cents and a list of denominations of n coins, i.e. we have coinValue[i] (in cents) for coin types i from [0…n - 1],<br>what is the minimum number of coins that we must use to represent amount V? Assume that we have an unlimited supply of coins of any type</li>
+<li>Coins - Penny (1 cent), Nickel (5 cents), Dime (10 cents), Quarter (25 cents)</li>
+<li>Assume V = 41. We can use the Greedy algorithm of continuously selecting the largest coin denomination less than or equal to V, subtract that<br>coin’s value from V, and repeat.</li>
+<li>V = 41 | 0 coins used</li>
+<li>V = 16 | 1 coin used (41 - 25 = 16)</li>
+<li>V = 6  | 2 coins used (16 - 10 = 6)</li>
+<li>V = 1  | 3 coins used (6 - 5 = 1)</li>
+<li>V = 0  | 4 coins used (1 - 1 = 0)</li>
+<li>Using this algorithm, we arrive at a total of 4 coins which is optimal</li>
+</ul>
+</li>
+</ul>
+<h2 id="Bitmasks"><a href="#Bitmasks" class="headerlink" title="Bitmasks"></a>Bitmasks</h2><ul>
+<li>Bitmasking is a technique used to perform operations at the bit level. Leveraging bitmasks often leads to faster runtime complexity and<br>helps limit memory usage</li>
+<li>Test kth bit: <code>s &amp; (1 &lt;&lt; k);</code></li>
+<li>Set kth bit: <code>s |= (1 &lt;&lt; k);</code></li>
+<li>Turn off kth bit: <code>s &amp;= ~(1 &lt;&lt; k);</code></li>
+<li>Toggle kth bit: <code>s ^= (1 &lt;&lt; k);</code></li>
+<li>Multiple by 2<sup>n</sup>: <code>s &lt;&lt; n;</code></li>
+<li>Divide by 2<sup>n</sup>: <code>s &gt;&gt; n;</code></li>
+<li>Intersection: <code>s &amp; t;</code></li>
+<li>Union: <code>s | t;</code></li>
+<li>Set Subtraction: <code>s &amp; ~t;</code></li>
+<li>Extract lowest set bit: <code>s &amp; (-s);</code></li>
+<li>Extract lowest unset bit: <code>~s &amp; (s + 1);</code></li>
+<li>Swap Values:<pre><code>       <figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x ^= y;</span><br><span class="line">y ^= x;</span><br><span class="line">x ^= y;</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<h2 id="Runtime-Analysis"><a href="#Runtime-Analysis" class="headerlink" title="Runtime Analysis"></a>Runtime Analysis</h2><h4 id="Big-O-Notation"><a href="#Big-O-Notation" class="headerlink" title="Big O Notation"></a>Big O Notation</h4><ul>
+<li><em>Big O Notation</em> is used to describe the upper bound of a particular algorithm. Big O is used to describe worst case scenarios</li>
+</ul>
+<p><img src="/images/2019/09/bigO.png?raw=true" alt="Theta Notation"></p>
+<h4 id="Little-O-Notation"><a href="#Little-O-Notation" class="headerlink" title="Little O Notation"></a>Little O Notation</h4><ul>
+<li><em>Little O Notation</em> is also used to describe an upper bound of a particular algorithm; however, Little O provides a bound<br>that is not asymptotically tight</li>
+</ul>
+<h4 id="Big-Ω-Omega-Notation"><a href="#Big-Ω-Omega-Notation" class="headerlink" title="Big Ω Omega Notation"></a>Big Ω Omega Notation</h4><ul>
+<li><em>Big Omega Notation</em> is used to provide an asymptotic lower bound on a particular algorithm</li>
+</ul>
+<p><img src="/images/2019/09/bigOmega.png?raw=true" alt="Theta Notation"></p>
+<h4 id="Little-ω-Omega-Notation"><a href="#Little-ω-Omega-Notation" class="headerlink" title="Little ω Omega Notation"></a>Little ω Omega Notation</h4><ul>
+<li><em>Little Omega Notation</em> is used to provide a lower bound on a particular algorithm that is not asymptotically tight</li>
+</ul>
+<h4 id="Theta-Θ-Notation"><a href="#Theta-Θ-Notation" class="headerlink" title="Theta Θ Notation"></a>Theta Θ Notation</h4><ul>
+<li><em>Theta Notation</em> is used to provide a bound on a particular algorithm such that it can be “sandwiched” between<br>two constants (one for an upper limit and one for a lower limit) for sufficiently large values</li>
+</ul>
+<p><img src="/images/2019/09/theta.png?raw=true%22" alt="Theta Notation"></p>
+<h2 id="Video-Lectures"><a href="#Video-Lectures" class="headerlink" title="Video Lectures"></a>Video Lectures</h2><ul>
+<li>Data Structures<ul>
+<li><a target="_blank" rel="noopener" href="https://archive.org/details/ucberkeley-webcast?&and%5B%5D=subject:%22Computer%20Science%22&and%5B%5D=subject:%22CS%22">UC Berkeley Data Structures</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=T0yzrZL1py0&list=PLUl4u3cNGP61hsJNdULdudlRL493b-XZf&index=1">MIT Advanced Data Structures</a></li>
+</ul>
+</li>
+<li>Algorithms<ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb&index=1">MIT Introduction to Algorithms</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PL6ogFv-ieghdoGKGg2Bik3Gl1glBTEu8c">MIT Advanced Algorithms</a></li>
+<li><a target="_blank" rel="noopener" href="https://archive.org/details/ucberkeley-webcast?&and%5B%5D=subject:%22Computer%20Science%22&and%5B%5D=subject:%22CS%22">UC Berkeley Algorithms</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="Interview-Books"><a href="#Interview-Books" class="headerlink" title="Interview Books"></a>Interview Books</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.amazon.com/Competitive-Programming-3rd-Steven-Halim/dp/B00FG8MNN8">Competitive Programming 3 - Steven Halim &amp; Felix Halim</a> </li>
+<li><a target="_blank" rel="noopener" href="https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=sr_1_1?s=books&ie=UTF8">Cracking The Coding Interview - Gayle Laakmann McDowell</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.amazon.com/Cracking-PM-Interview-Product-Technology-ebook/dp/B00ISYMUR6/ref=sr_1_1?s=books&ie=UTF8">Cracking The PM Interview - Gayle Laakmann McDowell &amp; Jackie Bavaro</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844/ref=sr_1_1?ie=UTF8&qid=1490295989&sr=8-1&keywords=Introduction+to+Algorithms">Introduction to Algorithms -  Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest &amp; Clifford Stein</a></li>
+</ul>
+<h2 id="Computer-Science-News"><a href="#Computer-Science-News" class="headerlink" title="Computer Science News"></a>Computer Science News</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://news.ycombinator.com/">Hacker News</a></li>
+<li><a target="_blank" rel="noopener" href="https://lobste.rs/">Lobsters</a></li>
+</ul>
+
+            </div>
+            
+                <div class="kratos-copyright text-center clearfix">
+                    <h5>本作品采用 <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+                </div>
+            
+            <footer class="kratos-entry-footer clearfix">
+                
+                    <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                    
+                    
+                        <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                        <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://www.chaoswork.cn/20190918-2.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://www.chaoswork.cn/20190918-2.html";
+            const title         = "「github算法面试资料(Java版)」";
+            const excerpt       = `Interviews
+Maintainer - Kevin Naughton Jr.
+
+Translations
+简体中文
+
+Table of Contents
+YouTube
+Instagram
+Articles
+Online Ju...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                    
+                    </div>
+                
+                <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                        <a class="tag-none-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a>, <a class="tag-none-link" href="/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="tag">编程基础</a>, <a class="tag-none-link" href="/tags/%E9%9D%A2%E8%AF%95%E8%B5%84%E6%96%99/" rel="tag">面试资料</a>
+                    </div>
+                    <div class="pull-date">
+                    <span>最后编辑：2021-03-11</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
+            <nav class="navigation post-navigation clearfix" role="navigation">
+                
+                <div class="nav-previous clearfix">
+                    <a title=" 基本算法复杂度统计" href="/20190918-1.html">&lt; 上一篇</a>
+                </div>
+                
+                
+                <div class="nav-next clearfix">
+                    <a title=" Authentication in MariaDB 10.4 (MariaDB 10.4 root账号密码问题)" href="/20191012-1.html">下一篇 &gt;</a>
+                </div>
+                
+            </nav>
+        
+        
+            <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.css">
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var load_comm = () => {
+        const init = () => {
+            const gitalk = new Gitalk({
+                // Gitalk配置
+                language: "zh-CN",
+                clientID: "7dff06239ac01f6006c8",
+                clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
+                repo: "comment_data",
+                owner: "stayknight",
+                admin: ["stayknight"],
+                id: location.pathname,
+                distractionFreeMode: false
+            });
+            gitalk.render('gitalk-container');
+        };
+        if (typeof Gitalk == 'undefined') {
+            const src = 'https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+
+        
+    </article>
+</section>
+              </div>
+              
+                <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+  
+    <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="https://cdn.jsdelivr.net/npm/chwx@1.0.0/avatars/icon41.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        
+            <p class="text-center">路漫漫其修远兮，吾将上下而求索~<br/><span>(右下角搜索)</span></p>
+        
+    </div>
+</aside>
+  
+    <!-- Moved to about.ejs -->
+  
+    
+  <aside id="krw-categories" class="widget widget-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E6%BA%90%E7%A0%81/">源码</a><span class="category-list-count">1</span></li></ul></li></ul>
+  </aside>
+
+
+  
+    
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签云</h4>
+      <div class="tag-clouds">
+        <a href="/tags/ACGN/" style="font-size: 0.75em;">ACGN</a> <a href="/tags/ACM/" style="font-size: 0.6em;">ACM</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.65em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.65em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/SAO/" style="font-size: 0.6em;">SAO</a> <a href="/tags/adb/" style="font-size: 0.6em;">adb</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/centos/" style="font-size: 0.7em;">centos</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/gcc/" style="font-size: 0.6em;">gcc</a> <a href="/tags/gitlab/" style="font-size: 0.65em;">gitlab</a>
+      </div>
+  </aside>
+
+  
+    
+  <aside id="krw-posts" class="widget widget-kratos-poststab">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/20230224-1.html"><i class="fa  fa-book"></i> 关于带返回值的函数未返回引起的Undefined Behavior问题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20210201-1.html"><i class="fa  fa-book"></i> 【转】【分享】80个网站源码</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200611-1.html"><i class="fa  fa-book"></i> Linux adb devices 显示no permissions问题解决</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200604-1.html"><i class="fa  fa-book"></i> 各类MQTT代理服务器特性对比</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20191220-2.html"><i class="fa  fa-book"></i> 自动备份远程文件到本地</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+  
+</section>
+              
+            </div>
+          </div>
+        </div>
+        <footer>
+    <div id="footer">
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons text-center">
+                        
+                        <li><a href="mailto:stayknight@163.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://smp.chaoswork.cn/@stayknight"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/stayknight"><i class="fa fa-github"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 云海鹰影 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Made with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by <a href="https://candinya.com" target="_blank" rel="nofollow">Candinya</a>.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
+                            <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
+                            
+                                <li><a href="sitemap.xml" target="_blank">站点地图</a></li>
+                                <li><a href="baidusitemap.xml" target="_blank">百度地图</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+      </div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    $("img.headicon").one("error", function(e) {
+        $(this).attr("src", "/images/avatar.webp");
+    });
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+<script async src="/js/candy.min.js"></script>
+
+
+    <script defer src=""></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?bfb917536df0b5a503a5690e6de9ef9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+  </body>
+</html>

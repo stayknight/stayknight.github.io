@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  <title>linux内存管理和虚拟内存 | 云海鹰影</title>
+  <meta name="author" content="云海鹰影" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="linux基础, 内存管理, 编程基础, 虚拟内存" />
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+      <meta name="baidu-site-verification" content="code-EjIoHOEm6V" />
+    
+    
+    
+  
+  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+  <body class="custom-background">
+    <div id="kratos-wrapper">
+      <div id="kratos-page">
+        <div id="kratos-header">
+  <div class="nav-toggle"><a class="kratos-nav-toggle js-kratos-nav-toggle"><i></i></a></div>
+  <header id="kratos-header-section">
+    <div class="container">
+      <div class="nav-header">
+        <div class="color-logo"><a href="/">云海鹰影</a></div>
+        <nav id="kratos-menu-wrap">
+  <ul id="kratos-primary-menu" class="sf-menu">
+    
+      
+        <li><a  href="/"  ><i class="fa fa-home"></i>首页</a></li>
+      
+    
+      
+        <li><a  href="/tags/"  ><i class="fa fa-file"></i>标签云</a></li>
+      
+    
+      
+        <li><a  href="/archives/"  ><i class="fa fa-file"></i>档案馆</a></li>
+      
+    
+      
+        <li><a  href="/friends/"  ><i class="fa fa-paw"></i>友链</a></li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-umbrella"></i>秘密小窝</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://smp.chaoswork.cn"  >鹰の巢</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-random"></i>资源库</a>
+          <ul class="sub-menu">
+            
+              <li><a  href="/resources/frontend"  >前端</a></li>
+            
+              <li><a  href="/resources/backend"  >后端</a></li>
+            
+              <li><a  href="/resources/tools"  >工具</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-gift"></i>看动漫</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://www.5dm.tv/"  >五弹幕</a></li>
+            
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="kratos-start kratos-hero-2">
+  <!-- <div class="kratos-overlay"></div> -->
+  <div class="kratos-cover kratos-cover-2 text-center">
+    <div class="desc desc2 animate-box">
+      <a href="/">
+        <h2>云海鹰影</h2> <br />
+        <span>我独自度过的无数个晨昏，用来交换你身边一瞬</span>
+      </a>
+    </div>
+  </div>
+</div>
+        <div id="kratos-blog-post">
+          <div class="container">
+            <div class="row">
+              
+              <div id="main">
+                <section class="col-md-8">
+    <article>
+        <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">linux内存管理和虚拟内存</h1>
+                
+                <div class="kratos-post-meta text-center">
+                    <span>
+                        <i class="fa fa-calendar"></i> 2019-05-08
+                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>, <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+                        <i class="fa fa-user"></i> 作者 云海鹰影
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~2.90K
+                        
+                        字
+                        
+                    </span>
+                </div>
+            </header>
+            <div class="kratos-post-content">
+                <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                    本文最后编辑于 <time datetime="1615457057383"></time> 前，其中的内容可能需要更新。
+                </div>
+                
+                <hr />
+                <h2 id="一、虚拟内存简介"><a href="#一、虚拟内存简介" class="headerlink" title="一、虚拟内存简介"></a>一、虚拟内存简介</h2><p>在现代操作系统中，进程之间共享使用cpu和内存，但是内存资源有限，为了更加高效地使用内存，现代操作系统提供一个内存抽象—虚拟内存。</p>
+<p>虚拟内存是操作系统内核为了对进程地址空间进行管理而精心设计的一个逻辑意义上的内存空间概念。我们编写程序中用到的内存都是在这个虚拟内存空间中进行分配。在程序运行中，操作系统通过地址管理单元（Memory Management Unit, MMU）和映射页表(page tables)来将需要访问的虚拟内存地址映射为物理内存地址。</p>
+<p>虚拟内存提供三个重要的能力：</p>
+<ol>
+<li>将内存当作磁盘的缓存，在内存中只保留常用数据，必要时从内存和磁盘之间交换数据。</li>
+<li>简化内存管理，为每个进程提供统一的地址空间。</li>
+<li>保护进程的内存空间不受其他进程影响。</li>
+</ol>
+<h2 id="二、虚拟内存机制"><a href="#二、虚拟内存机制" class="headerlink" title="二、虚拟内存机制"></a>二、虚拟内存机制</h2><p><strong>以下文字和图片中用到的简称说明：</strong></p>
+<blockquote>
+<p>VA: Virtual Address 虚拟地址<br>PA: Physical Address 物理地址<br>VP: Virtual Page 虚拟内存页<br>PP: Physical Page 物理内存页<br>PTE:  Page Table Entry 页表项<br>PTEA：Page Table Entry Address 页表项地址</p>
+</blockquote>
+<hr>
+<h3 id="2-1-地址映射"><a href="#2-1-地址映射" class="headerlink" title="2.1 地址映射"></a>2.1 地址映射</h3><p>在简介中我们提到了虚拟地址到物理地址的映射，下面是这种过程的示意图：</p>
+<ul>
+<li><p>没有虚拟内存，cpu通过物理地址读取4个字节示意图:<br><img src="/images/2019/05/mem_access_no_virt.png"><br>当cpu执行加载操作，它将有效的物理地址通过地址总线传给内存，内存从地址4开始读取4个字节，将这4个字节内容返回给cpu。</p>
+</li>
+<li><p>有虚拟内存，cpu通过虚拟地址读取4个字节示意图:<br><img src="/images/2019/05/mem_access_with_virt.png"><br>cpu在加载虚拟地址（VA）之前，MMU（地址管理单元）会将VA转换成PA（物理地址），然后在执行正常的读取操作。</p>
+</li>
+</ul>
+<h3 id="2-2-内存页"><a href="#2-2-内存页" class="headerlink" title="2.2 内存页"></a>2.2 内存页</h3><p>进程的虚拟内存在物理内存和磁盘之间交换时以内存页（4kB）为最小单位。进程运行中，虚拟内存页有三种状态：</p>
+<blockquote>
+<ul>
+<li>未分配：未在虚拟内存系统分配，只在页表存在一个记录，不占用内存和磁盘空间。</li>
+<li>未缓存：已分配页，没有缓存在内存中，存于磁盘。</li>
+<li>已缓存：已分配页，并缓存在内存中。</li>
+</ul>
+</blockquote>
+<p><img src="/images/2019/05/vm_page_state.png"></p>
+<h3 id="2-3-页表"><a href="#2-3-页表" class="headerlink" title="2.3 页表"></a>2.3 页表</h3><p>页表是用于内存页管理的的结构。其中记录了每个虚拟内存页（VP）对应的状态、与内存和磁盘之间的映射。如下示意图：<br><img src="/images/2019/05/mem_cache.png"></p>
+<h3 id="2-4-内存缓存命中与MISS"><a href="#2-4-内存缓存命中与MISS" class="headerlink" title="2.4 内存缓存命中与MISS"></a>2.4 内存缓存命中与MISS</h3><p>当CPU访问某个虚拟内存地址时，如果页表中记录该地址所在的分页已缓存，则直接去对应物理内存中读取数据，这种情况称为缓存命中（cache hit）；当页表中记录该地址所在分页为分配或未缓存时，则会触发”缺页”异常（page fault exception），然后内核会分配新的物理内存页并建立页表映射，这种情况称为缓存未命中（cache miss）。</p>
+<p>缓存命中的情形:<br><img src="/images/2019/05/mem_cache_hit.png"><br>缓存命中的流程：</p>
+<blockquote>
+<ol>
+<li>CPU将虚拟地址传给MMU，</li>
+<li>MMU生成PTE页表地址，去内存里拿页表。</li>
+<li>内存返回页表给MMU，</li>
+<li>MMU根据页表查表后得到物理地址，去请求内存</li>
+<li>根据物理地址，内存将数据返回给CPU</li>
+</ol>
+</blockquote>
+<p><img src="/images/2019/05/cache_hit_flow.png"></p>
+<p>缓存miss的情形：<br><img src="/images/2019/05/mem_cache_miss.png"><br>缓存miss的流程：</p>
+<blockquote>
+<ol>
+<li>CPU将虚拟地址传给MMU，</li>
+<li>MMU生成PTE页表地址，去内存里拿页表。</li>
+<li>内存返回页表给MMU，</li>
+<li>MMU发现PTE的valid标志位是0，将CPU的执行权交给操作系统内核的page fault异常处理程序（page fault exception handler）。</li>
+<li>异常处理程序选中一个物理内存页（PP）剔除出去，如果该页内容相比之前有变动，同时将其内容写回磁盘。</li>
+<li> 异常处理程序将需要的页从磁盘里读取到内存里，并且更新内存里的页表里的PTE。</li>
+<li>异常处理程序执行结束返回，CPU继续之前的寻址操作，现在一切情况都和 page hit 情况一样了。</li>
+</ol>
+</blockquote>
+<p><img src="/images/2019/05/cache_miss_flow.png"><br>从上面的步骤可以看出，page hit 这种情况可以在硬件基础上完成，可是 page fault 就需要操作系统内核配合完成了。</p>
+<h2 id="三、虚拟内存与内存管理"><a href="#三、虚拟内存与内存管理" class="headerlink" title="三、虚拟内存与内存管理"></a>三、虚拟内存与内存管理</h2><h3 id="3-1-进程的地址空间"><a href="#3-1-进程的地址空间" class="headerlink" title="3.1 进程的地址空间"></a>3.1 进程的地址空间</h3><p>有了虚拟内存的机制，操作系统可以为每个进程提供独立的页表的虚拟内存空间，并且每个进程都可以有相同的内存布局。</p>
+<p>每个进程拥有4G的进程地址空间，该空间被人为的分为两个部分——用户空间与内核空间。用户空间从0到3G（0xC0000000），内核空间占据3G到4G。用户进程通常情况下只能访问用户空间的虚拟地址，不能访问内核空间虚拟地址。只有用户进程进行系统调用（代表用户进程在内核态执行）等时刻可以访问到内核空间。</p>
+<p>进程的用户内存空间又分为5个数据段：</p>
+<ul>
+<li><strong>代码段（text段）</strong>：存放可执行文件的操作指令（代码主体），只读。</li>
+<li><strong>数据段（data段）</strong>：存放初始化后的静态和全局变量，常量也存放在这个区域。</li>
+<li><strong>BSS段</strong>：存放未初始化的静态和全局变量，在程序载入时该段内存由内核清零。</li>
+<li><strong>堆（heap）</strong>：堆是“先进先出”的数据结构，用于存放进程运行中动态分配的内存。堆的内存地址向上增加；即堆上的数据越多，新分配的堆内存地址越大。</li>
+<li><strong>栈（stack）</strong>：栈是“后进先出”的数据结构，用于存放程序中的局部变量，包括函数调用时传入的参数和返回值。栈从内存空间的最高地址向下生长，和堆相对。</li>
+</ul>
+<p>【注意，内存管理中栈的概念和作用与《数据结构》中类似， 而堆和数据结构中的堆不是一回事。】</p>
+<p>进程内存分配如下图所示：</p>
+<center>
+    
+![](/images/2019/05/process_mem_plot.gif)
+</center>
+
+<h3 id="3-2-虚拟内存与内存管理"><a href="#3-2-虚拟内存与内存管理" class="headerlink" title="3.2 虚拟内存与内存管理"></a>3.2 虚拟内存与内存管理</h3><p>每个进程拥有独立的虚拟内存空间和相同的空间布局，这样就为程序的链接、加载、代码与数据共享和程序内存分配等环节带来了便利，使相应工作变得相对简单。</p>
+<p><img src="/images/2019/05/vm_multi_proc.png"></p>
+<ul>
+<li><strong>简化链接</strong>：因为每个进程有独立的虚拟内存空间和相同的内存布局，这样的统一使得链接器的设计和实现变得简单，不管代码区或者数据区在物理内存的那个地方，链接器总能够根据统一规则生产一个可执行文件。</li>
+<li><strong>简化加载</strong>：当加载可执行文件和共享对象文件时，加载器不需要立即从磁盘copy全部可执行文件内容到内存里；只需为可执行文件建立页表并分配页表项（text段和data段），并将页表项映射到磁盘上的可执行文件。CPU加载或者执行指令时候发现相应的VP没有在缓存中，这时才会触发数据从磁盘copy到内存。</li>
+<li><strong>简化共享</strong>：单独的地址空间为操作系统提供了一个统一的机制用于管理用户进程和操作系统内核之间的内存共享。正常情况下，每个进程都有自己的代码、数据、堆和栈区域，进程之间不会共享，操作系统为每个进程创建的页表将进程虚拟页映射到不相交到物理内存中。但是有时候需要需要进程之间共享数据和代码。比如每个进程都要调用相同到操作系统内核代码，每个C程序都要调用标准C库函数printf函数。这时就要用到上图示意的共享PP的场景了。</li>
+<li><strong>简化内存分配</strong>：VM为用户态进程提供了一个简单机制用于分配额外内存。比如说，进程想额外从堆上分配内存（通过malloc系统调用），操作系统会分配k个连续堆虚拟内存页（k of VPs)，因为有页表的存在，在物理内存DRAM上没必要分配连续k页内存，k页可以分散开来。</li>
+</ul>
+
+            </div>
+            
+                <div class="kratos-copyright text-center clearfix">
+                    <h5>本作品采用 <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+                </div>
+            
+            <footer class="kratos-entry-footer clearfix">
+                
+                    <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                    
+                    
+                        <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                        <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://www.chaoswork.cn/20190508-2.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://www.chaoswork.cn/20190508-2.html";
+            const title         = "「linux内存管理和虚拟内存」";
+            const excerpt       = `一、虚拟内存简介在现代操作系统中，进程之间共享使用cpu和内存，但是内存资源有限，为了更加高效地使用内存，现代操作系统提供一个内存抽象—虚拟内存。
+虚拟内存是操作系统内核为了对进程地址空间进行管理而精心设计的一个逻辑意义上的内存空间概...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                    
+                    </div>
+                
+                <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                        <a class="tag-none-link" href="/tags/linux%E5%9F%BA%E7%A1%80/" rel="tag">linux基础</a>, <a class="tag-none-link" href="/tags/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/" rel="tag">内存管理</a>, <a class="tag-none-link" href="/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="tag">编程基础</a>, <a class="tag-none-link" href="/tags/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/" rel="tag">虚拟内存</a>
+                    </div>
+                    <div class="pull-date">
+                    <span>最后编辑：2021-03-11</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
+            <nav class="navigation post-navigation clearfix" role="navigation">
+                
+                <div class="nav-previous clearfix">
+                    <a title=" wordpress站升级HTTPS" href="/20190508-1.html">&lt; 上一篇</a>
+                </div>
+                
+                
+                <div class="nav-next clearfix">
+                    <a title=" 面向对象程序设计七大原则" href="/20190512-1.html">下一篇 &gt;</a>
+                </div>
+                
+            </nav>
+        
+        
+            <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.css">
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var load_comm = () => {
+        const init = () => {
+            const gitalk = new Gitalk({
+                // Gitalk配置
+                language: "zh-CN",
+                clientID: "7dff06239ac01f6006c8",
+                clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
+                repo: "comment_data",
+                owner: "stayknight",
+                admin: ["stayknight"],
+                id: location.pathname,
+                distractionFreeMode: false
+            });
+            gitalk.render('gitalk-container');
+        };
+        if (typeof Gitalk == 'undefined') {
+            const src = 'https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+
+        
+    </article>
+</section>
+              </div>
+              
+                <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+  
+    <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="https://cdn.jsdelivr.net/npm/chwx@1.0.0/avatars/icon41.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        
+            <p class="text-center">路漫漫其修远兮，吾将上下而求索~<br/><span>(右下角搜索)</span></p>
+        
+    </div>
+</aside>
+  
+    <!-- Moved to about.ejs -->
+  
+    
+  <aside id="krw-categories" class="widget widget-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E6%BA%90%E7%A0%81/">源码</a><span class="category-list-count">1</span></li></ul></li></ul>
+  </aside>
+
+
+  
+    
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签云</h4>
+      <div class="tag-clouds">
+        <a href="/tags/ACGN/" style="font-size: 0.75em;">ACGN</a> <a href="/tags/ACM/" style="font-size: 0.6em;">ACM</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.65em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.65em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/SAO/" style="font-size: 0.6em;">SAO</a> <a href="/tags/adb/" style="font-size: 0.6em;">adb</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/centos/" style="font-size: 0.7em;">centos</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/gcc/" style="font-size: 0.6em;">gcc</a> <a href="/tags/gitlab/" style="font-size: 0.65em;">gitlab</a>
+      </div>
+  </aside>
+
+  
+    
+  <aside id="krw-posts" class="widget widget-kratos-poststab">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/20230224-1.html"><i class="fa  fa-book"></i> 关于带返回值的函数未返回引起的Undefined Behavior问题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20210201-1.html"><i class="fa  fa-book"></i> 【转】【分享】80个网站源码</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200611-1.html"><i class="fa  fa-book"></i> Linux adb devices 显示no permissions问题解决</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200604-1.html"><i class="fa  fa-book"></i> 各类MQTT代理服务器特性对比</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20191220-2.html"><i class="fa  fa-book"></i> 自动备份远程文件到本地</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+  
+</section>
+              
+            </div>
+          </div>
+        </div>
+        <footer>
+    <div id="footer">
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons text-center">
+                        
+                        <li><a href="mailto:stayknight@163.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://smp.chaoswork.cn/@stayknight"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/stayknight"><i class="fa fa-github"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 云海鹰影 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Made with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by <a href="https://candinya.com" target="_blank" rel="nofollow">Candinya</a>.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
+                            <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
+                            
+                                <li><a href="sitemap.xml" target="_blank">站点地图</a></li>
+                                <li><a href="baidusitemap.xml" target="_blank">百度地图</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+      </div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    $("img.headicon").one("error", function(e) {
+        $(this).attr("src", "/images/avatar.webp");
+    });
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+<script async src="/js/candy.min.js"></script>
+
+
+    <script defer src=""></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?bfb917536df0b5a503a5690e6de9ef9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+  </body>
+</html>

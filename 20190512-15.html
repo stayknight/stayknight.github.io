@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  <title>linux之cron服务 | 云海鹰影</title>
+  <meta name="author" content="云海鹰影" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="anacron, cron, crontab, linux基础, 编程基础" />
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+      <meta name="baidu-site-verification" content="code-EjIoHOEm6V" />
+    
+    
+    
+  
+  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+  <body class="custom-background">
+    <div id="kratos-wrapper">
+      <div id="kratos-page">
+        <div id="kratos-header">
+  <div class="nav-toggle"><a class="kratos-nav-toggle js-kratos-nav-toggle"><i></i></a></div>
+  <header id="kratos-header-section">
+    <div class="container">
+      <div class="nav-header">
+        <div class="color-logo"><a href="/">云海鹰影</a></div>
+        <nav id="kratos-menu-wrap">
+  <ul id="kratos-primary-menu" class="sf-menu">
+    
+      
+        <li><a  href="/"  ><i class="fa fa-home"></i>首页</a></li>
+      
+    
+      
+        <li><a  href="/tags/"  ><i class="fa fa-file"></i>标签云</a></li>
+      
+    
+      
+        <li><a  href="/archives/"  ><i class="fa fa-file"></i>档案馆</a></li>
+      
+    
+      
+        <li><a  href="/friends/"  ><i class="fa fa-paw"></i>友链</a></li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-umbrella"></i>秘密小窝</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://smp.chaoswork.cn"  >鹰の巢</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-random"></i>资源库</a>
+          <ul class="sub-menu">
+            
+              <li><a  href="/resources/frontend"  >前端</a></li>
+            
+              <li><a  href="/resources/backend"  >后端</a></li>
+            
+              <li><a  href="/resources/tools"  >工具</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-gift"></i>看动漫</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://www.5dm.tv/"  >五弹幕</a></li>
+            
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="kratos-start kratos-hero-2">
+  <!-- <div class="kratos-overlay"></div> -->
+  <div class="kratos-cover kratos-cover-2 text-center">
+    <div class="desc desc2 animate-box">
+      <a href="/">
+        <h2>云海鹰影</h2> <br />
+        <span>我独自度过的无数个晨昏，用来交换你身边一瞬</span>
+      </a>
+    </div>
+  </div>
+</div>
+        <div id="kratos-blog-post">
+          <div class="container">
+            <div class="row">
+              
+              <div id="main">
+                <section class="col-md-8">
+    <article>
+        <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">linux之cron服务</h1>
+                
+                <div class="kratos-post-meta text-center">
+                    <span>
+                        <i class="fa fa-calendar"></i> 2019-05-12
+                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a>, <a class="label-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a>
+                        <i class="fa fa-user"></i> 作者 云海鹰影
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~6.30K
+                        
+                        字
+                        
+                    </span>
+                </div>
+            </header>
+            <div class="kratos-post-content">
+                <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                    本文最后编辑于 <time datetime="1615457057387"></time> 前，其中的内容可能需要更新。
+                </div>
+                
+                <hr />
+                <p>在Linux中，如果要在预设时间执行shell脚本，at命令非常好用，但如果需要定期执行shell任务，例如每天一次、每周一次，则需要Linux的cron程序来安排定期执行的作业。</p>
+<h2 id="一、cron服务简介"><a href="#一、cron服务简介" class="headerlink" title="一、cron服务简介"></a>一、cron服务简介</h2><p>linux中cron服务相关的程序有：crond, crontab, anacron。</p>
+<p>crond是linux中一个用来周期性的执行任务的守护进程。绝大多数linux发行版都带有crond服务，并随系统自动启动。crond服务以每分钟一次的频率检查配置文件，并且在固定的时间点执行任务。</p>
+<p>crontab是与crond一起的命令程序；用户可以通过crontab设置cron时间表来维护自定义的cron任务。</p>
+<p>anacron 是crond与crontab的延伸程序。用于以天为单位的频率执行任务。</p>
+<p>anacron并不是一个服务程序，它的周期性执行依赖于crond服务中对于anacron的配置。centos中，anacron每小时会被检查执行一次。</p>
+<p>anacron任务格式不设置具体时间点，而是设置任务的时间周期(单位：天）和延迟（单位：分钟），只要检查时当前时间距离上次执行时间点超过设置周期，那么任务在机器运行时都会执行一次。</p>
+<p>例如，假设你有一个计划任务设置在每天半夜运行，如果用crontab配置，假如笔记本电脑晚上关机，第二天早上开机，那么该任务就会错过一次执行；如果使用 anacron，那么在第二天开机时，anacron判断满足时间间隔，就会执行一次。</p>
+<h2 id="二、crond-和-crontab"><a href="#二、crond-和-crontab" class="headerlink" title="二、crond 和 crontab"></a>二、crond 和 crontab</h2><h3 id="2-1-安装cron服务"><a href="#2-1-安装cron服务" class="headerlink" title="2.1 安装cron服务"></a>2.1 安装cron服务</h3><p>若是cron服务没有安装（现在一般linux系统都自带了），则可以通过yum等包管理器安装：</p>
+<figure class="highlight sh" data-lang="sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">yum -y install crontabs</span><br><span class="line">service crond start <span class="comment">#安装后启动</span></span><br><span class="line">service crond status <span class="comment">#检查cron服务状态</span></span><br><span class="line">chkconfig --level 345 crond on <span class="comment">#把 Cron 加入开机启动的服务列表</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-cron服务相关文件和目录（centos7）："><a href="#2-2-cron服务相关文件和目录（centos7）：" class="headerlink" title="2.2 cron服务相关文件和目录（centos7）："></a>2.2 cron服务相关文件和目录（centos7）：</h3><p><strong>应用程序和系统文件：</strong>（删除线表示不太需要关注）</p>
+<ul>
+<li><del><code>/usr/lib/systemd/system/crond.service</code>: 系统内置crond服务启动文件。</del></li>
+<li><del><code>/usr/sbin/crond</code>: crond服务主程序，在crond.service中配置。</del></li>
+<li><del><code>/etc/sysconfig/crond</code>: crond服务的系统配置程序，用户不应修改。</del></li>
+<li><del><code>/usr/bin/crontab</code>：crontab命令程序</del></li>
+</ul>
+<p><strong>配置文件和目录：</strong></p>
+<ul>
+<li><p><code>/etc/crontab</code>：系统级crontab任务配置文件。</p>
+</li>
+<li><p><code>/var/spool/cron/</code>：用户级crontab任务配置文件目录；其中的文件需以用户名来命名。如果存在非用户名文件(如任意文件<code>fasdfa</code>)，则cron会每分钟报错：<code>crond[3950]: (fasdfa) ORPHAN (no passwd entry)</code>。</p>
+</li>
+<li><p><code>/etc/cron.d/</code>: 相当于<code>/etc/crontab</code>文件的扩展目录，存放系统级crontab任务配置文件。</p>
+</li>
+<li><p><code>/etc/cron.hourly</code>: 系统内置的按小时执行的任务目录，存放按小时执行的脚本。该目录配置在<code>/etc/cron.d/0hourly</code>文件中。</p>
+</li>
+<li><p><code>/etc/cron.daily</code>|<code>/etc/cron.weekly</code>|<code>/etc/cron.monthly</code>：系统内置的按日|周|月执行的任务目录，存放按照相应时间周期执行的脚本。这些目录配置在<code>/etc/anacrontab</code>文件中，由anacron保证其功能。</p>
+</li>
+</ul>
+<p><strong>权限配置和日志文件：</strong></p>
+<ul>
+<li><p><code>/etc/cron.allow</code>：将可以使用 crontab 的帐号写入其中，不在该文件内的用户不可使用 crontab。</p>
+</li>
+<li><p><code>/etc/cron.deny</code>：将不可以使用 crontab 的帐号写入其中，不在其中的使用者可以使用 crontab。</p>
+</li>
+<li><p>如果allow和deny文件都不存在，则只有root用户可以使用crontab命令。若都存在，allow文件优先于deny文件。一般来说，只需要保留一个，系统预设是保留 /etc/cron.deny ，你可以将不想让他执行 crontab 的使用者写入 /etc/cron.deny 当中。</p>
+</li>
+<li><p><code>/var/log/cron</code>：cron日志文件。</p>
+</li>
+</ul>
+<h3 id="2-3-crontab文件格式"><a href="#2-3-crontab文件格式" class="headerlink" title="2.3 crontab文件格式"></a>2.3 crontab文件格式</h3><p>crontab 每一行都代表一项任务, 每行的每个字段代表一项设置，它的格式共分为六个字段，前五段是时间设定段，第六段是要执行的命令段，格式如下：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">minute hour day month week command</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>allowed values</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>minute</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>hour</td>
+<td>0-23</td>
+</tr>
+<tr>
+<td>day</td>
+<td>1-31</td>
+</tr>
+<tr>
+<td>month</td>
+<td>1-12 (or names)</td>
+</tr>
+<tr>
+<td>week</td>
+<td>0-7 (0 or 7 is Sunday, or use names)</td>
+</tr>
+</tbody></table>
+<ul>
+<li>通过空格或tab分割；时间用数字或通配符表示；</li>
+<li>支持范围表示：8-10表示8,9,10</li>
+<li>支持列表：1,2,5,9</li>
+<li>支持间隔：*/2，在hour位表示每隔两小时</li>
+<li>月和星期可以使用英文的前三个字母表示，但这种形式不支持范围和列表。</li>
+</ul>
+<p>例如，如果要在每天10:15运行命令:</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">15 10 * * * command</span><br></pre></td></tr></table></figure>
+<p>又例如，每隔7天，凌晨3点整自动执行命令：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 3 */7 * * command</span><br></pre></td></tr></table></figure>
+
+<p><strong>补充说明：</strong></p>
+<p>1）在command命令之前，还可以加上用户名；还可以通过<code>run-parts</code>参数指定命令文件目录。格式为：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">minute hour day month week [user] command</span><br><span class="line">minute hour day month week [user] run-parts directory</span><br></pre></td></tr></table></figure>
+
+<p>用法举例：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*/1 * * * * root echo &quot;test&quot; &gt;/tmp/test_root.log</span><br><span class="line">*/1 * * * * www echo &quot;test&quot; &gt;/tmp/test_www.log</span><br><span class="line">01 * * * * root run-parts /etc/cron.hourly</span><br></pre></td></tr></table></figure>
+
+<p>2）在<code>/etc/crontab</code>文件中，可以指定不同的用户名；在<code>/var/spool/cron/</code>目录下的文件中，只能指定与文件名相同的用户，指定其他用户的任务无效。</p>
+<h3 id="2-4-crontab命令"><a href="#2-4-crontab命令" class="headerlink" title="2.4 crontab命令"></a>2.4 crontab命令</h3><p><strong>命令格式:</strong></p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab [-u user] file</span><br><span class="line">crontab [-u user] [ -e | -l | -r ]</span><br></pre></td></tr></table></figure>
+<p><strong>命令功能：</strong></p>
+<p>设置用户的cron任务。创建、编辑和删除用户级别的cron配置文件。</p>
+<p><strong>参数说明：</strong></p>
+<ul>
+<li><code>-u user</code>：用来设定某个用户的crontab服务，例如，“-u ixdba”表示设定ixdba用户的crontab服务，此参数一般有root用户来运行。</li>
+<li><code>file</code>：file是命令文件的名字,表示将file做为crontab的任务列表文件并载入crontab。如果在命令行中没有指定这个文件，crontab命令将接受标准输入（键盘）上键入的命令，并将它们载入crontab。</li>
+<li><code>-e</code>：编辑某个用户的crontab文件内容。如果不指定用户，则表示编辑当前用户的crontab文件。</li>
+<li><code>-l</code>：显示某个用户的crontab文件内容，如果不指定用户，则表示显示当前用户的crontab文件内容。</li>
+<li><code>-r</code>：从/var/spool/cron目录中删除某个用户的crontab文件，如果不指定用户，则默认删除当前用户的crontab文件。</li>
+<li><code>-i</code>：在删除用户的crontab文件时给确认提示。</li>
+</ul>
+<p><strong>使用说明：</strong></p>
+<p>不建议直接编辑<code>/var/spool/cron</code>下面的文件，避免造成安全问题和误操作。可以先在用户目录下编辑一个crontab格式的文件，然后使用<code>crontab file</code>的方式载入。这样也可以给crontab任务留存一个备份，在crontab文件丢失时，可以方便的恢复。</p>
+<figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> mycron</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;0,15,30,45,18-06 * * * /bin/echo `date` &gt; dev/tty1&quot;</span> &gt; mycron</span><br><span class="line">crontab mycron</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-注意事项"><a href="#2-5-注意事项" class="headerlink" title="2.5 注意事项"></a>2.5 注意事项</h3><h4 id="2-5-1-环境变量问题"><a href="#2-5-1-环境变量问题" class="headerlink" title="2.5.1 环境变量问题"></a>2.5.1 环境变量问题</h4><p>有时我们创建了一个crontab，但是这个任务却无法自动执行，而手动执行这个任务却没有问题，这种情况一般是由于在crontab文件中没有配置环境变量引起的。</p>
+<p>在crontab文件中定义多个调度任务时，需要特别注意的一个问题就是环境变量的设置，因为我们手动执行某个任务时，是在当前shell环境下进行的，程序当然能找到环境变量，而系统自动执行任务调度时，是不会加载任何环境变量的，因此，就需要在crontab文件中指定任务运行所需的所有环境变量，这样，系统执行任务调度时就没有问题了。</p>
+<p>不要假定cron知道所需要的特殊环境，它其实并不知道。所以你要保证在shelll脚本中提供所有必要的路径和环境变量，除了一些自动设置的全局变量。所以注意如下3点：</p>
+<ol>
+<li>脚本中涉及文件路径时写全局路径；</li>
+<li>脚本执行要用到额外环境变量（如java相关）时，通过source命令引入环境变量；如：</li>
+</ol>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat start_cbp.sh</span><br><span class="line">#!/bin/sh</span><br><span class="line">source /etc/profile</span><br><span class="line">export RUN_CONF=/home/d139/conf/platform/cbp/cbp_jboss.conf</span><br><span class="line">/usr/local/jboss-4.0.5/bin/run.sh -c mev &amp;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>当手动执行脚本OK，但是crontab死活不执行时。这时必须大胆怀疑是环境变量惹的祸，并可以尝试在crontab中直接引入环境变量解决问题。如：</li>
+</ol>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 * * * * . /etc/profile;/bin/sh /var/www/java/audit_no_count/bin/restart_audit.sh</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-5-2-注意清理系统用户的邮件日志"><a href="#2-5-2-注意清理系统用户的邮件日志" class="headerlink" title="2.5.2 注意清理系统用户的邮件日志"></a>2.5.2 注意清理系统用户的邮件日志</h4><p>每条任务调度执行完毕，系统都会将任务输出信息通过电子邮件的形式发送给当前系统用户，这样日积月累，日志信息会非常大，可能会影响系统的正常运行，因此，将每条任务进行重定向处理非常重要。例如，可以在crontab文件中设置如下形式，忽略日志输出：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 */3 * * * /usr/local/apache2/apachectl restart &gt;/dev/null 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p><code>/dev/null 2&gt;&amp;1</code>表示先将标准输出重定向到/dev/null，然后将标准错误重定向到标准输出，由于标准输出已经重定向到了/dev/null，因此标准错误也会重定向到/dev/null，这样日志输出问题就解决了。</p>
+<h4 id="2-5-3-系统级任务调度与用户级任务调度"><a href="#2-5-3-系统级任务调度与用户级任务调度" class="headerlink" title="2.5.3 系统级任务调度与用户级任务调度"></a>2.5.3 系统级任务调度与用户级任务调度</h4><p>系统级任务调度主要完成系统的一些维护操作，用户级任务调度主要完成用户自定义的一些任务，可以将用户级任务调度放到系统级任务调度来完成（不建议这么做），但是反过来却不行，root用户的任务调度操作可以通过“crontab –uroot –e”来设置，也可以将调度任务直接写入/etc/crontab文件，需要注意的是，如果要定义一个定时重启系统的任务，就必须将任务放到/etc/crontab文件，即使在root用户下创建一个定时重启系统的任务也是无效的。</p>
+<h4 id="2-5-4-其他"><a href="#2-5-4-其他" class="headerlink" title="2.5.4 其他"></a>2.5.4 其他</h4><ol>
+<li>在crontab中%是有特殊含义的，表示换行的意思。如果要用的话必须进行转义%，如经常用的<code>date +%Y%m%d</code>在crontab里是不会执行的，应该换成date <code>+\%Y\%m\%d</code>。</li>
+</ol>
+<h2 id="三、anacron"><a href="#三、anacron" class="headerlink" title="三、anacron"></a>三、anacron</h2><p>anacron每小时执行一次，其运行脚本文件为：<code>/etc/cron.hourly/0anacron</code>。可见anacron正是依赖crontab每小时任务来保证其周期执行的。</p>
+<p><strong>应用程序和系统文件：</strong>（删除线表示不太需要关注）</p>
+<ul>
+<li>~~`/usr/sbin/anacron`：anacron执行程序</li>
+</ul>
+<p><strong>配置文件和目录：</strong></p>
+<ul>
+<li><p><code>/etc/cron.hourly/0anacron</code>：anacron运行脚本。</p>
+</li>
+<li><p><code>/etc/anacrontab</code>：anacron任务配置文件。</p>
+</li>
+<li><p><code>/var/spool/anacron/</code>：与crontab中的配置意义不同，该目录由anacron自动维护，其下的文件名称是anacron的任务名称，记录最近一次执行anacron任务的时间戳（日期）。anacron每小时检查这些时间戳以确定是否执行任务。</p>
+</li>
+</ul>
+<h3 id="3-1-anacron时间格式"><a href="#3-1-anacron时间格式" class="headerlink" title="3.1 anacron时间格式"></a>3.1 anacron时间格式</h3><p>anacron任务配置格式如下：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">duration delay command</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>field</th>
+<th>allowed values</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>duration</td>
+<td>任务周期，数字，单位：天</td>
+</tr>
+<tr>
+<td>delay</td>
+<td>任务延迟时间，数字，单位：分钟</td>
+</tr>
+</tbody></table>
+<p>以<code>/etc/anacrontab</code>中的默认配置为例：</p>
+<figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@study ~]<span class="comment"># cat /etc/anacrontab</span></span><br><span class="line">HELL=/bin/sh</span><br><span class="line">PATH=/sbin:/bin:/usr/sbin:/usr/bin</span><br><span class="line">MAILTO=root</span><br><span class="line"><span class="comment"># the maximal random delay added to the base delay of the jobs</span></span><br><span class="line">RANDOM_DELAY=45</span><br><span class="line"><span class="comment"># the jobs will be started during the following hours only</span></span><br><span class="line">START_HOURS_RANGE=3-22</span><br><span class="line"></span><br><span class="line"><span class="comment">#period in days   delay in minutes   job-identifier   command</span></span><br><span class="line">1	5	cron.daily		<span class="built_in">nice</span> run-parts /etc/cron.daily</span><br><span class="line">7	25	cron.weekly		<span class="built_in">nice</span> run-parts /etc/cron.weekly</span><br><span class="line">@monthly 45	cron.monthly		<span class="built_in">nice</span> run-parts /etc/cron.monthly</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h2><p>crontab和anacron中的目录依赖关系比较复杂，现总结如下：</p>
+<ol>
+<li>crond 每分钟主动读取 /etc/crontab, /etc/cron.d/<em>, /var/spool/cron/</em> 等配置，并依据【分，时，日，周，月】的任务时间设置去执行任务；</li>
+<li>根据 <code>/etc/cron.d/0hourly</code> 的设置，主动读取并执行 <code>/etc/cron.hourly/</code> 目录下的脚本；</li>
+<li>根据 <code>/etc/cron.hourly/0anacron</code> 的设置，主动每小时执行一次anacron ，anacron会读取 <code>/etc/anacrontab</code> 的配置；</li>
+<li>根据 <code>/etc/anacrontab</code> 的设置，主动依据每天、每周、每月去分析和执行<code>/etc/cron.daily/</code>, <code>/etc/cron.weekly/</code>, <code>/etc/cron.monthly/</code> 內的脚本。</li>
+</ol>
+<p>更多可以参考：<a target="_blank" rel="noopener" href="http://linux.vbird.org/linux_basic/0430cron.php">鳥哥的 Linux 私房菜 – 第十五章、例行性工作排程(crontab)</a></p>
+
+            </div>
+            
+                <div class="kratos-copyright text-center clearfix">
+                    <h5>本作品采用 <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+                </div>
+            
+            <footer class="kratos-entry-footer clearfix">
+                
+                    <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                    
+                    
+                        <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                        <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://www.chaoswork.cn/20190512-15.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://www.chaoswork.cn/20190512-15.html";
+            const title         = "「linux之cron服务」";
+            const excerpt       = `在Linux中，如果要在预设时间执行shell脚本，at命令非常好用，但如果需要定期执行shell任务，例如每天一次、每周一次，则需要Linux的cron程序来安排定期执行的作业。
+一、cron服务简介linux中cron服务相关的程...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                    
+                    </div>
+                
+                <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                        <a class="tag-none-link" href="/tags/anacron/" rel="tag">anacron</a>, <a class="tag-none-link" href="/tags/cron/" rel="tag">cron</a>, <a class="tag-none-link" href="/tags/crontab/" rel="tag">crontab</a>, <a class="tag-none-link" href="/tags/linux%E5%9F%BA%E7%A1%80/" rel="tag">linux基础</a>, <a class="tag-none-link" href="/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="tag">编程基础</a>
+                    </div>
+                    <div class="pull-date">
+                    <span>最后编辑：2021-03-11</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
+            <nav class="navigation post-navigation clearfix" role="navigation">
+                
+                <div class="nav-previous clearfix">
+                    <a title=" C++ union介绍" href="/20190512-14.html">&lt; 上一篇</a>
+                </div>
+                
+                
+                <div class="nav-next clearfix">
+                    <a title=" 为你的博客博客/网页添加Live2d二次元老婆的插件/手动方法" href="/20190512-16.html">下一篇 &gt;</a>
+                </div>
+                
+            </nav>
+        
+        
+            <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.css">
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var load_comm = () => {
+        const init = () => {
+            const gitalk = new Gitalk({
+                // Gitalk配置
+                language: "zh-CN",
+                clientID: "7dff06239ac01f6006c8",
+                clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
+                repo: "comment_data",
+                owner: "stayknight",
+                admin: ["stayknight"],
+                id: location.pathname,
+                distractionFreeMode: false
+            });
+            gitalk.render('gitalk-container');
+        };
+        if (typeof Gitalk == 'undefined') {
+            const src = 'https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+
+        
+    </article>
+</section>
+              </div>
+              
+                <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+  
+    <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="https://cdn.jsdelivr.net/npm/chwx@1.0.0/avatars/icon41.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        
+            <p class="text-center">路漫漫其修远兮，吾将上下而求索~<br/><span>(右下角搜索)</span></p>
+        
+    </div>
+</aside>
+  
+    <!-- Moved to about.ejs -->
+  
+    
+  <aside id="krw-categories" class="widget widget-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E6%BA%90%E7%A0%81/">源码</a><span class="category-list-count">1</span></li></ul></li></ul>
+  </aside>
+
+
+  
+    
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签云</h4>
+      <div class="tag-clouds">
+        <a href="/tags/ACGN/" style="font-size: 0.75em;">ACGN</a> <a href="/tags/ACM/" style="font-size: 0.6em;">ACM</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.65em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.65em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/SAO/" style="font-size: 0.6em;">SAO</a> <a href="/tags/adb/" style="font-size: 0.6em;">adb</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/centos/" style="font-size: 0.7em;">centos</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/gcc/" style="font-size: 0.6em;">gcc</a> <a href="/tags/gitlab/" style="font-size: 0.65em;">gitlab</a>
+      </div>
+  </aside>
+
+  
+    
+  <aside id="krw-posts" class="widget widget-kratos-poststab">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/20230224-1.html"><i class="fa  fa-book"></i> 关于带返回值的函数未返回引起的Undefined Behavior问题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20210201-1.html"><i class="fa  fa-book"></i> 【转】【分享】80个网站源码</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200611-1.html"><i class="fa  fa-book"></i> Linux adb devices 显示no permissions问题解决</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200604-1.html"><i class="fa  fa-book"></i> 各类MQTT代理服务器特性对比</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20191220-2.html"><i class="fa  fa-book"></i> 自动备份远程文件到本地</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+  
+</section>
+              
+            </div>
+          </div>
+        </div>
+        <footer>
+    <div id="footer">
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons text-center">
+                        
+                        <li><a href="mailto:stayknight@163.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://smp.chaoswork.cn/@stayknight"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/stayknight"><i class="fa fa-github"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 云海鹰影 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Made with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by <a href="https://candinya.com" target="_blank" rel="nofollow">Candinya</a>.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
+                            <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
+                            
+                                <li><a href="sitemap.xml" target="_blank">站点地图</a></li>
+                                <li><a href="baidusitemap.xml" target="_blank">百度地图</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+      </div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    $("img.headicon").one("error", function(e) {
+        $(this).attr("src", "/images/avatar.webp");
+    });
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+<script async src="/js/candy.min.js"></script>
+
+
+    <script defer src=""></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?bfb917536df0b5a503a5690e6de9ef9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+  </body>
+</html>

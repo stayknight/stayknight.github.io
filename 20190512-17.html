@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/favicon.ico">
+  <title>php-fpm介绍，配置和优化 | 云海鹰影</title>
+  <meta name="author" content="云海鹰影" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="php-fpm, php基础" />
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+      <meta name="baidu-site-verification" content="code-EjIoHOEm6V" />
+    
+    
+    
+  
+  
+  <link rel="alternate" href="atom.xml" type="application/atom+xml">
+
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+  <body class="custom-background">
+    <div id="kratos-wrapper">
+      <div id="kratos-page">
+        <div id="kratos-header">
+  <div class="nav-toggle"><a class="kratos-nav-toggle js-kratos-nav-toggle"><i></i></a></div>
+  <header id="kratos-header-section">
+    <div class="container">
+      <div class="nav-header">
+        <div class="color-logo"><a href="/">云海鹰影</a></div>
+        <nav id="kratos-menu-wrap">
+  <ul id="kratos-primary-menu" class="sf-menu">
+    
+      
+        <li><a  href="/"  ><i class="fa fa-home"></i>首页</a></li>
+      
+    
+      
+        <li><a  href="/tags/"  ><i class="fa fa-file"></i>标签云</a></li>
+      
+    
+      
+        <li><a  href="/archives/"  ><i class="fa fa-file"></i>档案馆</a></li>
+      
+    
+      
+        <li><a  href="/friends/"  ><i class="fa fa-paw"></i>友链</a></li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-umbrella"></i>秘密小窝</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://smp.chaoswork.cn"  >鹰の巢</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-random"></i>资源库</a>
+          <ul class="sub-menu">
+            
+              <li><a  href="/resources/frontend"  >前端</a></li>
+            
+              <li><a  href="/resources/backend"  >后端</a></li>
+            
+              <li><a  href="/resources/tools"  >工具</a></li>
+            
+          </ul>
+        </li>
+      
+    
+      
+        <li>
+          <a  ><i class="fa fa-gift"></i>看动漫</a>
+          <ul class="sub-menu">
+            
+              <li><a  target="_blank" rel="noopener" href="https://www.5dm.tv/"  >五弹幕</a></li>
+            
+          </ul>
+        </li>
+      
+    
+  </ul>
+</nav>
+      </div>
+    </div>
+  </header>
+</div>
+<div class="kratos-start kratos-hero-2">
+  <!-- <div class="kratos-overlay"></div> -->
+  <div class="kratos-cover kratos-cover-2 text-center">
+    <div class="desc desc2 animate-box">
+      <a href="/">
+        <h2>云海鹰影</h2> <br />
+        <span>我独自度过的无数个晨昏，用来交换你身边一瞬</span>
+      </a>
+    </div>
+  </div>
+</div>
+        <div id="kratos-blog-post">
+          <div class="container">
+            <div class="row">
+              
+              <div id="main">
+                <section class="col-md-8">
+    <article>
+        <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">php-fpm介绍，配置和优化</h1>
+                
+                <div class="kratos-post-meta text-center">
+                    <span>
+                        <i class="fa fa-calendar"></i> 2019-05-12
+                        <i class="fa fa-folder"></i> 分类 <a class="label-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a>
+                        <i class="fa fa-user"></i> 作者 云海鹰影
+                        <i class="fa fa-edit"></i> 
+                        
+                        
+                            ~3.11K
+                        
+                        字
+                        
+                    </span>
+                </div>
+            </header>
+            <div class="kratos-post-content">
+                <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                    本文最后编辑于 <time datetime="1615457057387"></time> 前，其中的内容可能需要更新。
+                </div>
+                
+                <hr />
+                <blockquote>
+<p>上个月把博客站从php5.5.7升级到了php7.3.4，一个月的时间已经发生多次服务器卡死的情况，之前顾不上深究，直接重启了事。今天抽点时间处理了下，顺便把相关的知识点记录下来。</p>
+</blockquote>
+<h2 id="一、php-fpm-介绍"><a href="#一、php-fpm-介绍" class="headerlink" title="一、php-fpm 介绍"></a>一、php-fpm 介绍</h2><p>虽然对php不熟，但是本着虽不求甚解，但不能不了解的思想，所以我还是去阅读了一些php-fpm的相关知识。php-fpm是php-fastcgi process manager的简称。所以了解php-fpm不得不稍微了解下fastcgi以及cgi的相关知识。下面是一些笔者觉得不错的参考文章：</p>
+<ul>
+<li><a href="https://blog.csdn.net/zhang197093/article/details/73555895" target="_blank" rel="noopener noreferrer">动态web技术(二) — CGI</a></li>
+<li><a href="https://blog.csdn.net/zhang197093/article/details/78914509" target="_blank" rel="noopener noreferrer">FastCGI协议详解及代码实现</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/b1303110335/article/details/80112266">nginx、php-fpm、fastcgi深入理解与优化</a></li>
+</ul>
+<p>其实看了许多文章，但是对比理解发觉，许多文章描述有误或语焉不详，比如对于nginx的fastcgi和php的fastcgi的关系，这里我稍微总结梳理下：</p>
+<ul>
+<li><strong>cgi</strong>: 对接标准输入和标准输出的程序，其实现与语言无关。HTTP服务器每次收到请求后，启动一个CGI进程并将请求传入，CGI进程完成后退出。这种fork-and-execute模式导致性能低下。</li>
+<li><strong>php-cgi</strong>: 包含php解释器的CGI程序（不是用php写的CGI程序），能够处理php请求。</li>
+<li><strong>fastcgi</strong>：一种用于更好的提供CGI功能的协议；fastcgi协议采用C/S结构，http服务器只需要包含fastcgi的C端模块，通过socket与支持fastcgi S端的CGI程序通信。这样既解决了CGI反复加载的问题，又可以将CGI程序和http服务器分离。nginx的fastcgi模块即fastcgi的C端。</li>
+<li><strong>php-fpm</strong>:  包含php解释器，实现了fastcgi的S端，并且提供了进程管理功能的程序。可以常驻内存并持续接受和处理php请求，并且能够控制进程的数量和生存周期。</li>
+</ul>
+<h2 id="二、php-fpm-配置和优化"><a href="#二、php-fpm-配置和优化" class="headerlink" title="二、php-fpm 配置和优化"></a>二、php-fpm 配置和优化</h2><p>php-fpm一直存在一些固有问题，如内存泄漏，进程僵死等；这些问题会导致占用内存一直增加，进程数不停增加，直到服务器资源耗尽死机。所以php-fpm的配置主要是围绕控制进程数和进程生命周期进行的（用这种方法来解决性能问题不得不说php团队也是对这个语言的没辙了）。</p>
+<p>php中主要有这么两个配置文件：php.ini, php-fpm.conf; 前者是php解释器的配置，后者是php-fpm的配置。php的性能优化主要是调整进程管理相关参数即php-fpm.conf。</p>
+<p>这里列举一些重要的配置，并做一些说明：</p>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">error_log = /usr/local/var/log/php-fpm.log  #错误日志</span><br><span class="line"></span><br><span class="line">emergency_restart_threshold = 60</span><br><span class="line">emergency_restart_interval = 60s</span><br><span class="line">#表示在emergency_restart_interval所设值内出现SIGSEGV或者SIGBUS错误的php-cgi进程数如果超过 emergency_restart_threshold个，php-fpm就会优雅重启。这两个选项一般保持默认值。0 表示 &#x27;关闭该功能&#x27;. 默认值: 0 (关闭).</span><br><span class="line"></span><br><span class="line">process_control_timeout = 0</span><br><span class="line">#设置子进程接受主进程复用信号的超时时间. 超过时间没有接受到信号则子进程优雅退出。可用单位: s(秒), m(分), h(小时), 或者 d(天) 默认单位: s(秒). 默认值: 0.</span><br><span class="line"></span><br><span class="line">pm = dynamic</span><br><span class="line">#php-fpm进程启动模式，pm可以设置为static和dynamic和ondemand</span><br><span class="line">#如果选择static，则进程数就数固定的，由pm.max_children指定固定的子进程数。</span><br><span class="line">#如果选择dynamic，则进程数是动态变化的,由以下参数决定：</span><br><span class="line">pm.max_children = 50 #子进程最大数</span><br><span class="line">pm.start_servers = 2 #启动时的进程数，默认值为: (min_spare_servers + max_spare_servers)/2</span><br><span class="line">pm.min_spare_servers = 1 #保证空闲进程数最小值，如果空闲进程小于此值，则创建新的子进程</span><br><span class="line">pm.max_spare_servers = 3 #保证空闲进程数最大值，如果空闲进程大于此值，此进行清理</span><br><span class="line">pm.max_requests = 500</span><br><span class="line">#设置每个子进程重生之前服务的请求数. 对于可能存在内存泄漏的第三方模块来说是非常有用的. 如果设置为 &#x27;0&#x27; 则一直接受请求. 等同于 PHP_FCGI_MAX_REQUESTS 环境变量. 默认值: 0.</span><br><span class="line"></span><br><span class="line">slowlog = log/$pool.log.slow</span><br><span class="line">#慢请求的记录日志,配合request_slowlog_timeout使用，默认关闭</span><br><span class="line">request_slowlog_timeout = 10s</span><br><span class="line">#当一个请求该设置的超时时间后，就会将对应的PHP调用堆栈信息完整写入到慢日志中. 设置为 &#x27;0&#x27; 表示 &#x27;Off&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><strong>额外说明：</strong></p>
+<ol>
+<li><p><code>emergency_restart</code>功能，<code>process_control_timeout</code>和 <code>slowlog</code>功能默认都是关闭的，若有频繁假死，进程过多，死机等情况，建议都打开。</p>
+</li>
+<li><p>进程的数量要根据服务器的实际情况调整，不然也会耗尽资源。比如，每个php-fpm占用内存一般在30M到50M之间，对于1G内存的服务器，可能不到30个就会耗尽内存，所以可以设置：</p>
+</li>
+</ol>
+<figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pm = dynamic</span><br><span class="line">pm.max_children = 30</span><br><span class="line">pm.start_servers = 10</span><br><span class="line">pm.min_spare_servers = 5</span><br><span class="line">pm.max_spare_servers = 15</span><br><span class="line">pm.max_requests = 500  //单个进程不宜过大，防止内存泄漏</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>其实也不确定这样是否能高枕无忧，观察一段时间再看。对于解决不了的，网上还有一种终极大法：利用linux定时器任务执行脚本(或者后台持续运行脚本)，在脚本中监测php-fpm的进程数量或系统内存占用，达到条件重启php-fpm，简单有效。</p>
+<p>一个根据memory重启的例子:</p>
+<p><code>checkmem.sh</code></p>
+<figure class="highlight sh" data-lang="sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line"><span class="comment"># pcount = $(top -b -n1 | grep -c &quot;php-fpm&quot;) 这个是统计进程数的</span></span><br><span class="line">mem=$(top -b -n1 | grep <span class="string">&quot;php-fpm&quot;</span> | awk <span class="string">&#x27;&#123;sum=sum+$10&#125;;END&#123;print sum&#125;&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> [[ <span class="variable">$mem</span> &gt; 70 ]];<span class="keyword">then</span></span><br><span class="line">    service php-fpm restart</span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">sleep</span> 30</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>后台启动：</p>
+<figure class="highlight sh" data-lang="sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">nohup</span> ./checkmem.sh &gt; checkmem.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line"><span class="comment"># nohup 是不挂断的运行(忽略所有挂断（SIGHUP）信号)</span></span><br><span class="line"><span class="comment"># 最后一个&amp;表示后台运行</span></span><br><span class="line"><span class="comment"># 2&gt;&amp;1 表示将标准错误重定向到标准输出；这里标准输出又被重定向到checkmem.log文件中。</span></span><br></pre></td></tr></table></figure>
+
+            </div>
+            
+                <div class="kratos-copyright text-center clearfix">
+                    <h5>本作品采用 <a rel="license nofollow" target="_blank" href="http://creativecommons.org/licenses/by-sa/4.0/">知识共享署名-相同方式共享 4.0 国际许可协议</a> 进行许可</h5>
+                </div>
+            
+            <footer class="kratos-entry-footer clearfix">
+                
+                    <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                    
+                    
+                        <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                        <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "https://www.chaoswork.cn/20190512-17.html",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "https://www.chaoswork.cn/20190512-17.html";
+            const title         = "「php-fpm介绍，配置和优化」";
+            const excerpt       = `
+上个月把博客站从php5.5.7升级到了php7.3.4，一个月的时间已经发生多次服务器卡死的情况，之前顾不上深究，直接重启了事。今天抽点时间处理了下，顺便把相关的知识点记录下来。
+
+一、php-fpm 介绍虽然对php不熟，但是本...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                    
+                    </div>
+                
+                <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                        <a class="tag-none-link" href="/tags/php-fpm/" rel="tag">php-fpm</a>, <a class="tag-none-link" href="/tags/php%E5%9F%BA%E7%A1%80/" rel="tag">php基础</a>
+                    </div>
+                    <div class="pull-date">
+                    <span>最后编辑：2021-03-11</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        
+            <nav class="navigation post-navigation clearfix" role="navigation">
+                
+                <div class="nav-previous clearfix">
+                    <a title=" 为你的博客博客/网页添加Live2d二次元老婆的插件/手动方法" href="/20190512-16.html">&lt; 上一篇</a>
+                </div>
+                
+                
+                <div class="nav-next clearfix">
+                    <a title=" 2019四月新番推荐和点评" href="/20190512-18.html">下一篇 &gt;</a>
+                </div>
+                
+            </nav>
+        
+        
+            <link rel="stylesheet" href="https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.css">
+<div id="gitalk-container"></div>
+<script type="text/javascript">
+    var load_comm = () => {
+        const init = () => {
+            const gitalk = new Gitalk({
+                // Gitalk配置
+                language: "zh-CN",
+                clientID: "7dff06239ac01f6006c8",
+                clientSecret: "1cf779fc33e9e0d353f196eefa4bb43ecd560889",
+                repo: "comment_data",
+                owner: "stayknight",
+                admin: ["stayknight"],
+                id: location.pathname,
+                distractionFreeMode: false
+            });
+            gitalk.render('gitalk-container');
+        };
+        if (typeof Gitalk == 'undefined') {
+            const src = 'https://cdn.bootcss.com/gitalk/1.4.1/gitalk.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+
+        
+    </article>
+</section>
+              </div>
+              
+                <section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+  
+    <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="https://cdn.jsdelivr.net/npm/chwx@1.0.0/avatars/icon41.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        
+            <p class="text-center">路漫漫其修远兮，吾将上下而求索~<br/><span>(右下角搜索)</span></p>
+        
+    </div>
+</aside>
+  
+    <!-- Moved to about.ejs -->
+  
+    
+  <aside id="krw-categories" class="widget widget-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E6%BA%90%E7%A0%81/">源码</a><span class="category-list-count">1</span></li></ul></li></ul>
+  </aside>
+
+
+  
+    
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签云</h4>
+      <div class="tag-clouds">
+        <a href="/tags/ACGN/" style="font-size: 0.75em;">ACGN</a> <a href="/tags/ACM/" style="font-size: 0.6em;">ACM</a> <a href="/tags/AVL%E6%A0%91/" style="font-size: 0.6em;">AVL树</a> <a href="/tags/C-%E5%9F%BA%E7%A1%80/" style="font-size: 0.8em;">C++基础</a> <a href="/tags/C-%E7%B1%BB%E5%9E%8B/" style="font-size: 0.65em;">C++类型</a> <a href="/tags/IO%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8/" style="font-size: 0.65em;">IO多路复用</a> <a href="/tags/IO%E6%A8%A1%E5%9E%8B/" style="font-size: 0.6em;">IO模型</a> <a href="/tags/MYSQL/" style="font-size: 0.6em;">MYSQL</a> <a href="/tags/SAO/" style="font-size: 0.6em;">SAO</a> <a href="/tags/adb/" style="font-size: 0.6em;">adb</a> <a href="/tags/anacron/" style="font-size: 0.6em;">anacron</a> <a href="/tags/centos/" style="font-size: 0.7em;">centos</a> <a href="/tags/cms/" style="font-size: 0.6em;">cms</a> <a href="/tags/cron/" style="font-size: 0.6em;">cron</a> <a href="/tags/crontab/" style="font-size: 0.6em;">crontab</a> <a href="/tags/epoll/" style="font-size: 0.6em;">epoll</a> <a href="/tags/gcc/" style="font-size: 0.6em;">gcc</a> <a href="/tags/gitlab/" style="font-size: 0.65em;">gitlab</a>
+      </div>
+  </aside>
+
+  
+    
+  <aside id="krw-posts" class="widget widget-kratos-poststab">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+            <a class="list-group-item" href="/20230224-1.html"><i class="fa  fa-book"></i> 关于带返回值的函数未返回引起的Undefined Behavior问题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20210201-1.html"><i class="fa  fa-book"></i> 【转】【分享】80个网站源码</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200611-1.html"><i class="fa  fa-book"></i> Linux adb devices 显示no permissions问题解决</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20200604-1.html"><i class="fa  fa-book"></i> 各类MQTT代理服务器特性对比</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/20191220-2.html"><i class="fa  fa-book"></i> 自动备份远程文件到本地</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+  
+</section>
+              
+            </div>
+          </div>
+        </div>
+        <footer>
+    <div id="footer">
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons text-center">
+                        
+                        <li><a href="mailto:stayknight@163.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="me" href="https://smp.chaoswork.cn/@stayknight"><i class="fa fa fa-share-alt-square"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/stayknight"><i class="fa fa-github"></i></a></li>
+                        <li><a target="_blank" rel="nofollow" href="/atom.xml"><i class="fa fa-rss"></i></a></li>
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2023 云海鹰影 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        <div>
+                            <li>Theme <a href="https://github.com/Candinya/Kratos-Rebirth" target="_blank">Kratos:Rebirth</a></li>
+                            <li>Made with&nbsp;<i class="fa fa-heart throb" style="color:#d43f57"></i>&nbsp;by <a href="https://candinya.com" target="_blank" rel="nofollow">Candinya</a>.</li>
+                        </div>
+                        <div>
+                            <li>Powered by <a href="https://hexo.io" target="_blank" rel="nofollow">Hexo</a></li>
+                            <li>Hosted on <a href="https://github.io" target="_blank">Github Pages</a></li>
+                        </div>
+                        <div>
+                            <li><a href="https://beian.miit.gov.cn" rel="external nofollow" target="_blank">鄂ICP备17025858号-5</a></li>
+                            <li><a href="http://www.beian.gov.cn" rel="external nofollow" target="_blank"><img src="/images/psr.webp" width="12" height="12">&nbsp;xxxxx</a></li>
+                            
+                                <li><a href="sitemap.xml" target="_blank">站点地图</a></li>
+                                <li><a href="baidusitemap.xml" target="_blank">百度地图</a></li>
+                            
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+      </div>
+    </div>
+    <script type="text/javascript" charset="utf-8">
+    $("img.headicon").one("error", function(e) {
+        $(this).attr("src", "/images/avatar.webp");
+    });
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+<script>const notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+<script async src="/js/candy.min.js"></script>
+
+
+    <script defer src=""></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?bfb917536df0b5a503a5690e6de9ef9c";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+
+  </body>
+</html>
