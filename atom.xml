@@ -6,7 +6,7 @@
   <link href="https://www.chaoswork.cn/atom.xml" rel="self"/>
   
   <link href="https://www.chaoswork.cn/"/>
-  <updated>2023-02-24T07:55:31.787Z</updated>
+  <updated>2023-02-28T08:19:05.884Z</updated>
   <id>https://www.chaoswork.cn/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux僵尸进程和孤儿进程一点记录</title>
+    <link href="https://www.chaoswork.cn/20230227-1.html"/>
+    <id>https://www.chaoswork.cn/20230227-1.html</id>
+    <published>2023-02-27T10:10:50.000Z</published>
+    <updated>2023-02-28T08:19:05.884Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>工作中偶尔会碰到僵尸进程问题，有时候同事也会来问，有时候自己也会遗忘搞不清，有必要记录一下。</p></blockquote><h2 id="进程基础"><a href="#进程基础" class="headerlink" title="进程基础"></a>进程基础</h2><ol><li>Linux进程是一棵树，除了根节点，每一个进程都由其父进程创建出来。根节点为init/systemd进程，进程号一般为1.</li><li>进程是一种系统资源，进程结束后，将由其父进程负责回收其剩余占用的系统资源。</li></ol><h2 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h2><p>进程退出时，若还有运行中的子进程，这些子进程就被称为孤儿进程。孤儿进程会被init/systemd收养，也就是孤儿进程的父进程会变成init/systemd。<br>PS： ubuntu16.04以上，每个用户拥有一个独立的systemd进程，该用户运行的孤儿进程会被相应的systemd收养，故孤儿进程ID不一定是1.</p><p>孤儿进程本身不是一种问题。比如我们经常用脚本启动一个后台进程，脚本执行完毕退出，这个后台进程就经历了变孤儿然后被收养的流程。<br>孤儿进程在开发中造成困扰通常是想要结束进程时，错误的结束了它的父进程，造成了误解。一个典型的例子就是： 在supervisor中配置了shell脚本作为应用的可执行路径，shell脚本启动真正的应用程序，然后用supervisor stop 停止应用却发觉应用没有正确停止，后台残留一个ppid为1的应用程序。</p><p>孤儿进程可以正常的被kill杀死。</p><h2 id="僵尸进程"><a href="#僵尸进程" class="headerlink" title="僵尸进程"></a>僵尸进程</h2><p>进程退出后，在被父进程回收前的这段时间状态即为僵尸状态，每个进程都会经历这个过程。正常情况下，僵尸状态的进程会很快被父进程回收。<br>但是若父进程太忙，陷入阻塞无法调用wait/waitpid()来清理子进程，那么进程就变成一个可见的僵尸进程存留于系统中。<br>僵尸进程可以通过ps查看，STAT列值是Z/Z+/Zl/Zl+的就是僵尸进程，同时其COMMAND带有<defunct>标志。</p><ol><li>通常情况下，<strong>僵尸进程无法通过kill杀死</strong>，因为kill只是通知进程退出，但是僵尸进程本身是已调用过exit()后死亡等待回收的进程。<br>解决的办法是杀死其父进程，让init/systemd来回收僵尸进程的资源。</li><li><strong>可以被杀死的僵尸进程</strong>：<br>对于多线程的应用，若主线程调用<code>pthread_exit</code>函数退出，其他线程将保持运行，此时进程无法被回收而显示出僵尸进程状态(Zl/Zl+)。<br>这时候若用<code>ps a -eLf</code>查看，可以看到仅有主线程处于僵尸状态。此时可以通过<code>kill &lt;进程ID&gt;</code>杀死整个进程，而导致僵尸进程被回收。</li></ol><h2 id="附：-进程状态码"><a href="#附：-进程状态码" class="headerlink" title="附： 进程状态码"></a>附： 进程状态码</h2><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">PROCESS STATE CODES</span><br><span class="line">       Here are the different values that the s, stat and state output</span><br><span class="line">       specifiers (header &quot;STAT&quot; or &quot;S&quot;) will display to describe the state of</span><br><span class="line">       a process:</span><br><span class="line"></span><br><span class="line">               D    uninterruptible sleep (usually IO)</span><br><span class="line">               I    Idle kernel thread</span><br><span class="line">               R    running or runnable (on run queue)</span><br><span class="line">               S    interruptible sleep (waiting for an event to complete)</span><br><span class="line">               T    stopped by job control signal</span><br><span class="line">               t    stopped by debugger during the tracing</span><br><span class="line">               W    paging (not valid since the 2.6.xx kernel)</span><br><span class="line">               X    dead (should never be seen)</span><br><span class="line">               Z    defunct (&quot;zombie&quot;) process, terminated but not reaped by</span><br><span class="line">                    its parent</span><br><span class="line"></span><br><span class="line">       For BSD formats and when the stat keyword is used, additional</span><br><span class="line">       characters may be displayed:</span><br><span class="line"></span><br><span class="line">               &lt;    high-priority (not nice to other users)</span><br><span class="line">               N    low-priority (nice to other users)</span><br><span class="line">               L    has pages locked into memory (for real-time and custom IO)</span><br><span class="line">               s    is a session leader</span><br><span class="line">               l    is multi-threaded (using CLONE_THREAD, like NPTL pthreads</span><br><span class="line">                    do)</span><br><span class="line">               +    is in the foreground process group</span><br></pre></td></tr></table></figure><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li><a href="https://www.cnblogs.com/jian-99/p/7739369.html">https://www.cnblogs.com/jian-99/p/7739369.html</a></li><li><a href="https://www.cnblogs.com/Anker/p/3271773.html">https://www.cnblogs.com/Anker/p/3271773.html</a></li><li><a href="https://blog.csdn.net/weixin_42350305/article/details/112072559">https://blog.csdn.net/weixin_42350305/article/details/112072559</a></li><li><a href="https://zhuanlan.zhihu.com/p/341747924">https://zhuanlan.zhihu.com/p/341747924</a></li></ul>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;工作中偶尔会碰到僵尸进程问题，有时候同事也会来问，有时候自己也会遗忘搞不清，有必要记录一下。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;进程基础&quot;&gt;&lt;a href=&quot;#进程基础&quot; class=&quot;headerlink&quot; title=&quot;进程基</summary>
+      
+    
+    
+    
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="linux基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="僵尸进程" scheme="https://www.chaoswork.cn/tags/%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>关于带返回值的函数未返回引起的Undefined Behavior问题</title>
@@ -567,41 +600,6 @@
     <category term="ubuntu" scheme="https://www.chaoswork.cn/tags/ubuntu/"/>
     
     <category term="vscode" scheme="https://www.chaoswork.cn/tags/vscode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>C/C++内置类型，数值常量和隐式转换</title>
-    <link href="https://www.chaoswork.cn/20190525-1.html"/>
-    <id>https://www.chaoswork.cn/20190525-1.html</id>
-    <published>2019-05-25T14:22:08.000Z</published>
-    <updated>2021-03-11T10:04:17.387Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>写这篇，一是想巩固下基础知识；二是发觉网上很多写的也是错漏较多，模糊了去查了看需要很多时间去分辨对错；故自己总结下，自觉应该不会出错吧(错了欢迎指出，我再纠正。)- -|||</p></blockquote><h2 id="一、C-C-内置类型长度"><a href="#一、C-C-内置类型长度" class="headerlink" title="一、C/C++内置类型长度"></a>一、C/C++内置类型长度</h2><p>我们知道C++内置类型有<code>bool, char, short, int, long, long long, float, double, long double, wchar_t</code>这些。每种类型的长度都不一样，但是<strong>C/C++标准并没有规定每个类型必须要占多少字节，而是规定了长度的最小值等一些约束</strong>。所以实际上<strong>各个类型的变量长度是由编译器来决定的</strong>。</p><p>那么编译器是根据什么来决定类型的长度呢？操作系统位数orCPU位数？</p><p>我们知道这样一个关系：</p><ul><li>32位编译器编译出来的是32位应用程序；64位编译器编译出来的是64位应用程序。</li></ul><p>而这里<strong>编译器是32位or64位</strong>指的是利用该编译器生成的应用程序是32位or64位；与该编译器应用程序自身是32和64位的没有关系，也就是<strong>与操作系统是32位or64位没有绝对关系，同样与CPU位数也没有绝对关系</strong>。</p><p>比如在64位系统上的32位编译器，其应用本身可以是32位的也可以是64位的；同样的，理论上在32位系统上一样可以做出64位的编译器， 其应用本身是32位的，但是可以生成64位程序（只是32位的系统不能运行64位的应用程序）。</p><p>事实上，编译器依据一种数据模型来决定其类型的长度。这些数据模型有：ILP32, ILP32LL, LP64, LLP64, ILP64等。其中I,L,P分别指int,long, pointer (如ILP32LL与ILP32LL64等同，意为int，long，pointer为32位，longlong为64位）。其中各种模型中类型的长度区别为：</p><table><thead><tr><th align="left">类型</th><th align="center">ILP32</th><th align="center">ILP32LL</th><th align="center">LLP64</th><th align="center">LP64</th><th align="center">ILP64</th></tr></thead><tbody><tr><td align="left">char</td><td align="center">8</td><td align="center">8</td><td align="center">8</td><td align="center">8</td><td align="center">8</td></tr><tr><td align="left">short</td><td align="center">16</td><td align="center">16</td><td align="center">16</td><td align="center">16</td><td align="center">16</td></tr><tr><td align="left">float</td><td align="center">32</td><td align="center">32</td><td align="center">32</td><td align="center">32</td><td align="center">32</td></tr><tr><td align="left">int</td><td align="center">32</td><td align="center">32</td><td align="center">32</td><td align="center">32</td><td align="center">64</td></tr><tr><td align="left">long</td><td align="center">32</td><td align="center">32</td><td align="center">32</td><td align="center">64</td><td align="center">64</td></tr><tr><td align="left">pointer</td><td align="center">32</td><td align="center">32</td><td align="center">64</td><td align="center">64</td><td align="center">64</td></tr><tr><td align="left">long long</td><td align="center">…</td><td align="center">64</td><td align="center">64</td><td align="center">64</td><td align="center">64</td></tr><tr><td align="left">double</td><td align="center">64</td><td align="center">64</td><td align="center">64</td><td align="center">64</td><td align="center">64</td></tr></tbody></table><p>现如今，<strong>32位的windows程序的数据模型为ILP32LL；64位的Windows程序数据模型是LLP64；绝大部分Unix，linux编译器和应用程序都是使用的LP64模型。</strong></p><h2 id="二、数值常量的类型"><a href="#二、数值常量的类型" class="headerlink" title="二、数值常量的类型"></a>二、数值常量的类型</h2><h3 id="2-1-数值常量的表示方法"><a href="#2-1-数值常量的表示方法" class="headerlink" title="2.1 数值常量的表示方法"></a>2.1 数值常量的表示方法</h3><p>C/C++的数字常量有这样几种表示：<code>18, -23, 3., -5.4, 2E-2, 07, -036, 0x3a, -0xFF</code>。</p><p>其中<code>18, -23, 3., -5.4, 2.9E-2</code>为<strong>10进制表示</strong>， 其中2.9E-2为<strong>科学计数法</strong>（10进制指数表示）；<code>07, -036</code>为<strong>8进制表示</strong>；<code>0x3a, -0xFF</code>为<strong>16进制表示</strong>。</p><p>其中<code>18, -23, 07, -036, 0x3a, -0xFF</code>皆为<strong>整数型常量</strong>；<code>3., -5.4, 2E-2</code>皆为<strong>浮点数型常量</strong>（小数型常量）。</p><p>从中我们可以总结出：</p><ul><li>以0开头的为8进制常量，0后只能以数字0~7表示；</li><li>以0x开头的为16进制常量，其后只能以数字和字母0~F表示；</li><li>其他为10进制常量，整形不能以0和0x开头，只能以0~9和小数点表示；</li><li>8进制和16进制不能用来表示浮点数；</li><li>科学计数法表示的一定是浮点数</li></ul><h3 id="2-2-数值常量的类型和后缀"><a href="#2-2-数值常量的类型和后缀" class="headerlink" title="2.2 数值常量的类型和后缀"></a>2.2 数值常量的类型和后缀</h3><p>C/C++数值常量后可以跟随一个后缀来给编译器指示类型；如果不加后缀，编译器会根据数值的范围指定合适的类型。</p><p><strong>编译器自动选择：</strong></p><ul><li>如果是浮点型常量，则指定double类型；</li><li>如果是整数型常量，如果在int表示的范围内，则指定为int；如果超出int，对于正数，按照<code>int-&gt;unsigned int-&gt;long-&gt;unsigned long-&gt;long long-&gt;unsigned long long</code>的方向指定合适的类型；对于负数，按照<code>int-&gt;long-&gt;long long</code>的方向指定合适的类型。</li></ul><p><strong>指定后缀：</strong></p><ul><li><p>整数型后缀有U，L或其组合(UL, LL，ULL或LLU)；其中U,L不区分大小写，分别表示unsigned 和long；如ull和llu都表示unsigned long long。</p></li><li><p>小数型后缀有F, L。分别表示float，long double。即单精度浮点数和长双精度浮点数。</p></li><li><p>整数后接f，或者小数后接U都会报错。</p></li></ul><h2 id="三、隐式转换"><a href="#三、隐式转换" class="headerlink" title="三、隐式转换"></a>三、隐式转换</h2><h3 id="3-1-隐式转换场合"><a href="#3-1-隐式转换场合" class="headerlink" title="3.1 隐式转换场合"></a>3.1 隐式转换场合</h3><p>C/C++在以下四种情况下会进行隐式转换:</p><ol><li>算术运算式中，低类型能够转换为高类型。</li><li>赋值表达式中，右边表达式的值自动隐式转换为左边变量的类型，并赋值给他。</li><li>函数调用中参数传递时，系统隐式地将实参转换为形参的类型后，赋给形参。</li><li>函数有返回值时，系统将隐式地将返回表达式类型转换为返回值类型，赋值给调用函数。</li></ol><h3 id="3-2-算数运算的隐式转换"><a href="#3-2-算数运算的隐式转换" class="headerlink" title="3.2 算数运算的隐式转换"></a>3.2 算数运算的隐式转换</h3><p>算数运算中，首先有如下类型转换规则：</p><ol><li>char和short先转换为int。</li><li>float型数据在运算时一律转换为双精度(double)型，以提高运算精度(同属于实型) 。</li><li>当不同类型的数据进行操作时，应当首先将其转换成相同的类型，然后进行操作，转换规则是由低级向高级转换。转换规则如下图所示:<br><img src="/images/2019/05/implicit_conversion.png" alt="隐式转换"></li><li>算数表达式的值类型与参与运算的值类型相同。</li></ol><p><strong>四则运算中，特别要注意unsigned运算。实际编程中最好避免unsigned值参与运算。</strong></p><p>举例：</p><figure class="highlight cpp" data-lang="cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//signed与unsigned int运算时，先都转换为unsigned</span></span><br><span class="line"><span class="type">unsigned</span> <span class="type">int</span> a=<span class="number">20</span>;</span><br><span class="line"><span class="type">signed</span> <span class="type">int</span> b=<span class="number">-130</span>;</span><br><span class="line">cout &lt;&lt; a&gt;b?<span class="string">&quot;yes&quot;</span>:<span class="string">&quot;no&quot;</span> &lt;&lt; endl; <span class="comment">//输出no</span></span><br><span class="line">cout &lt;&lt; a+b &lt;&lt; endl; <span class="comment">//输出4294967186</span></span><br><span class="line"></span><br><span class="line">cout &lt;&lt; (<span class="number">1</span> &lt;&lt; <span class="number">31</span>) &lt;&lt; endl; <span class="comment">//输出-2147483648</span></span><br><span class="line">cout &lt;&lt; (<span class="number">1L</span> &lt;&lt; <span class="number">31</span>) &lt;&lt; endl; <span class="comment">//输出2147483648</span></span><br></pre></td></tr></table></figure><h2 id="四、64位编程应注意事项"><a href="#四、64位编程应注意事项" class="headerlink" title="四、64位编程应注意事项"></a>四、64位编程应注意事项</h2><h3 id="4-1-格式化字符串：long使用-ld，指针使用-p"><a href="#4-1-格式化字符串：long使用-ld，指针使用-p" class="headerlink" title="4.1 格式化字符串：long使用%ld，指针使用%p"></a>4.1 格式化字符串：long使用%ld，指针使用%p</h3><p>32位下，打印地址可以用%x，但在64位下只能打印低4位；所以64位应用%p。</p><figure class="highlight cpp" data-lang="cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *ptr = &amp;something;</span><br><span class="line"><span class="built_in">printf</span> (%x\n<span class="string">&quot;, ptr);  //32位OK，64位错误</span></span><br><span class="line"><span class="string">printf (%p\n&quot;</span>, ptr);  <span class="comment">//64位</span></span><br></pre></td></tr></table></figure><h3 id="4-2-64位下的对齐"><a href="#4-2-64位下的对齐" class="headerlink" title="4.2 64位下的对齐"></a>4.2 64位下的对齐</h3><p>64位下，因为long和指针的长度可能发生了变化，所以32位下对齐良好的的结构可能变得不太好，导致32位程序在64位系统上运行性能下降。如：</p><figure class="highlight cpp" data-lang="cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"><span class="type">long</span> l;</span><br><span class="line"><span class="type">int</span> j;</span><br><span class="line"><span class="type">char</span>* p;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>ILP32下,sizeof(A)=16; 但是在LP64下，sizeof(A)=32。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;写这篇，一是想巩固下基础知识；二是发觉网上很多写的也是错漏较多，模糊了去查了看需要很多时间去分辨对错；故自己总结下，自觉应该不会出错吧(错了欢迎指出，我再纠正。)- -|||&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;一、C-C-内置类型</summary>
-      
-    
-    
-    
-    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="C++基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/"/>
-    
-    
-    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="C++基础" scheme="https://www.chaoswork.cn/tags/C-%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="内置类型" scheme="https://www.chaoswork.cn/tags/%E5%86%85%E7%BD%AE%E7%B1%BB%E5%9E%8B/"/>
-    
-    <category term="隐式转换" scheme="https://www.chaoswork.cn/tags/%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2/"/>
     
   </entry>
   
