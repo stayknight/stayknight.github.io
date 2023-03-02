@@ -151,7 +151,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            795
+                            793
                         
                         字
                         
@@ -160,7 +160,7 @@
             </header>
             <div class="kratos-post-content">
                 <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                    本文最后编辑于 <time datetime="1677749024155"></time> 前，其中的内容可能需要更新。
+                    本文最后编辑于 <time datetime="1677749270337"></time> 前，其中的内容可能需要更新。
                 </div>
                 
                 <hr />
@@ -170,7 +170,7 @@
 <h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><p>有一台远程机器<code>remote_host</code>，其上有一个目录<code>~/testscp</code>, 其目录结构如下:</p>
 <figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">testscp</span><br><span class="line">├── f1</span><br><span class="line">│   └── info.txt</span><br><span class="line">├── f2</span><br><span class="line">│   └── info.txt</span><br><span class="line">├── f3</span><br><span class="line">│   └── info.txt</span><br><span class="line">└── info.txt</span><br></pre></td></tr></table></figure>
 
-<p>出问题的scp命令是*<em>远端目录带</em>号**时:</p>
+<p>出问题的scp命令是<strong>远端目录带*号</strong>时:</p>
 <figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r remote_host:~/testscp/* testscp</span><br></pre></td></tr></table></figure>
 <p>问题表现：</p>
 <ol>
