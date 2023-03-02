@@ -6,7 +6,7 @@
   <link href="https://www.chaoswork.cn/atom.xml" rel="self"/>
   
   <link href="https://www.chaoswork.cn/"/>
-  <updated>2023-02-28T08:19:05.884Z</updated>
+  <updated>2023-03-02T09:23:44.155Z</updated>
   <id>https://www.chaoswork.cn/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ubuntu scp命令的一个问题</title>
+    <link href="https://www.chaoswork.cn/20230302-1.html"/>
+    <id>https://www.chaoswork.cn/20230302-1.html</id>
+    <published>2023-03-02T08:23:59.000Z</published>
+    <updated>2023-03-02T09:23:44.155Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>今天碰到一个小问题，scp从远端复制目录时，与期望结果不符; 恰好在之后一个同事将远端目录误删，导致数据丢失，只得重新生产数据，浪费几个小时。<br>这个scp的问题以前没有留意过，觉得有必要记录下。</p></blockquote><h2 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h2><p>有一台远程机器<code>remote_host</code>，其上有一个目录<code>~/testscp</code>, 其目录结构如下:</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">testscp</span><br><span class="line">├── f1</span><br><span class="line">│   └── info.txt</span><br><span class="line">├── f2</span><br><span class="line">│   └── info.txt</span><br><span class="line">├── f3</span><br><span class="line">│   └── info.txt</span><br><span class="line">└── info.txt</span><br></pre></td></tr></table></figure><p>出问题的scp命令是*<em>远端目录带</em>号**时:</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r remote_host:~/testscp/* testscp</span><br></pre></td></tr></table></figure><p>问题表现：</p><ol><li>若本地testscp目录存在，则scp拷贝一切正常，完整的文件和目录结构会被拷贝到本地</li><li><strong>若本地testscp不存在，则其会创建testscp目录， 但是拷贝结果中只有一个info.txt，多个子目录中的相同的文件被覆盖到一个位置。</strong></li><li>反过来，若将本地目录拷贝到远端: <code>scp -r testscp/* remote_host:~/testscp</code>, 则会明确要求远端目录存在,否则给出错误提示。</li></ol><p>正确的用法：</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> testscp</span><br><span class="line">scp -r remote_host:~/testscp/* testscp</span><br></pre></td></tr></table></figure><h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h2><p><code>scp -r</code>不带*号时，其表现也值得留意，比如:</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r remote_host:~/testscp testscp</span><br></pre></td></tr></table></figure><p>其表现为：</p><ol><li>若本地testscp目录不存在，则将远端testscp整个拷贝到当前目录中。</li><li>若本地当前目录存在testscp, 则将远端testscp拷贝到本地testscp中，即本地生成testscp/testscp目录。</li></ol><p>作为对比，cp命令的表现就简单多了，其要求目标目录必须存在，所以就不存在以上问题。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;今天碰到一个小问题，scp从远端复制目录时，与期望结果不符; 恰好在之后一个同事将远端目录误删，导致数据丢失，只得重新生产数据，浪费几个小时。&lt;br&gt;这个scp的问题以前没有留意过，觉得有必要记录下。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 i</summary>
+      
+    
+    
+    
+    <category term="编程基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="linux基础" scheme="https://www.chaoswork.cn/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="编程基础" scheme="https://www.chaoswork.cn/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="linux基础" scheme="https://www.chaoswork.cn/tags/linux%E5%9F%BA%E7%A1%80/"/>
+    
+    <category term="scp" scheme="https://www.chaoswork.cn/tags/scp/"/>
+    
+  </entry>
   
   <entry>
     <title>linux僵尸进程和孤儿进程一点记录</title>
@@ -574,32 +607,6 @@
     <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
     
     <category term="镜像源" scheme="https://www.chaoswork.cn/tags/%E9%95%9C%E5%83%8F%E6%BA%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu中vscode导致卡顿问题解决</title>
-    <link href="https://www.chaoswork.cn/20190605-1.html"/>
-    <id>https://www.chaoswork.cn/20190605-1.html</id>
-    <published>2019-06-05T14:22:08.000Z</published>
-    <updated>2021-03-11T10:04:17.387Z</updated>
-    
-    <content type="html"><![CDATA[<p>vscode在ubuntu中体验和windows一样，感觉很好，只是偶尔在修改文件时会导致濒临卡死现象，几乎不能操作；网上查了下，与gpu硬件加速有关，gpu硬件加速需要消耗额外的内存资源，如果配置较低或者打开进程过多，容易导致内存耗尽而卡死。vscode默认启用gpu，这点可能是不必要的。</p><p>vscode 禁用GPU硬件加速的方式如下：</p><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/share/applications</span><br><span class="line">sudo vim code.desktop</span><br></pre></td></tr></table></figure><p>在打开的文件中两处地方加入 –disable-gpu：</p><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Name=Visual Studio Code</span><br><span class="line">Comment=Code Editing. Redefined.</span><br><span class="line">GenericName=Text Editor</span><br><span class="line">Exec=/usr/share/code/code --disable-gpu --unity-launch %F</span><br><span class="line">Icon=code</span><br><span class="line">Type=Application</span><br><span class="line">StartupNotify=true</span><br><span class="line">StartupWMClass=Code</span><br><span class="line">Categories=Utility;TextEditor;Development;IDE;</span><br><span class="line">MimeType=text/plain;inode/directory;</span><br><span class="line">Actions=new-empty-window;</span><br><span class="line">Keywords=vscode;</span><br><span class="line"></span><br><span class="line">X-Desktop-File-Install-Version=0.22</span><br><span class="line"></span><br><span class="line">[Desktop Action new-empty-window]</span><br><span class="line">Name=New Empty Window</span><br><span class="line">Exec=/usr/share/code/code --disable-gpu --new-window %F</span><br><span class="line">Icon=code</span><br></pre></td></tr></table></figure><p>这样操作后，问题就解决了。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;vscode在ubuntu中体验和windows一样，感觉很好，只是偶尔在修改文件时会导致濒临卡死现象，几乎不能操作；网上查了下，与gpu硬件加速有关，gpu硬件加速需要消耗额外的内存资源，如果配置较低或者打开进程过多，容易导致内存耗尽而卡死。vscode默认启用gpu，这</summary>
-      
-    
-    
-    
-    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="ubuntu" scheme="https://www.chaoswork.cn/tags/ubuntu/"/>
-    
-    <category term="vscode" scheme="https://www.chaoswork.cn/tags/vscode/"/>
     
   </entry>
   
