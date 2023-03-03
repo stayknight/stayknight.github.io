@@ -87,9 +87,9 @@
     <link href="https://www.chaoswork.cn/20230224-1.html"/>
     <id>https://www.chaoswork.cn/20230224-1.html</id>
     <published>2023-02-24T07:18:52.000Z</published>
-    <updated>2023-02-24T07:55:31.787Z</updated>
+    <updated>2023-03-03T02:34:28.553Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>最近帮一个同事调试代码，遇到一个奇怪的double free崩溃问题，通过gdb定位到问题函数，发现问题出现在一个局部变量的析构函数中，最初没有关注到返回值问题，花了很多时间分析业务代码，结果找不出任何问题; 后来注意到返回值问题，想到gcc没有任何报错（用了-w屏蔽警告）, 而且测试问题函数内业务代码时，有时候也能修复，所以觉得应该与返回值无关，但是顺手修复后，bug就此消失了。后来上网查找了类似原因，原来是编译优化与UB的基础性问题，惭愧。</p></blockquote><p>知乎讨论帖： <a href="https://www.zhihu.com/question/472017255">这个代码int函数无返回值且开-O2，for循环会无限循环，是什么原因？</a></p><p>后经过测试，对于int函数漏返回值：<br>ubuntu 18.04 gcc 7.5.0 -O2      编译器无警告，运行结果正确，没有触发UB行为<br>ubuntu 20.04 gcc 9.4.0 -O2 -O1  编译器输出警告，运行触发UB行为，比如上面提到的double free或者 带条件for无限循环 等问题</p><p>结论： 进行C/C++程序开发时，非常有必要关注编译器版本，优化级别以及警告信息，尽量在打开警告(-Wall)时完成编译并认真对待警告。</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>最近帮一个同事调试代码，遇到一个奇怪的double free崩溃问题，通过gdb定位到问题函数，发现问题出现在一个局部变量的析构函数中，最初没有关注到返回值问题，花了很多时间分析业务代码，结果找不出任何问题; 后来注意到返回值问题，想到gcc没有任何报错（用了-w屏蔽警告）, 而且测试问题函数内业务代码时，有时候也能修复，所以觉得应该与返回值无关，但是顺手修复后，bug就此消失了。后来上网查找了类似原因，原来是编译优化与UB的基础性问题，惭愧。</p></blockquote><p>知乎讨论帖： <a href="https://www.zhihu.com/question/472017255">这个代码int函数无返回值且开-O2，for循环会无限循环，是什么原因？</a></p><p>后经过测试，对于int函数漏返回值：<br>ubuntu 18.04 gcc 7.5.0 -O2      编译器无警告，运行结果正确，没有触发UB行为<br>ubuntu 20.04 gcc 9.4.0 -O2 -O1  编译器输出警告，运行触发UB行为，比如上面提到的double free或者 带条件for无限循环 等问题</p><p>结论： 进行C/C++程序开发时，基础一定要打牢，同时非常有必要关注编译器版本，优化级别以及警告信息，尽量在打开警告(-Wall)时完成编译并认真对待警告。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://en.cppreference.com/w/cpp/language/ub">cppreference UB</a><br><a href="https://www.cnblogs.com/wangzhiyi/p/10964937.html">C++ 未定义行为</a></p>]]></content>
     
     
       
