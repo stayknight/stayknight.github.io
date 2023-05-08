@@ -6,7 +6,7 @@
   <link href="https://www.chaoswork.cn/atom.xml" rel="self"/>
   
   <link href="https://www.chaoswork.cn/"/>
-  <updated>2023-03-02T09:27:50.337Z</updated>
+  <updated>2023-05-08T08:12:59.736Z</updated>
   <id>https://www.chaoswork.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C++开源游戏服务器或脚手架记录</title>
+    <link href="https://www.chaoswork.cn/20230508-1.html"/>
+    <id>https://www.chaoswork.cn/20230508-1.html</id>
+    <published>2023-05-08T02:45:28.000Z</published>
+    <updated>2023-05-08T08:12:59.736Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="BigWorld"><a href="#BigWorld" class="headerlink" title="BigWorld"></a>BigWorld</h2><p>BigWorld公司网址: <a href="http://www.bigworldtech.com/">http://www.bigworldtech.com/</a><br>github地址: <a href="https://github.com/v2v3v4/BigWorld-Engine-14.4.1.git">https://github.com/v2v3v4/BigWorld-Engine-14.4.1.git</a></p><p>商业引擎，并非完全开源，但是是很多开源服务器框架的鼻祖。<br>该引擎是澳大利亚BigWorldPty.Ltd所开发的，由服务器软件、内容创建工具、3D客户端引擎、服务器端实时管理工具组成，为致力于构建富有创造力的一流的新一代网络游戏的开发商降低了开发周期和成本。</p><p>作为世界上最优异的大型多人在线网络游戏（MMO）解决方案，与其他著名商业游戏引擎有着明显区别的是，BigWorld引擎包含了制作次世代网络游戏的所有复杂技术，是世界范围内在技术架构上唯一完整的网络游戏开发平台。凭借其全球顶尖的动态负载均衡服务器架构及诸多创新技术设计，BigWorld引擎在迅速成为行业标准的同时，确立了在MMORPG商业授权市场的全球领先地位，是诸多世界著名游戏开发商的首选。仅在中国，就已经有十余款基于BigWorld引擎研发的大型多人在线网络游戏完成上线交付。</p><p>BigWorld引擎的代表作：<br>· 中国：《天下贰 》《天下叁》等等数十款，网易对BigWorld的实用化贡献很大。<br>· 国际：《魔兽世界》早期版本，《坦克世界》，《战争雷霆》</p><h2 id="KBengine"><a href="#KBengine" class="headerlink" title="KBengine"></a>KBengine</h2><p>github地址: <a href="https://github.com/kbengine/kbengine.git">https://github.com/kbengine/kbengine.git</a><br>MMORPG游戏服务端框架，作者自称是仿照BigWorld的架构所写。C++编写，python脚本，跨平台，支持热更新。有一些插件可以方便对接Unity,cocos等客户端引擎。</p><h2 id="NoahGameFrame"><a href="#NoahGameFrame" class="headerlink" title="NoahGameFrame"></a>NoahGameFrame</h2><p>github地址: <a href="https://github.com/ketoo/NoahGameFrame.git">https://github.com/ketoo/NoahGameFrame.git</a><br>作者受OGRE和BigWorld启发而开发的MMO服务端框架。C++编写，Lua脚本，跨平台，分布式可扩展插件，高性能actor模型。截止本文最近一次更新: 2022/04/22.<br>差不多的几个项目，这几个项目之间加了互联：</p><ul><li><a href="https://github.com/zsummer/breeze.git">breeze</a>: 一个C++的轻量级的分布式服务器引擎, 截止本文最近一次更新: 2020/07/15.</li><li><a href="https://github.com/sniper00/moon.git">moon</a>: 较新的一个actor模型服务端框架，采用较新的premake5编译管理工具，还在持续迭代中。</li></ul><h2 id="MaNGOS-TrinityCore-AzerothCore"><a href="#MaNGOS-TrinityCore-AzerothCore" class="headerlink" title="MaNGOS/TrinityCore/AzerothCore"></a>MaNGOS/TrinityCore/AzerothCore</h2><p>github地址： <a href="https://github.com/mangos/MaNGOS.git">https://github.com/mangos/MaNGOS.git</a><br>《魔兽世界》私服仿真服务器，支持多个版本魔兽世界客户端。作为一款游戏服务器框架而开源。基于此产生了许多衍生版魔兽世界开源服务器项目，包括：</p><ul><li><a href="https://github.com/TrinityCore/TrinityCore.git">TrinityCore</a>: 支持魔兽世界客户端3.3.5a,号称实现了该版本99%的功能。</li><li><a href="https://github.com/azerothcore/azerothcore-wotlk.git">AzerothCore</a>: 参考TrinityCore的另一个版本。</li></ul><h2 id="rathena"><a href="#rathena" class="headerlink" title="rathena"></a>rathena</h2><p>韩国MMORPG游戏《仙境传说》的私服仿真服务器，社区维护，纯C代码，lua脚本。<br>github地址: <a href="https://github.com/rathena/rathena.git">https://github.com/rathena/rathena.git</a></p><h2 id="OpenTibiaBR-forgottenserver"><a href="#OpenTibiaBR-forgottenserver" class="headerlink" title="OpenTibiaBR/forgottenserver"></a>OpenTibiaBR/forgottenserver</h2><p>github地址： <a href="https://github.com/opentibiabr/canary.git">https://github.com/opentibiabr/canary.git</a><br>《Tibia》是欧洲历史最悠久，最成功的2D MMORPG游戏之一。OpenTibiaBR是复刻该游戏的开源项目，包含服务端和客户端工程。完整度很高，可以直接上手部署。<br>其服务端是C++编写，脚本采用Lua，客户端目前有PC和Android版本。<br>**<a href="https://github.com/otland/forgottenserver.git">forgottenserver</a>**是OpenTibiaBR 服务端的fork版本。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;BigWorld&quot;&gt;&lt;a href=&quot;#BigWorld&quot; class=&quot;headerlink&quot; title=&quot;BigWorld&quot;&gt;&lt;/a&gt;BigWorld&lt;/h2&gt;&lt;p&gt;BigWorld公司网址: &lt;a href=&quot;http://www.bigworldtech</summary>
+      
+    
+    
+    
+    <category term="游戏开发" scheme="https://www.chaoswork.cn/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="服务器" scheme="https://www.chaoswork.cn/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    
+    <category term="游戏开发" scheme="https://www.chaoswork.cn/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/"/>
+    
+    <category term="服务器" scheme="https://www.chaoswork.cn/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    
+    <category term="C++" scheme="https://www.chaoswork.cn/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>ubuntu scp命令的一个问题</title>
@@ -580,33 +610,6 @@
     <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
     
     <category term="nginx" scheme="https://www.chaoswork.cn/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CentOS7替换国内镜像源</title>
-    <link href="https://www.chaoswork.cn/20190624-1.html"/>
-    <id>https://www.chaoswork.cn/20190624-1.html</id>
-    <published>2019-06-24T12:22:08.000Z</published>
-    <updated>2021-03-11T10:04:17.387Z</updated>
-    
-    <content type="html"><![CDATA[<p>以中科大源为例：<a href="https://mirrors.ustc.edu.cn/centos/">https://mirrors.ustc.edu.cn/centos/</a></p><h2 id="1-先备份CentOS-Base-repo"><a href="#1-先备份CentOS-Base-repo" class="headerlink" title="1 先备份CentOS-Base.repo"></a>1 先备份CentOS-Base.repo</h2><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br></pre></td></tr></table></figure><h2 id="2-建立新的repo文件"><a href="#2-建立新的repo文件" class="headerlink" title="2 建立新的repo文件"></a>2 建立新的repo文件</h2><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/yum.repos.d/CentOS-Base.repo</span><br><span class="line"><span class="comment"># 文件内容如下：</span></span><br></pre></td></tr></table></figure><figure class="highlight plaintext" data-lang="plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"># CentOS-Base.repo</span><br><span class="line">#</span><br><span class="line"># The mirror system uses the connecting IP address of the client and the</span><br><span class="line"># update status of each mirror to pick mirrors that are updated to and</span><br><span class="line"># geographically close to the client.  You should use this for CentOS updates</span><br><span class="line"># unless you are manually picking other mirrors.</span><br><span class="line">#</span><br><span class="line"># If the mirrorlist= does not work for you, as a fall back you can try the</span><br><span class="line"># remarked out baseurl= line instead.</span><br><span class="line">#</span><br><span class="line">#</span><br><span class="line"></span><br><span class="line">[base]</span><br><span class="line">name=CentOS-$releasever - Base</span><br><span class="line">#mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=os</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/os/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#released updates</span><br><span class="line">[updates]</span><br><span class="line">name=CentOS-$releasever - Updates</span><br><span class="line"># mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=updates</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/updates/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#additional packages that may be useful</span><br><span class="line">[extras]</span><br><span class="line">name=CentOS-$releasever - Extras</span><br><span class="line"># mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=extras</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/extras/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br><span class="line"></span><br><span class="line">#additional packages that extend functionality of existing packages</span><br><span class="line">[centosplus]</span><br><span class="line">name=CentOS-$releasever - Plus</span><br><span class="line"># mirrorlist=http://mirrorlist.centos.org/?release=$releasever&amp;arch=$basearch&amp;repo=centosplus</span><br><span class="line">baseurl=https://mirrors.ustc.edu.cn/centos/$releasever/centosplus/$basearch/</span><br><span class="line">gpgcheck=1</span><br><span class="line">enabled=0</span><br><span class="line">gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7</span><br></pre></td></tr></table></figure><h2 id="3-生成缓存"><a href="#3-生成缓存" class="headerlink" title="3 生成缓存"></a>3 生成缓存</h2><figure class="highlight bash" data-lang="bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo yum makecache</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;以中科大源为例：&lt;a href=&quot;https://mirrors.ustc.edu.cn/centos/&quot;&gt;https://mirrors.ustc.edu.cn/centos/&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;1-先备份CentOS-Base-repo&quot;&gt;&lt;a href=</summary>
-      
-    
-    
-    
-    <category term="经验教程" scheme="https://www.chaoswork.cn/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="centos" scheme="https://www.chaoswork.cn/tags/centos/"/>
-    
-    <category term="镜像源" scheme="https://www.chaoswork.cn/tags/%E9%95%9C%E5%83%8F%E6%BA%90/"/>
     
   </entry>
   
