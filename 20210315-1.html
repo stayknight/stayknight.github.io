@@ -151,7 +151,7 @@
                         <i class="fa fa-edit"></i> 
                         
                         
-                            ~1.81K
+                            ~1.94K
                         
                         字
                         
@@ -160,7 +160,7 @@
             </header>
             <div class="kratos-post-content">
                 <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                    本文最后编辑于 <time datetime="1677225425991"></time> 前，其中的内容可能需要更新。
+                    本文最后编辑于 <time datetime="1691741588053"></time> 前，其中的内容可能需要更新。
                 </div>
                 
                 <hr />
@@ -177,14 +177,21 @@
 <li><code>-rpath</code>: 设置运行时库搜索路径，会写入ELF可执行文件中。</li>
 <li><code>-rpath-link</code>: 指定<strong>链接时</strong>间接依赖库搜索路径, 运行时无效。</li>
 </ul>
-<h3 id="LD-LIBRARY-PATH"><a href="#LD-LIBRARY-PATH" class="headerlink" title="LD_LIBRARY_PATH"></a>LD_LIBRARY_PATH</h3><p>在程序链接或运行期间，如果设置了LD_LIBRARY_PATH， 链接器/运行时链接器都会搜索该路径查找动态库。</p>
+<h3 id="LD-LIBRARY-PATH"><a href="#LD-LIBRARY-PATH" class="headerlink" title="LD_LIBRARY_PATH"></a>LD_LIBRARY_PATH</h3><p>在程序链接或运行期间，如果设置了LD_LIBRARY_PATH， 链接器/运行时链接器都会搜索该路径查找动态库。<br>有趣的两点:</p>
+<blockquote>
+<ol>
+<li>LD_LIBRARY_PATH 中可以配置相对路径，比如.和..</li>
+<li>LD_LIBRARY_PATH 中若存在空路径，则相当于包含当前工作路径 (所以LD_LIBRARY_PATH中存在一个多余的冒号与否，有较大区别)</li>
+</ol>
+</blockquote>
 <h3 id="可执行程序运行时搜索库路径的几个点："><a href="#可执行程序运行时搜索库路径的几个点：" class="headerlink" title="可执行程序运行时搜索库路径的几个点："></a>可执行程序运行时搜索库路径的几个点：</h3><ul>
 <li>默认路径： /lib， /usr/lib</li>
 <li>环境变量： <strong>LD_LIBRARY_PATH</strong></li>
 <li>ELF中的<strong>RPATH</strong></li>
 <li>ELF中的<strong>RUNPATH</strong></li>
 </ul>
-<p>其优先级关系如下：<br>ELF中的RPATH|ELF中的RUNPATH|LD_LIBRARY_PATH环境变量|尝试加载目录的数序<br>:=:|:=:|:=:|:=:<br>未设置|未设置|未设置|/lib==&gt;/usr/lib<br>未设置|未设置|设置|${LD_LIBRARY_PATH}==&gt;/lib==&gt;/usr/lib<br>设置|未设置|未设置|${RPATH}==&gt;/lib==&gt;/usr/lib<br>设置|未设置|设置|${RPATH}==&gt;${LD_LIBRARY_PATH}==&gt;/lib==&gt;/usr/lib<br>设置或未设置|设置|设置|${LD_LIBRARY_PATH}==&gt;${RUN_PATH}==&gt;/lib==&gt;/usr/lib<br>设置或未设置|设置|未设置|${RUN_PATH}==&gt;/lib==&gt;/usr/lib</p>
+<p>其优先级关系如下：</p>
+<p>|ELF中的RPATH|ELF中的RUNPATH|LD_LIBRARY_PATH环境变量|尝试加载目录的数序|<br>|:=:|:=:|:=:|:=:|<br>|未设置|未设置|未设置|/lib==&gt;/usr/lib|<br>|未设置|未设置|设置|${LD_LIBRARY_PATH}==&gt;/lib==&gt;/usr/lib|<br>|设置|未设置|未设置|${RPATH}==&gt;/lib==&gt;/usr/lib|<br>|设置|未设置|设置|${RPATH}==&gt;${LD_LIBRARY_PATH}==&gt;/lib==&gt;/usr/lib|<br>|设置或未设置|设置|设置|${LD_LIBRARY_PATH}==&gt;${RUN_PATH}==&gt;/lib==&gt;/usr/lib|<br>|设置或未设置|设置|未设置|${RUN_PATH}==&gt;/lib==&gt;/usr/lib|</p>
 <h3 id="pkg-config和PKG-CONFIG-PATH"><a href="#pkg-config和PKG-CONFIG-PATH" class="headerlink" title="pkg-config和PKG_CONFIG_PATH"></a>pkg-config和PKG_CONFIG_PATH</h3><p>许多程序和第三方库发布包提供一个*.pc的配置文件，里面也包含了头文件和依赖库等信息，用户通过设置PKG_CONFIG_PATH，就可以利用pkg-config工具解析并输出编译选项，将其用于gcc等编译器的编译链接过程中。如：<br>$gcc main.c <code>pkg-config --cflags --libs opencv</code> -o main</p>
 <blockquote>
 <p>参考： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/sddai/p/10266624.html">https://www.cnblogs.com/sddai/p/10266624.html</a></p>
@@ -286,7 +293,7 @@ C++开发中需要关注的...`;
                         <a class="tag-none-link" href="/tags/C-%E5%9F%BA%E7%A1%80/" rel="tag">C++基础</a>, <a class="tag-none-link" href="/tags/linux%E5%9F%BA%E7%A1%80/" rel="tag">linux基础</a>, <a class="tag-none-link" href="/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" rel="tag">编程基础</a>
                     </div>
                     <div class="pull-date">
-                    <span>最后编辑：2023-02-24</span>
+                    <span>最后编辑：2023-08-11</span>
                     </div>
                 </div>
             </footer>
@@ -360,7 +367,7 @@ C++开发中需要关注的...`;
     
   <aside id="krw-categories" class="widget widget-categories clearfix">
     <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">9</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E6%BA%90%E7%A0%81/">源码</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACGN/">ACGN</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/">前端开发</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/%E6%9C%8D%E5%8A%A1%E5%99%A8/">服务器</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/">生活学习</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E6%9D%82%E8%B0%88/">杂谈</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E8%AF%BB%E4%B9%A6/">读书</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB%E5%AD%A6%E4%B9%A0/%E9%9F%B3%E4%B9%90/">音乐</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/">经验教程</a><span class="category-list-count">16</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BB%8F%E9%AA%8C%E6%95%99%E7%A8%8B/%E5%8D%9A%E5%AE%A2/">博客</a><span class="category-list-count">5</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a><span class="category-list-count">38</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/C-%E5%9F%BA%E7%A1%80/">C++基础</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/linux%E5%9F%BA%E7%A1%80/">linux基础</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/">数据结构与算法</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/">软件工程</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/">开发资源</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/%E6%BA%90%E7%A0%81/">源码</a><span class="category-list-count">1</span></li></ul></li></ul>
   </aside>
 
 
@@ -411,8 +418,6 @@ C++开发中需要关注的...`;
             
           
         
-          
-            
           
             
           
